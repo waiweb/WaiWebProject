@@ -1,0 +1,77 @@
+1.0 GUI
+
+1.1 
+Login 
+	- Das System erkennt User und Admin an seinem Loginnamen. 
+	- Eingabe Username & Password
+
+
+1.2 GUI Admin
+
+Auswahlmöglichkeit: 
+	- Liste der Cams
+	- Liste der User
+	- Einstellungen
+	- Logseite (Auslesen der Log-File welche nutzer sich wann an und ausgelogt haben, Logeinträge "info") -> nice to have
+	- Logout
+
+
+1.2.1 
+Liste User
+
+	- Anzeigen Benutzer bzw. name
+	- Nutzer hinzufügen.
+	- Tabelle/Liste mit: User, Rechte, Anzahl Cams,Kommentare, Edit,Löschen
+
+
+1.2.1.1 
+Edit User
+
+	- Konfiguration for User : Xyz,
+	- Rechte: 
+	- Passwort zurücksetzen(nice to have)
+	- Benutzer löschen
+	- Kommentarfeld
+	- Einstellung Speichern
+	- Tabelle/Liste aller Cams:  Name der Cam, Beschreibung ,Randombild der Kamera , Checkbox (Zugriffsberechtigung)
+	- Nice to have hoock nach oben.
+
+
+1.2.2
+Liste Cams
+	- Camhinzufügen 
+	- Tabelle/Liste:
+	Cam-Name, Url zur Cam, Hinzufügedatum, Beschreibung(Kommentar), Editisch, Löschen, Vorschaubild(Thumbnail), Edit Kamera 
+
+1.2.2.1
+Cam
+	- Cam-Name
+	- Url
+	- Hinzufügedatum (nicht änderbar)
+	- Beschreibung(Kommentar)
+	- Vorschaubild(Thumbnail). 
+
+1.2.3
+Einstellungen
+	- Debug an aus  (nice to have)
+	- Anzahl Thumbmails
+	- Löschen Datenbank (Drop table und create table)
+	- Löschen Bilde
+
+
+1.3
+GUI User
+
+Auswahlmöglichkeit: 
+	- Liste der Cams
+
+1.3.1
+Liste der Cams
+	- Tabelle/Liste der Cams (die für den User möglich sind): Cam-Name, Url,Beschreibung,Vorschaubild
+
+1.3.1.1
+Cam
+	- Cam-Name
+	- Zeitrahmen auswahl
+	- Bestätigen
+	- Tabelle/Liste der Cam-Bilder
