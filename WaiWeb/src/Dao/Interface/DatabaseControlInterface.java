@@ -1,4 +1,4 @@
-package Dao;
+package Dao.Interface;
 
 public interface DatabaseControlInterface {
 		

@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
+import Dao.Interface.UserInterface;
 import exception.UserNotAddedExecption;
 import model.User;
 import jndi.JndiFactory;
@@ -26,12 +27,8 @@ public class UserDaoImpl implements UserInterface {
 		Connection connection = null;		
 		try {
 			connection = jndi.getConnection("jdbc/libraryDB");		
-			/*
-				PreparedStatement pstmt = connection.prepareStatement("insert into books (title, author) values (?,?)"); 
-				pstmt.setString(1, book.getTitle());
-				pstmt.setString(2, book.getAuthor());
-				pstmt.executeUpdate();
-				*/
+			
+			//hier user implemntierung.
 
 				
 		} catch (Exception e) {
