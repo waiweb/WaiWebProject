@@ -29,7 +29,8 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		  "CREATE TABLE Users_Table ("
 			    		+ "Id_User numeric PRIMARY KEY, "
 			    		+ "Username character varying, "
-			    		+ "Rechte character varying,"
+			    		+ "Password character varying," //sollte hier gehased abgelegt werden
+			    		+ "Rechte integer ,"
 			    		+ "TimeOfCreation character varying,"  //bis ich das mit dem datum raus hab.
 			    		+ "Kommentar character varying);"
 			    		;
