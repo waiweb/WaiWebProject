@@ -26,16 +26,66 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			connection = jndi.getConnection("jdbc/libraryDB");		
 			
 			    String createString_UserTable=
-			    		  "CREATE TABLE Users ("
-			    		+ "Id numeric PRIMARY KEY, "
+			    		  "CREATE TABLE Users_Table ("
+			    		+ "Id_User numeric PRIMARY KEY, "
 			    		+ "Username character varying, "
 			    		+ "Rechte character varying,"
+			    		+ "TimeOfCreation character varying,"  //bis ich das mit dem datum raus hab.
 			    		+ "Kommentar character varying);"
 			    		;
+			    
+			    
+			    String createString_CamsTable=
+			    		  "CREATE TABLE Cams_Table ("
+			    		+ "Id_Cam numeric PRIMARY KEY, "
+			    		+ "Camname character varying, "
+			    		+ "Url character varying,"
+			    		+ "TimeOfCreation character varying,"  //bis ich das mit dem datum raus hab.
+			    		+ "PathOriginalImageDirectory character varying,"
+			    		+ "PathThumbnailImageDirectory character varying,"
+			    		+ "Kommentar character varying);"
+			    		;
+			    
+			    //Zur zuordnung, welche User auf eine CAM zugreifen dürfen.
+			    String createString_CamsAccess=
+			    		  "CREATE TABLE Cam_Access_Table ("
+			    		+ "Id_Cam numeric PRIMARY KEY, "
+			    		+ "Camname character varying, "   //redundant
+			    		+ "Id_User numeric, "
+			    		+ "Username character varying,"  //redundant
+			    		+ "Kommentar character varying);"
+			    		;
+			    
+			    
+			    String createString_Cam_Images=
+			    		  "CREATE TABLE Cam_Images_Table ("
+			    		+ "Id_Image numeric PRIMARY KEY,"
+			    	    + "Imagename character varying,"
+			    		+ "Id_Cam numeric, "
+			    		+ "Camname character varying, "   //redundant
+			    		+ "TimeOfCreation character varying, " //Todo Date statt character
+			    		+ "PathOriginalImage character varying,"
+			    		+ "PathThumbnailImage character varying,"
+			    		+ "Kommentar character varying);"
+			    		;
+			    
+			    
+
 
 			    
 				PreparedStatement pstmt = connection.prepareStatement(createString_UserTable); 
 				pstmt.executeUpdate();
+				
+				pstmt = connection.prepareStatement(createString_CamsTable); 
+				pstmt.executeUpdate();
+				
+				pstmt = connection.prepareStatement(createString_CamsAccess); 
+				pstmt.executeUpdate();
+				
+				
+				pstmt = connection.prepareStatement(createString_Cam_Images); 
+				pstmt.executeUpdate();
+				
 				
 
 				
@@ -50,6 +100,9 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 		
 	}
 
+	/**
+	 * Droping evey single Table
+	 */
 	@Override
 	public void deleteDatabase() {
 		
@@ -59,7 +112,16 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			
 
 			    
-				PreparedStatement pstmt = connection.prepareStatement("Drop Table Users"); 
+				PreparedStatement pstmt = connection.prepareStatement("Drop Table Users_Table; "); 
+				pstmt.executeUpdate();
+				
+				pstmt = connection.prepareStatement("Drop Table Cams_Table; "); 
+				pstmt.executeUpdate();
+				
+				pstmt = connection.prepareStatement("Drop Table Cam_Access_Table; "); 
+				pstmt.executeUpdate();
+				
+				pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
 				pstmt.executeUpdate();
 				
 
