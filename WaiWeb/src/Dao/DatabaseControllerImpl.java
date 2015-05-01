@@ -27,7 +27,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			
 			    String createString_UserTable=
 			    		  "CREATE TABLE Users_Table ("
-			    		+ "Id_User numeric PRIMARY KEY, "
+			    		+ "Id_User Serial PRIMARY KEY, "
 			    		+ "Username character varying, "
 			    		+ "Password character varying," //sollte hier gehased abgelegt werden
 			    		+ "Rechte integer ,"
@@ -38,7 +38,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    
 			    String createString_CamsTable=
 			    		  "CREATE TABLE Cams_Table ("
-			    		+ "Id_Cam numeric PRIMARY KEY, "
+			    		+ "Id_Cam Serial PRIMARY KEY, "
 			    		+ "Camname character varying, "
 			    		+ "Url character varying,"
 			    		+ "TimeOfCreation character varying,"  //bis ich das mit dem datum raus hab.

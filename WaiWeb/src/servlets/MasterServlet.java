@@ -1,5 +1,6 @@
 package servlets;
 
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.Tool_ImageProcessing;
 import Dao.DatabaseControllerImpl;
 
 /**
@@ -25,7 +27,9 @@ public class MasterServlet extends HttpServlet {
         
 		DatabaseControllerImpl db = new DatabaseControllerImpl();
 		db.createDatabase();
-        
+		
+		
+
     }
     
     
