@@ -2,7 +2,7 @@ package model;
 
 public class User {
 	
-	private int Id_User;
+	private long Id_User;
 	private String Username;
 	private String Password;
 	private int rechte;
@@ -13,12 +13,34 @@ public class User {
 		
 	}
 	
+
+	public User(long id_User, String username, String password, int rechte,
+			String timeOfCreation, String kommentar) {
+		this.Id_User = id_User;
+		this.Username = username;
+		this.Password = password;
+		this.rechte = rechte;
+		this.timeOfCreation = timeOfCreation;
+		this.kommentar = kommentar;
+	}
 	
-	public int getId_User() {
+	public User(String username, String password, int rechte,
+			String timeOfCreation, String kommentar) {
+		this.Username = username;
+		this.Password = password;
+		this.rechte = rechte;
+		this.timeOfCreation = timeOfCreation;
+		this.kommentar = kommentar;
+	}
+
+
+
+
+	public long getId_User() {
 		return Id_User;
 	}
-	public void setId_User(int id_User) {
-		Id_User = id_User;
+	public void setId_User(long l) {
+		Id_User = l;
 	}
 	public String getUsername() {
 		return Username;

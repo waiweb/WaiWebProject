@@ -9,7 +9,7 @@ public class Tool_TimeStamp {
     public static String getTimeStampString(){
 
         long date = System.currentTimeMillis();
-        SimpleDateFormat sDate = new SimpleDateFormat("yyyy_MM_dd_HH_mm_ss_SSS");
+        SimpleDateFormat sDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         String date_string = sDate.format(date);
         return date_string;
     }
@@ -21,6 +21,10 @@ public class Tool_TimeStamp {
         return date_string;
     }
     
+    /**
+     * Generates a timestamp and returns a hashmap of strings of the timestamp 
+     * @return
+     */
     public static HashMap<String,String> getTimeStampSet(){
     	
     	HashMap<String,String> timstampHashMap = new HashMap<String,String>();
