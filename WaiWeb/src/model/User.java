@@ -1,5 +1,7 @@
 package model;
 
+import javax.servlet.http.HttpServletRequest;
+
 public class User {
 	
 	private int Id_User;
@@ -8,6 +10,7 @@ public class User {
 	private int rechte;
 	private String timeOfCreation;
 	private String kommentar;
+	boolean processError = false;
 	
 	public User(){
 		
@@ -50,10 +53,24 @@ public class User {
 	public void setKommentar(String kommentar) {
 		this.kommentar = kommentar;
 	}
+    public boolean getProcessError () {
+		    return this.processError;
+	  }
 	
+    // hier sollte ich alle infos über ein servlet erhalten und dem benutzer mit daten füllen 
+	 public void processRequest (HttpServletRequest request) {
+		    // Get the name and the other stuff
+		     this.processError = false;
+		    if (!(Username == null || Username.equals("")||Password == null || Password.equals(""))){ 
+		    	setUsername(request.getParameter ("username"));
+		    	setEmail(request.getParameter ("password"));}  
+		    else{
+		      this.processError = true;
+		      return;
+		    }
+     }
 	
-	
-	
+	 
 
 }
 
