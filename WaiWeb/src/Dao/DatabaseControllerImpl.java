@@ -72,8 +72,6 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    
 			    
 
-
-			    
 				PreparedStatement pstmt = connection.prepareStatement(createString_UserTable); 
 				pstmt.executeUpdate();
 				

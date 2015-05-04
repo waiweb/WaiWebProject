@@ -8,7 +8,7 @@ public class Tool_Security {
 	static final Integer hashLength = 64;
 		
 	
-	public static byte[] hash(String data) {
+	public static byte[] hashFromString(String data) {
 		byte[] hash = null;
 		
 		try {
