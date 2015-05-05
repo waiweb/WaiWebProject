@@ -2,6 +2,8 @@ package model;
 
 import javax.servlet.http.HttpServletRequest;
 
+
+
 public class User {
 	
 	private long Id_User;
@@ -85,7 +87,7 @@ public class User {
 		     this.processError = false;
 		    if (!(Username == null || Username.equals("")||Password == null || Password.equals(""))){ 
 		    	setUsername(request.getParameter ("username"));
-		    	setEmail(request.getParameter ("password"));}  
+		    	setPassword(request.getParameter ("password"));}  
 		    else{
 		      this.processError = true;
 		      return;
