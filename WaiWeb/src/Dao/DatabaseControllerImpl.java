@@ -10,7 +10,7 @@ import jndi.JndiFactory;
 
 public class DatabaseControllerImpl implements DatabaseControlInterface {
 	
-	//yolo2
+	//yolo3
 	final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
 	
 
