@@ -32,7 +32,11 @@ public class MasterServlet extends HttpServlet {
     public MasterServlet() {
         super();
        
-        //Auskommentieren für Beispielnutzer usw. bei Start:
+        /**	
+        //WICHTIG!!!
+         * Auskommentieren für Beispielnutzer usw. bei Start:
+         */
+        
         //beispiele();		
     }
     
