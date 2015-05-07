@@ -27,14 +27,14 @@ public class MasterServlet extends HttpServlet {
        
     /**
      * @see HttpServlet#HttpServlet()
+     * Servlet zur Weiterleitung auf Startseite, erste Instanz:
      */
     public MasterServlet() {
         super();
-        
-       // beispiele();		
-
+       
+        //Auskommentieren für Beispielnutzer usw. bei Start:
+        //beispiele();		
     }
-    
     
     public void beispiele(){
     	
@@ -80,24 +80,18 @@ public class MasterServlet extends HttpServlet {
 		list = (ArrayList<User>) udb.getAllUsers();
 		for(int i=0; i< list.size();i++){
 			System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
-		}
-		
-
-    	
+		}	
     }
     
-    // ToDo    Servlet um Liste fuer cams und benutzer an Auswahl.jsp zu senden
-    
-    
-    
-
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//Direkte Weiterleitung auf Login Bildschirm:
+		
+		//Direkte Weiterleitung auf Login Bildschirm bei erstem Start:
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
 		dispatcher.forward(request, response);
+		
 	}
 
 	/**
