@@ -1,29 +1,29 @@
 <html>
 <head>
-	<title> Login page for the calendar. </title>
+	<title> WAIWEB Login </title>
 </head>
-
-<body bgcolor="white">
-<center>
-
-	<font size=7 color="red"> Please Enter the following Information: </font>
-
-<br>
-	<form method=GET action=index.jsp>  
-
-		<font size=5> Username <input type=text name="username" size=20></font>
-		<br>
-		<font size=5>Passwort <input type="password" name="password" size="20" maxlength="20"></font>
-	    
-		<br>
-		<input type=submit name=action value="Submit">
-
-	</form>
-<hr>
-<font size=3 color="red"> Note: This application does not implement the complete 
-functionality of a typical calendar application. It demostartes a way JSP can be 
-used with html tables and forms.</font>
-
-</center>
-</body>
+	<body bgcolor="white">
+	
+		<div style="text-align: center;">
+			<font size=7 color="red"> Please Enter the following Information: </font>
+		</div>
+	
+	<br>
+		<!--  action=login & methdo=POST (Leitet direkt auf die doPost() Funktion des LoginServlet weiter) -->
+		<form name=checkLogin method=POST action=login>  
+			<div style="text-align: center;">
+				<font size=5> Username <input type=text name="username" size=20 ></font>
+				<br>
+				<font size=5>Passwort <input type="password" name="password" size="20" maxlength="20" ></font>
+				<br>
+				<!-- Type=submit, Name=action (das Attribut), 
+					 Value=Submit (über action.equals("Submit") in doPost() des LoginServlet abfragen -->
+				<input type=submit name=action value="Submit">
+			</div>
+		</form>
+	<hr>
+	<font size=3 color="red"> Note: This application does not implement the complete 
+	functionality of a typical calendar application. It demostartes a way JSP can be 
+	used with html tables and forms.</font>
+	</body>
 </html>
