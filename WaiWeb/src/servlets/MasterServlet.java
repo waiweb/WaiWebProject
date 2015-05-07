@@ -4,6 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -30,9 +31,7 @@ public class MasterServlet extends HttpServlet {
     public MasterServlet() {
         super();
         
-
-        beispiele();
-		
+       // beispiele();		
 
     }
     
@@ -60,18 +59,18 @@ public class MasterServlet extends HttpServlet {
 			System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
 		}
 		
-		//Änderung username und passwort, einsetzen neuen zeitstempel
+		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
 		udb.updateUser(new User(2,"UseraaaaaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
 
-		//ausgabe aller user
+		//Ausgabe aller user
 		list = (ArrayList<User>) udb.getAllUsers();
 		for(int i=0; i< list.size();i++){
 			System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
 		}
 		
 		
-		//User id holen, dann damit user löschen		
+		//User id holen, dann damit user loeschen		
 		long userid = udb.getUserIdFromDatabaseByName("UseraaaaaaA");
 		System.out.println("Gesuchte userid: "+userid);
 		udb.deleteUserInDatabase(userid);
@@ -87,7 +86,7 @@ public class MasterServlet extends HttpServlet {
     	
     }
     
-    // ToDo    Servlet um Liste für cams und benutzer an Auswahl.jsp zu senden
+    // ToDo    Servlet um Liste fuer cams und benutzer an Auswahl.jsp zu senden
     
     
     
@@ -96,14 +95,16 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		//Direkte Weiterleitung auf Login Bildschirm:
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
+		dispatcher.forward(request, response);
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		
 	}
 
 }

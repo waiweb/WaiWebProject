@@ -10,7 +10,7 @@
   <!--  Redundant, da das Master-Servlet ohnehin gleich started -->
   <servlet-mapping>
     <servlet-name>MasterServlet</servlet-name>
-    <url-pattern>/index</url-pattern>
+    <url-pattern>/login</url-pattern>
   </servlet-mapping>
 
   
