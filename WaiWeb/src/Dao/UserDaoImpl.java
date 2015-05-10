@@ -281,7 +281,34 @@ public class UserDaoImpl implements UserInterface {
 
 	@Override
 	public boolean isUserLoginValid(User user) {
-		// TODO Auto-generated method stub
+
+		
+		Connection connection = null;		
+		try {
+			connection = jndi.getConnection("jdbc/libraryDB");	
+			
+			
+			PreparedStatement pstmt = connection.prepareStatement("select Id_User,username,password,rechte,timeofcreation,kommentar from users_table where username =? AND password =?") ;
+			pstmt.setString(1, user.getUsername());
+			pstmt.setString(2, user.getPassword());
+
+			ResultSet rs =  pstmt.executeQuery();
+			
+			if(rs.next()){
+				return true;
+
+			}
+			else {
+				return false;
+			}
+			
+
+	} catch (Exception e) {
+		//throw new UserNotFoundExecption(userId);
+		//database fehler
+	} finally {
+		closeConnection(connection);
+	}
 		return false;
 	}
 
