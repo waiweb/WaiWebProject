@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import utils.Tool_Security;
 import Dao.UserDaoImpl;
-import Dao.Interface.UserInterface;
 
 /**
  * Servlet implementation class LoginServlet
@@ -29,7 +29,6 @@ public class LoginServlet extends HttpServlet {
     }
     
     final UserDaoImpl daoImp = new UserDaoImpl();
-    final UserInterface userDao = daoImp;
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -49,9 +48,10 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		//Der Parameter action beinhaltet das Attribut das wir in den JSP über name=? angeben:
 		String action = request.getParameter("action");
-		String tempUser, tempPw = null;
+		String tempUser, tempPw;
 		
 		//Parameter aus Eingabefeldern holen:
 		tempUser = request.getParameter("username");
@@ -59,12 +59,9 @@ public class LoginServlet extends HttpServlet {
 		
 		//Falls auf den Button "Submit" geklickt wird:
 		if (action.equals("Submit")) {
-			
-			//Testweise um auf Error weiterzuleiten falls keine Eingabe gemacht wurde (später nur DB Abfrage):
-			if (tempUser != "" && tempPw != "" ) {
 				
 				//Testen ob Logindaten richtig sind, falls ja auf Auswahlseite (todo: check if admin):
-				if (userDao.isUserLoginValid(tempUser, tempPw) == true ) {
+				if (daoImp.isUserLoginValid(tempUser,new String(Tool_Security.hashFromString(tempPw))) == true ) {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/Auswahl.jsp");
 					dispatcher.forward(request, response);
 					
@@ -73,12 +70,6 @@ public class LoginServlet extends HttpServlet {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/LoginError.html");
 					dispatcher.forward(request, response);
 				}
-			
-			//Später löschen, nur testweise:
-			} else {
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/LoginError.html");
-				dispatcher.forward(request, response);
-			}
 		}
 	}
 }

@@ -81,7 +81,7 @@ public class User {
 		    return this.processError;
 	  }
 	
-    // hier sollte ich alle infos über ein servlet erhalten und dem benutzer mit daten füllen 
+    // hier sollte ich alle infos ueber ein servlet erhalten und dem benutzer mit daten fuellen 
 	 public void processRequest (HttpServletRequest request) {
 		    // Get the name and the other stuff
 		     this.processError = false;
