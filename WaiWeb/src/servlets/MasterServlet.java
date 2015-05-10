@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Cam;
 import model.User;
 //import utils.Tool_ImageProcessing;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
+import Dao.CamDaoImpl;
 import Dao.DatabaseControllerImpl;
 import Dao.UserDaoImpl;
 
@@ -60,6 +62,18 @@ public class MasterServlet extends HttpServlet {
 		ArrayList<User>list = (ArrayList<User>) udb.getAllUsers();
 		for(int i=0; i< list.size();i++){
 			System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
+		}
+		
+		//create cams
+		CamDaoImpl dao = new CamDaoImpl();
+		
+		dao.createCamInDatabase(new Cam("Wiese", "www.spielgel.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "yolo"));
+		dao.createCamInDatabase(new Cam("Fluss", "www.natur.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "fluesse"));
+		dao.createCamInDatabase(new Cam("Berg", "www.berg.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "berg"));
+
+		ArrayList<Cam>camlist = (ArrayList<Cam>) dao.getAllCams();
+		for(Cam cam : camlist){
+			System.out.println("Id: "+cam.getCamname() + " url: "+cam.getUrl()+" erstellt am: "+cam.getTimeOfCreation()+ " directory: "+cam.getPathOriginalImageDirectory()+" kommentare: "+cam.getKommentar());
 		}
 		
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
