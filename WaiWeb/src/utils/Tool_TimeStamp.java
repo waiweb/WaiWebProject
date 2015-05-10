@@ -34,11 +34,17 @@ public class Tool_TimeStamp {
         SimpleDateFormat dateMonth = new SimpleDateFormat("MM");
         SimpleDateFormat dateDay = new SimpleDateFormat("dd");
         SimpleDateFormat dateHour = new SimpleDateFormat("HH");
+        SimpleDateFormat dateMinute = new SimpleDateFormat("mm");
+        SimpleDateFormat dateSecond = new SimpleDateFormat("ss");
+        SimpleDateFormat dateMilliSecond = new SimpleDateFormat("SSS");
         
         timstampHashMap.put("year", dateYear.format(date));
         timstampHashMap.put("month", dateMonth.format(date));
         timstampHashMap.put("day", dateDay.format(date));
         timstampHashMap.put("hour", dateHour.format(date));
+        timstampHashMap.put("minute", dateMinute.format(date));
+        timstampHashMap.put("second", dateSecond.format(date));
+        timstampHashMap.put("millisecond", dateMilliSecond.format(date));
 
         return timstampHashMap;
 
