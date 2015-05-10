@@ -7,7 +7,8 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>      
-    <title>Auswahlseite</title>     
+    <title>Auswahlseite</title>  
+    <meta content="text/html; charset=iso-8859-1" http-equiv="Content-Type">   
   </head>
   <body>
   	<table border="1">
@@ -18,7 +19,7 @@
 			
 			<c:forEach var="user" items="${users}">		<!--users ist die Liste die mir vom servlet gegeben wird -->
 				<tr>
-					<td><c:out value="${user.NAME}"/></td>					
+					<td><c:out value="${user.Username}"/></td>					
 				 </tr>
 			   </c:forEach>
   		    </tbody>
@@ -26,5 +27,7 @@
   	 <br>
   	      <a href="edit?action=add">Einstellungen</a>	<!-- wir brauchen ein Servlet der die verschiedenen  -->
   	       <a href="edit?action=add">Logout</a>			<!-- action auswertet und an die richtige jsp zurückschickt wo die infos dann angezeigt werden -->
+  	 </body>
+</html>
   	       
   	   
