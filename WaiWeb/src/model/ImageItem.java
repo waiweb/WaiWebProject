@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class ImageItem {
 	
-	//private long Id_Image;  // id ist nicht 
+	private long Id_Image;  
 	private long Id_CamSource;
 	private String year;
 	private String month;

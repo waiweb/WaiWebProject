@@ -12,7 +12,7 @@ public interface ImageItemInterface {
 	
 
 	
-	public void addImage(BufferedImage bufferedimage, String );
+	public void addImage(BufferedImage bufferedimage, String name );
 	public void addImage(File file);
 	
 	//Das Argument ist eine Hashmap mit den Angaben Year, Month, Day, Hour, Minute
