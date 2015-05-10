@@ -44,21 +44,19 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Url character varying,"
 			    		+ "TimeOfCreation character varying,"  //bis ich das mit dem datum raus hab.
 			    		+ "PathOriginalImageDirectory character varying,"
-			    		+ "PathThumbnailImageDirectory character varying,"
+			    //		+ "PathThumbnailImageDirectory character varying,"
 			    		+ "Kommentar character varying);"
 			    		;
 			    
 			    //Zur zuordnung, welche User auf eine CAM zugreifen dürfen.
-			    String createString_CamsAccess=
-			    		  "CREATE TABLE Cam_Access_Table ("
-			    		+ "Id_Cam numeric PRIMARY KEY, "
-			    		+ "Camname character varying, "   //redundant
-			    		+ "Id_User numeric, "
-			    		+ "Username character varying,"  //redundant
+			    String createString_User_Cam_Access_Table=
+			    		  "CREATE TABLE User_Cam_Access_Table ("
+			    		+ "Id_User numeric,  "
+			    		+ "Id_Cam numeric, "
 			    		+ "Kommentar character varying);"
 			    		;
 			    
-			    
+			    /*
 			    String createString_Cam_Images=
 			    		  "CREATE TABLE Cam_Images_Table ("
 			    		+ "Id_Image numeric PRIMARY KEY,"
@@ -70,7 +68,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "PathThumbnailImage character varying,"
 			    		+ "Kommentar character varying);"
 			    		;
-			    
+			    */
 			    
 
 				PreparedStatement pstmt = connection.prepareStatement(createString_UserTable); 
@@ -79,12 +77,12 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				pstmt = connection.prepareStatement(createString_CamsTable); 
 				pstmt.executeUpdate();
 				
-				pstmt = connection.prepareStatement(createString_CamsAccess); 
+				pstmt = connection.prepareStatement(createString_User_Cam_Access_Table); 
 				pstmt.executeUpdate();
 				
 				
-				pstmt = connection.prepareStatement(createString_Cam_Images); 
-				pstmt.executeUpdate();
+				//pstmt = connection.prepareStatement(createString_Cam_Images); 
+				//pstmt.executeUpdate();
 				
 				
 
@@ -118,11 +116,11 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				pstmt = connection.prepareStatement("Drop Table Cams_Table; "); 
 				pstmt.executeUpdate();
 				
-				pstmt = connection.prepareStatement("Drop Table Cam_Access_Table; "); 
+				pstmt = connection.prepareStatement("Drop Table User_Cam_Access_Table; "); 
 				pstmt.executeUpdate();
 				
-				pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
-				pstmt.executeUpdate();
+				//pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
+				//pstmt.executeUpdate();
 				
 
 				
