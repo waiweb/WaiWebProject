@@ -18,7 +18,7 @@ import jndi.JndiFactory;
 public class CamDaoImpl implements CamInterface{
 	
 final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
-
+//yoloroxxor
 	
 	@Override
 	public void createCamInDatabase(Cam cam) {
