@@ -4,6 +4,7 @@ package servlets;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 import javax.servlet.RequestDispatcher;
@@ -91,6 +92,8 @@ public class MasterServlet extends HttpServlet {
 		CaptureImages.captureCam(camlist.get(1));
 		CaptureImages.captureCam(camlist.get(2));
 		 
+		
+		
 
 		/*
 		System.out.println("file da?: "+new File("../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild1.png").exists());
@@ -106,11 +109,35 @@ public class MasterServlet extends HttpServlet {
 		
 		ArrayList<ImageItem> imageItemList = (ArrayList<ImageItem>) imageDaoImp.getAllImageItems();
 		
+		System.out.println("Alle images"); 
 		for(int i=0; i<imageItemList.size();i++){
 			System.out.println("Name Imageitem: "+imageItemList.get(i).getImageName());
 
 		}
 		
+		
+		//Beispiel selektion bilder in einer bestimmten uhrzeit:
+		
+		HashMap<String, String> imageRequestHashMap = new HashMap<String, String>();
+		imageRequestHashMap.put("Year",String.valueOf(2015));
+		imageRequestHashMap.put("Month","05");
+		imageRequestHashMap.put("Day","12");
+		imageRequestHashMap.put("Hour","15");
+
+		
+		
+		ArrayList<ImageItem> selectedList = imageDaoImp.getImageItem(imageRequestHashMap);
+		System.out.println("size: "+selectedList.size()); 
+
+		
+		System.out.println("Selection images");
+		for(int i=0; i<selectedList.size();i++){
+			System.out.println("Name Imageitem: "+selectedList.get(i).getImageName());
+
+		}
+
+
+			
 		
 
 		//Aenderung username und passwort, einsetzen neuen zeitstempel

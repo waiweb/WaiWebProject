@@ -159,11 +159,11 @@ public class ImageDaoImpl implements ImageItemInterface{
 			connection = jndi.getConnection("jdbc/libraryDB");	
 			
 			
-			PreparedStatement pstmt = connection.prepareStatement("select id_image,Imagename, Id_Cam,Year,Month,Day,Hour,Minute,Second,Millisecond,Basepath,Kommentar from Cam_Images_Table "
-					+ "where Year = ? AND "
-					+ "where Month = ? AND "
-					+ "where Day = ? AND "
-					+ "where Hour = ? AND ");
+			PreparedStatement pstmt = connection.prepareStatement("select id_image,Imagename, Id_Cam,Year,Month,Day,Hour,Minute,Second,Millisecond,Basepath,Kommentar from Cam_Images_Table where"
+					+ " Year = ? AND"
+					+ " Month = ? AND"
+					+ " Day = ? AND"
+					+ " Hour = ?");
 
 			pstmt.setString(1, imageHashMap.get("Year"));
 			pstmt.setString(2, imageHashMap.get("Month"));
