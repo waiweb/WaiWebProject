@@ -257,8 +257,40 @@ public class ImageDaoImpl implements ImageItemInterface{
 
 	@Override
 	public List<ImageItem> getAllImageItems() {
-		// TODO Auto-generated method stub
-		return null;
+		Connection connection = null;		
+		ArrayList<ImageItem> imageItemList = new ArrayList<ImageItem>();
+		try {
+			connection = jndi.getConnection("jdbc/libraryDB");	
+			
+			
+			PreparedStatement pstmt = connection.prepareStatement("select id_image,Imagename, Id_Cam,Year,Month,Day,Hour,Minute,Second,Millisecond,Basepath,Kommentar from Cam_Images_Table") ;
+			ResultSet rs =  pstmt.executeQuery();
+			
+			while(rs.next()){
+				ImageItem imageItem = new ImageItem();
+				imageItem.setId_Image(rs.getLong("id_image"));
+				imageItem.setImageName(rs.getString("Imagename"));
+				imageItem.setId_CamSource(rs.getLong("Id_Cam"));
+				imageItem.setYear(rs.getString("Year"));
+				imageItem.setMonth(rs.getString("Month"));
+				imageItem.setDay(rs.getString("Day"));
+				imageItem.setHour(rs.getString("Hour"));
+				imageItem.setMinute(rs.getString("Minute"));
+				imageItem.setSecond(rs.getString("Second"));
+				imageItem.setMillisecond(rs.getString("Millisecond"));
+				imageItem.setBasepath(rs.getString("Basepath"));
+				imageItem.setKommentar(rs.getString("kommentar"));
+				imageItemList.add(imageItem);
+			}
+		
+
+	} catch (Exception e) {
+		//throw new UserNotFoundExecption(userId);
+		//database fehler
+	} finally {
+		closeConnection(connection);
+	}
+		return imageItemList;
 	}
 
 

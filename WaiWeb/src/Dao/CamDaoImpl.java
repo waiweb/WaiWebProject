@@ -152,8 +152,9 @@ final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz h
 		try {
 			connection = jndi.getConnection("jdbc/libraryDB");	
 			
-			PreparedStatement pstmt = connection.prepareStatement("select * from cams_table");
-			ResultSet rs =  pstmt.executeQuery();
+			PreparedStatement pstmt = connection.prepareStatement("select * from Cams_Table");
+			ResultSet rs = pstmt.executeQuery();		
+			System.out.println("pstmt size cams: "+pstmt.getFetchSize());
 			
 			while(rs.next()){
 				Cam cam = new Cam();

@@ -75,20 +75,22 @@ public class MasterServlet extends HttpServlet {
 		
 		CamDaoImpl camDaoImp = new CamDaoImpl();
 		
-		camDaoImp.createCamInDatabase(new Cam("bild_1", "../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild1.png", Tool_TimeStamp.getTimeStampString(),homeDir, "unnoetiges kommentar"));
-		camDaoImp.createCamInDatabase(new Cam("bild_2", "../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild2.png", Tool_TimeStamp.getTimeStampString(),homeDir, "unnoetiges kommentar"));
-		camDaoImp.createCamInDatabase(new Cam("bild_3", "../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild3.png", Tool_TimeStamp.getTimeStampString(),homeDir, "unnoetiges kommentar"));
+		camDaoImp.createCamInDatabase(new Cam("cam_bildQuelle_1", "../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild1.png", Tool_TimeStamp.getTimeStampString(),homeDir, "unnoetiges kommentar"));
+		camDaoImp.createCamInDatabase(new Cam("cam_bildQuelle_2", "../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild2.png", Tool_TimeStamp.getTimeStampString(),homeDir, "unnoetiges kommentar"));
+		camDaoImp.createCamInDatabase(new Cam("cam_bildQuelle_3", "../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild3.png", Tool_TimeStamp.getTimeStampString(),homeDir, "unnoetiges kommentar"));
 
 		ArrayList<Cam>camlist = (ArrayList<Cam>) camDaoImp.getAllCams();
-		for(Cam cam : camlist){
-			System.out.println("Id: "+cam.getId_Cam()+" camname: "+cam.getCamname() + " url: "+cam.getUrl()+" erstellt am: "+cam.getTimeOfCreation()+ " directory: "+cam.getPathOriginalImageDirectory()+" kommentare: "+cam.getKommentar());
+		
+		if(camlist != null){
+			for(Cam cam : camlist){
+				System.out.println("Id_cam: "+cam.getId_Cam()+" camname: "+cam.getCamname() + " url: "+cam.getUrl()+" erstellt am: "+cam.getTimeOfCreation()+ " directory: "+cam.getPathOriginalImageDirectory()+" kommentare: "+cam.getKommentar());
+			}
 		}
 		
-		/*
 		CaptureImages.captureCam(camlist.get(0));
 		CaptureImages.captureCam(camlist.get(1));
 		CaptureImages.captureCam(camlist.get(2));
-		 */
+		 
 
 		/*
 		System.out.println("file da?: "+new File("../Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild1.png").exists());
@@ -98,7 +100,7 @@ public class MasterServlet extends HttpServlet {
 		System.out.println("file da?: "+new File("D:/xWAI/Wai_Semesterproject/WaiWebProject/WaiWeb/webcamQuelleSimulation/bild1.png").exists());
 		 */
 		
-		/*
+		
 		ImageItem item = imageDaoImp.getImageItem(1);
 		System.out.println("Name Imageitem: "+item.getImageName());
 		
@@ -108,7 +110,8 @@ public class MasterServlet extends HttpServlet {
 			System.out.println("Name Imageitem: "+imageItemList.get(i).getImageName());
 
 		}
-		*/
+		
+		
 
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
