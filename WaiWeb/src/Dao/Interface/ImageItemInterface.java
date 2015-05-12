@@ -2,6 +2,7 @@ package Dao.Interface;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,11 +13,12 @@ public interface ImageItemInterface {
 	
 
 	
-	public void addImage(BufferedImage bufferedimage, String name );
+	public void addImage(BufferedImage bufferedimage, ImageItem item);
+	public void addAllImages(ArrayList<BufferedImage> listImages, ArrayList<ImageItem> item);
 	public void addImage(File file);
 	
 	//Das Argument ist eine Hashmap mit den Angaben Year, Month, Day, Hour, Minute
-	public ImageItem getImageItem(HashMap<String,String> imageHashMap);
+	public ArrayList<ImageItem> getImageItem(HashMap<String, String> imageHashMap);
 	public void deleteImage(HashMap<String,String> imageHashMap);
 	
 	public void deleteImage(ImageItem imageItem);

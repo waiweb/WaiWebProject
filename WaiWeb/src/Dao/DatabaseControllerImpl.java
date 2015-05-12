@@ -59,7 +59,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    
 			    String createString_Cam_Images=
 			    		  "CREATE TABLE Cam_Images_Table ("
-			    		+ "Id_Image numeric PRIMARY KEY,"
+			    		+ "Id_Image Serial PRIMARY KEY,"
 			    	    + "Imagename character varying,"
 			    		+ "Id_Cam numeric, "
 			    	    + "Year character varying, "

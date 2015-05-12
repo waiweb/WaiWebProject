@@ -12,6 +12,7 @@ import javax.imageio.ImageIO;
 
 public class Tool_ImageProcessing {
 	
+	
 	public static final int IMG_WIDTH_Thumbnail = 100;
 	public static final int IMG_HEIGHT_Thumbnail = 100;
 	
@@ -63,7 +64,7 @@ public class Tool_ImageProcessing {
 	 * @param path
 	 * @throws IOException
 	 */
-	 static void writeImageToPath(BufferedImage bufferedImage, String pathAndName){
+	 public static void writeImageToPath(BufferedImage bufferedImage, String pathAndName){
 		try {
 			ImageIO.write(bufferedImage, "jpg", new File(pathAndName));
 		} catch (IOException e) {

@@ -1,5 +1,6 @@
 package Dao;
 
+import java.awt.image.BufferedImage;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -7,9 +8,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import utils.Tool_CamCapture;
+import utils.Tool_TimeStamp;
 import exception.CamNotAddedExecption;
 import exception.CamNotFoundExecption;
 import model.Cam;
+import model.ImageItem;
 import Dao.Interface.CamInterface;
 
 
@@ -18,6 +22,7 @@ import jndi.JndiFactory;
 public class CamDaoImpl implements CamInterface{
 	
 final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
+
 	
 	@Override
 	public void createCamInDatabase(Cam cam) {
@@ -253,6 +258,9 @@ final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz h
 	}
 		return false;
 	}
+	
+	
+	
 
 	//TODO: cheken ob man von der kamera noch bilder beziehen kann.
 	@Override

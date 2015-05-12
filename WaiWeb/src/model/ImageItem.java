@@ -1,10 +1,12 @@
 package model;
 
+import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 public class ImageItem {
 	
 	private long Id_Image;  
+	private String imageName;
 	private long Id_CamSource;
 	private String year;
 	private String month;
@@ -13,9 +15,11 @@ public class ImageItem {
 	private String hour;
 	private String minute;
 	private String second;
-	private String millisecond;
-	
+	private String millisecond;	
+	private String basepath;
 	private String Kommentar;
+	
+
 	
 	public ImageItem(){
 	};
@@ -80,7 +84,114 @@ public class ImageItem {
 
 		Kommentar = kommentar;
 	}
+
+	public long getId_Image() {
+		return Id_Image;
+	}
+
+	public void setId_Image(long id_Image) {
+		Id_Image = id_Image;
+	}
+
+	public long getId_CamSource() {
+		return Id_CamSource;
+	}
+
+	public void setId_CamSource(long id_CamSource) {
+		Id_CamSource = id_CamSource;
+	}
+
+	public String getYear() {
+		return year;
+	}
+
+	public void setYear(String year) {
+		this.year = year;
+	}
+
+	public String getMonth() {
+		return month;
+	}
+
+	public void setMonth(String month) {
+		this.month = month;
+	}
+
+	public String getWeek() {
+		return week;
+	}
+
+	public void setWeek(String week) {
+		this.week = week;
+	}
+
+	public String getDay() {
+		return day;
+	}
+
+	public void setDay(String day) {
+		this.day = day;
+	}
+
+	public String getHour() {
+		return hour;
+	}
+
+	public void setHour(String hour) {
+		this.hour = hour;
+	}
+
+	public String getMinute() {
+		return minute;
+	}
+
+	public void setMinute(String minute) {
+		this.minute = minute;
+	}
+
+	public String getSecond() {
+		return second;
+	}
+
+	public void setSecond(String second) {
+		this.second = second;
+	}
+
+	public String getMillisecond() {
+		return millisecond;
+	}
+
+	public void setMillisecond(String millisecond) {
+		this.millisecond = millisecond;
+	}
+
+	public String getKommentar() {
+		return Kommentar;
+	}
+
+	public void setKommentar(String kommentar) {
+		Kommentar = kommentar;
+	}
+
+	public String getBasepath() {
+		return basepath;
+	}
+
+	public void setBasepath(String basepath) {
+		this.basepath = basepath;
+	}
+
+	public String getImageName() {
+		return imageName;
+	}
+
+	public void setImageName(String imageName) {
+		this.imageName = imageName;
+	}
 	
+	
+
+
 	
 	
 
