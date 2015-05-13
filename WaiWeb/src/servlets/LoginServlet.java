@@ -10,8 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.Cam;
 import model.User;
 import utils.Tool_Security;
+import Dao.CamDaoImpl;
 import Dao.UserDaoImpl;
 
 /**
@@ -31,6 +33,7 @@ public class LoginServlet extends HttpServlet {
     }
     
     final UserDaoImpl daoImp = new UserDaoImpl();
+    final CamDaoImpl camdaoImp= new CamDaoImpl();
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -65,7 +68,9 @@ public class LoginServlet extends HttpServlet {
 				if (daoImp.isUserLoginValid(tempUser,new String(Tool_Security.hashFromString(tempPw))) == true ) {
 					
 					List<User> collection = daoImp.getAllUsers();
+					List<Cam> camcollection=camdaoImp.getAllCams();
 					request.setAttribute("users", collection);
+					request.setAttribute("cams", camcollection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahl.jsp");
 					dispatcher.forward(request, response);		
 					
