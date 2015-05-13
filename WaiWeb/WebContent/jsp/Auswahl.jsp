@@ -23,8 +23,8 @@
 			</tbody>
 		</table>
 		<br>
-			<a href="edit?action=add">Einstellungen</a>	<!-- wir brauchen ein Servlet der die verschiedenen  -->
-			<a href="edit?action=add">Logout</a>			<!-- action auswertet und an die richtige jsp zurückschickt wo die infos dann angezeigt werden -->
+			<a href="master?action=edit">Einstellungen</a>	<!-- wir brauchen ein Servlet der die verschiedenen  -->
+			<a href="master?action=logout">Logout</a>			<!-- action auswertet und an die richtige jsp zurückschickt wo die infos dann angezeigt werden -->
 	</body>
 </html>    
   	          
