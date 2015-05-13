@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.User;
 import utils.Tool_Security;
 import Dao.UserDaoImpl;
 
@@ -48,7 +50,6 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		//Der Parameter action beinhaltet das Attribut das wir in den JSP über name=? angeben:
 		String action = request.getParameter("action");
 		String tempUser, tempPw;
@@ -62,8 +63,12 @@ public class LoginServlet extends HttpServlet {
 				
 				//Testen ob Logindaten richtig sind, falls ja auf Auswahlseite (todo: check if admin):
 				if (daoImp.isUserLoginValid(tempUser,new String(Tool_Security.hashFromString(tempPw))) == true ) {
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/jsp/Auswahl.jsp");
-					dispatcher.forward(request, response);
+					
+					List<User> collection = daoImp.getAllUsers();
+					request.setAttribute("users", collection);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahl.jsp");
+					dispatcher.forward(request, response);		
+					
 					
 				//Falls Logindaten falsch, auf Error-Seite weiterleiten:
 				} else {
