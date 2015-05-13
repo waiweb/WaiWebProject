@@ -40,7 +40,7 @@ public class MasterServlet extends HttpServlet {
          * Momentan genutzt für Tests: USERNAME: admin PW: admin
          */
         
-        //beispiele();		
+        beispiele();		
     }
     
     public void beispiele(){
