@@ -2,5 +2,6 @@
 <%
 	//Direkte Weiterleitung zum MasterServlet bei erstem Start:
 		
+		
 	response.sendRedirect("master");
 %>
