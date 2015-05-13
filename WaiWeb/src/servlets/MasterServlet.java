@@ -16,6 +16,7 @@ import model.User;
 //import utils.Tool_ImageProcessing;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
+import Dao.CamDaoImpl;
 import Dao.DatabaseControllerImpl;
 import Dao.UserDaoImpl;
 
@@ -39,7 +40,7 @@ public class MasterServlet extends HttpServlet {
          * Momentan genutzt für Tests: USERNAME: admin PW: admin
          */
         
-        //beispiele();		
+        beispiele();		
     }
     
     public void beispiele(){
@@ -64,7 +65,7 @@ public class MasterServlet extends HttpServlet {
 		}
 		
 		//create cams
-		/*
+		
 		CamDaoImpl dao = new CamDaoImpl();
 		
 		dao.createCamInDatabase(new Cam("Wiese", "www.spielgel.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "yolo"));
@@ -74,7 +75,7 @@ public class MasterServlet extends HttpServlet {
 		ArrayList<Cam>camlist = (ArrayList<Cam>) dao.getAllCams();
 		for(Cam cam : camlist){
 			System.out.println("Id: "+cam.getCamname() + " url: "+cam.getUrl()+" erstellt am: "+cam.getTimeOfCreation()+ " directory: "+cam.getPathOriginalImageDirectory()+" kommentare: "+cam.getKommentar());
-		}*/
+		}
 		
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
