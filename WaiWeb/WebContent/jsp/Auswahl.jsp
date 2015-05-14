@@ -43,9 +43,9 @@
 		</table>
 	
 		<br>
-		 <!--    <form name=checkLogin method=POST action=login> -->   
-		<!--  	<input type=submit name=action value="Logout">  <!--  was soll beim logout passieren -->
-	<!--  	</form>	-->	
+		     <form name=checkLogin method=POST action=login>  
+		  	<input type=submit name=action value="Logout">  <!--  was soll beim logout passieren -->
+	  	</form>	
 			<a href="edit?action=add">Logout</a>			<!-- action auswertet und an die richtige jsp zurückschickt wo die infos dann angezeigt werden -->
 	</body>
 </html>    
