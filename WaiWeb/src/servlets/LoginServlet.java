@@ -67,11 +67,11 @@ public class LoginServlet extends HttpServlet {
 				//Testen ob Logindaten richtig sind, falls ja auf Auswahlseite (todo: check if admin):
 				if (daoImp.isUserLoginValid(tempUser,new String(Tool_Security.hashFromString(tempPw))) == true ) {
 					
-					List<User> collection = daoImp.getAllUsers();
-					List<Cam> camcollection=camdaoImp.getAllCams();
-					request.setAttribute("users", collection);
-					request.setAttribute("cams", camcollection);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahl.jsp");
+					//List<User> collection = daoImp.getAllUsers();
+					//List<Cam> camcollection=camdaoImp.getAllCams();
+					//request.setAttribute("users", collection);
+					//request.setAttribute("cams", camcollection);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
 					dispatcher.forward(request, response);		
 					
 					
