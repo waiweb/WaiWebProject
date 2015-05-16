@@ -66,7 +66,7 @@ public class LoginServlet extends HttpServlet {
 				//List<Cam> camcollection=camdaoImp.getAllCams();
 				//request.setAttribute("users", collection);
 				//request.setAttribute("cams", camcollection);
-				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/AuswahlmÃ¶glichkeiten.jsp");
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
 				dispatcher.forward(request, response);		
 				
 			//Falls Logindaten falsch, auf Error-Seite weiterleiten:
