@@ -51,8 +51,8 @@ public class MasterServlet extends HttpServlet {
 		UserDaoImpl udb = new UserDaoImpl();
 		
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
-		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),""));
-		udb.createUserInDatabase(new User("UserB","meinpass",1,Tool_TimeStamp.getTimeStampString(),""));
+		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),100,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("UserB","meinpass",1,Tool_TimeStamp.getTimeStampString(),"kommi"));
 		
 		//Test ob userlogin korrekt ist einmal mit fehlerfall
 		System.out.println("Existing: "+udb.isUsernameExisting("UserB"));
@@ -65,6 +65,7 @@ public class MasterServlet extends HttpServlet {
 		}
 		
 		//create cams
+		
 		CamDaoImpl dao = new CamDaoImpl();
 		
 		dao.createCamInDatabase(new Cam("Wiese", "www.spielgel.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "yolo"));
@@ -104,11 +105,13 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
 		
 		//Direkte Weiterleitung auf Login Bildschirm bei erstem Start:
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
-		dispatcher.forward(request, response);
-		
+		if (action == null) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
+			dispatcher.forward(request, response);
+		}	
 	}
 
 	/**

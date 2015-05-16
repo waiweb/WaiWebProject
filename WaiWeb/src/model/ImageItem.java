@@ -13,6 +13,7 @@ public class ImageItem {
 	private String hour;
 	private String minute;
 	private String second;
+	private String millisecond;
 	
 	private String Kommentar;
 	
@@ -21,7 +22,7 @@ public class ImageItem {
 
 	public ImageItem(long id_Image, long id_CamSource, String year,
 			String month, String week, String day, String hour, String minute,
-			String second, String kommentar) {
+			String second,String millisecond, String kommentar) {
 		Id_Image = id_Image;
 		Id_CamSource = id_CamSource;
 		this.year = year;
@@ -31,11 +32,12 @@ public class ImageItem {
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
+		this.millisecond =millisecond;
 		Kommentar = kommentar;
 	}
 
 	public ImageItem(long id_CamSource, String year, String month, String week,
-			String day, String hour, String minute, String second,
+			String day, String hour, String minute, String second,String millisecond,
 			String kommentar) {
 		super();
 		Id_CamSource = id_CamSource;
@@ -46,7 +48,8 @@ public class ImageItem {
 		this.hour = hour;
 		this.minute = minute;
 		this.second = second;
-		Kommentar = kommentar;
+		this.millisecond = millisecond;
+		this.Kommentar = kommentar;
 	}
 	
 	public ImageItem(long id_CamSource, HashMap<String,String> timeHashMap, String kommentar) {
@@ -58,6 +61,8 @@ public class ImageItem {
 		this.hour = timeHashMap.get("hour");
 		this.minute = timeHashMap.get("minute");
 		this.second = timeHashMap.get("second");
+		this.millisecond = timeHashMap.get("millisecond");
+		
 		Kommentar = kommentar;
 	}
 	
@@ -71,6 +76,8 @@ public class ImageItem {
 		this.hour = timeHashMap.get("hour");
 		this.minute = timeHashMap.get("minute");
 		this.second = timeHashMap.get("second");
+		this.millisecond = timeHashMap.get("millisecond");
+
 		Kommentar = kommentar;
 	}
 	

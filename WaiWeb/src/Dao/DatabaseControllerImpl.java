@@ -10,7 +10,6 @@ import jndi.JndiFactory;
 
 public class DatabaseControllerImpl implements DatabaseControlInterface {
 	
-	//yolo3
 	final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
 	
 
@@ -48,7 +47,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Kommentar character varying);"
 			    		;
 			    
-			    //Zur zuordnung, welche User auf eine CAM zugreifen dürfen.
+			    //Zur zuordnung, welche User auf eine CAM zugreifen dï¿½rfen.
 			    String createString_User_Cam_Access_Table=
 			    		  "CREATE TABLE User_Cam_Access_Table ("
 			    		+ "Id_User numeric,  "
@@ -56,19 +55,23 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Kommentar character varying);"
 			    		;
 			    
-			    /*
+			    
 			    String createString_Cam_Images=
 			    		  "CREATE TABLE Cam_Images_Table ("
 			    		+ "Id_Image numeric PRIMARY KEY,"
 			    	    + "Imagename character varying,"
 			    		+ "Id_Cam numeric, "
-			    		+ "Camname character varying, "   //redundant
-			    		+ "TimeOfCreation character varying, " //Todo Date statt character
-			    		+ "PathOriginalImage character varying,"
-			    		+ "PathThumbnailImage character varying,"
+			    	    + "Year character varying, "
+			    	    + "Month character varying, "
+			    	    + "Day character varying, "
+			    	    + "Hour character varying, "
+			    	    + "Minute character varying, "
+			    	    + "Second character varying, "
+			    	    + "Millisecond character varying, "
+			    		+ "Basepath character varying,"
 			    		+ "Kommentar character varying);"
 			    		;
-			    */
+			    
 			    
 
 				PreparedStatement pstmt = connection.prepareStatement(createString_UserTable); 
@@ -81,8 +84,8 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				pstmt.executeUpdate();
 				
 				
-				//pstmt = connection.prepareStatement(createString_Cam_Images); 
-				//pstmt.executeUpdate();
+				pstmt = connection.prepareStatement(createString_Cam_Images); 
+				pstmt.executeUpdate();
 				
 				
 
@@ -119,10 +122,10 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				pstmt = connection.prepareStatement("Drop Table User_Cam_Access_Table; "); 
 				pstmt.executeUpdate();
 				
-				//pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
-				//pstmt.executeUpdate();
+				pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
+				pstmt.executeUpdate();
 				
-
+				System.out.println("Datenbank wurde erfolgreich zurÃ¼ckgesetzt!");				
 				
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
