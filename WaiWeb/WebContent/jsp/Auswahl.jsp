@@ -9,22 +9,49 @@
     <title>Auswahlseite</title>     
   </head>
 	<body>
-		<table border="1">
+
+		<table align="left" border="1">
 	  		<tbody>
 		  		<tr>					
 					<td>User Liste</td>
 				</tr>
+			
 				
 				<c:forEach var="user" items="${users}">		<!--users ist die Liste die mir vom servlet gegeben wird -->
 					<tr>
 						<td><c:out value="${user.username}"/></td>			
 					 </tr>
 				</c:forEach>
+				
 			</tbody>
 		</table>
+	
+	
+		<table  border="1">
+	  		<tbody>
+		  		<tr>					
+					<td>User Cams</td>
+				</tr>
+				
+				<c:forEach var="cam" items="${cams}">		<!--users ist die Liste die mir vom servlet gegeben wird -->
+					<tr>
+						<td><c:out value="${cam.camname}"/></td>			
+					 </tr>
+				</c:forEach>
+				
+			</tbody>
+		</table>
+	
 		<br>
+<<<<<<< HEAD
 			<a href="master?action=edit">Einstellungen</a>	<!-- wir brauchen ein Servlet der die verschiedenen  -->
 			<a href="master?action=logout">Logout</a>			<!-- action auswertet und an die richtige jsp zurückschickt wo die infos dann angezeigt werden -->
+=======
+		 <!--    <form name=checkLogin method=POST action=login> -->   
+		<!--  	<input type=submit name=action value="Logout">  <!--  was soll beim logout passieren -->
+	<!--  	</form>	-->	
+			<a href="edit?action=add">Logout</a>			<!-- action auswertet und an die richtige jsp zurückschickt wo die infos dann angezeigt werden -->
+>>>>>>> master
 	</body>
 </html>    
   	          
