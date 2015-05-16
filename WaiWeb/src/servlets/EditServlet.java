@@ -55,12 +55,6 @@ public class EditServlet extends HttpServlet{
  		} else if(action.equals("saveUser")){
  			//Löscht den ausgewählten Nutzer in der Datenbank und kehrt zur User Liste zurück:
  			
- 			try {
-				daoImp.updateUser(daoImp.getUserFromDatabase(id));
-			} catch (UserNotFoundExecption e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
  			System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
  			backToAuswahl(request, response);
  		}
@@ -68,7 +62,7 @@ public class EditServlet extends HttpServlet{
 	
 	//Funktion um auf die User Liste zurückzukehren:
 	void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlm�glichkeiten.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
 		dispatcher.forward(request, response);
 	}
 }
