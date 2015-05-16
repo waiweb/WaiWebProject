@@ -7,7 +7,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
 import utils.Tool_Security;
 import Dao.CamDaoImpl;
 import Dao.UserDaoImpl;
@@ -70,7 +69,6 @@ public class LoginServlet extends HttpServlet {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
 				dispatcher.forward(request, response);		
 				
-				
 			//Falls Logindaten falsch, auf Error-Seite weiterleiten:
 			} else {
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/LoginError.html");
@@ -79,6 +77,13 @@ public class LoginServlet extends HttpServlet {
 		}
 		
 		//Für Logout zuständig, falls Login korrekt Weiterleitung an AuswahlServlet!
+		if (action.equals("Logout")) {
+			
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
+			dispatcher.forward(request, response);
+			
+		}
+		
 		if (action.equals("Logout")) {
 			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
