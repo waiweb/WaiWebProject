@@ -50,9 +50,9 @@ public class MasterServlet extends HttpServlet {
 		
 		UserDaoImpl udb = new UserDaoImpl();
 		
-		//User anlegen, einmal mit Adminrechte, einmal ohne:
-		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),""));
-		udb.createUserInDatabase(new User("user",new String(Tool_Security.hashFromString("user")),0,Tool_TimeStamp.getTimeStampString(),""));
+		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
+		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),100,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("UserB","meinpass",1,Tool_TimeStamp.getTimeStampString(),"kommi"));
 		
 		//Test ob userlogin korrekt ist einmal mit fehlerfall
 		System.out.println("Existing: "+udb.isUsernameExisting("UserB"));
@@ -111,17 +111,7 @@ public class MasterServlet extends HttpServlet {
 		if (action == null) {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
 			dispatcher.forward(request, response);
-		}
-		
-		else if (action.equals("edit")) {
-			//Auf JPS für Einstellungen weiterleiten:
-		}
-		
-		else if (action.equals("logout")) {
-			//Initiiere Logout-Prozess für den angemeldeten User:
-		}
-		
-		
+		}	
 	}
 
 	/**
