@@ -1,0 +1,9 @@
+@CHARSET "UTF-8";
+/*Test CSS Datei für Edit.jsp, immer Referenz in JSP Datei im Header angeben! */ 
+
+.links {
+ float: left;
+ width: 10 px;
+}
+
+.rechts { float: left; }

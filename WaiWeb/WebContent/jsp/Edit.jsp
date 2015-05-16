@@ -5,11 +5,11 @@
 <html>
   <head>    
     <title>Konfiguration </title>
+    <!--  Hier die CSS Referenz angeben: -->
+    <link href="css/userEdit.css" type="text/css" rel="stylesheet">
   </head>  
   <body>
-	<form name="edit" action="edit" method="post">	
-	
-	
+  	<font size=5> User bearbeiten </font> <br><br>	
 		<table border="1">
 			<tbody>
 			    <tr>   	
@@ -21,18 +21,22 @@
 				</tr>
 				<tr>		
 					<td>Rechte:</td>	
-					<td><input type="text" name="title" value="${user.kommentar}"></td>
+					<td><input type="text" name="title" value="${user.rechte}"></td>
 				</tr>				
-					
-				 	
-			
-			</tbody>
-					
+			</tbody>				
 		</table>
-		<button type="submit" name="action" value="delete"> User Löschen</button>
-    <button type="submit" name="action" value="save"> User Speichern</button>	
-	<!--  	<input type="hidden" name="id" value="${user.rechte}">  -->
-	</form>
-	
+		<br>
+		<div class="links">
+		<form name=deleteUser method=POST  action= edit>  
+			<button type="submit" name="action" value="deleteUser"> User Löschen</button>
+			<input type="hidden" name="id" value="${user.id_User}">
+		</form> 
+		</div>
+		<div class="rechts">
+		<form name=saveUser method=POST  action= edit>  
+	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
+	  		<input type="hidden" name="id" value="${user.id_User}">
+	  	</form> 
+	  	</div>
   </body>
 </html>

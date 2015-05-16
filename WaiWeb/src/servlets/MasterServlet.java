@@ -105,11 +105,13 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
 		
 		//Direkte Weiterleitung auf Login Bildschirm bei erstem Start:
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
-		dispatcher.forward(request, response);
-		
+		if (action == null) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
+			dispatcher.forward(request, response);
+		}	
 	}
 
 	/**

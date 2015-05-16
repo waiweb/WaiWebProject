@@ -33,18 +33,20 @@ public class AuswahlServlet extends HttpServlet {
 			List<User> collection = daoImp.getAllUsers();
 			request.setAttribute("users", collection);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
-			dispatcher.forward(request, response);		
-			
-				
+			dispatcher.forward(request, response);				
 		}
 		
-		if(action.equals("cam")){
+		else if(action.equals("cam")){
 			List<Cam> collection=camdaoImp.getAllCams();
 			request.setAttribute("cams", collection);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Cam.jsp");
 			dispatcher.forward(request, response);		
 		}
-	
+		
+		else if(action.equals("settings")){
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Einstellungen.jsp");
+			dispatcher.forward(request, response);		
+		}
 		
 	}
 

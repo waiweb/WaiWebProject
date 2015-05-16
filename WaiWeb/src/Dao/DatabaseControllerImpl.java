@@ -47,7 +47,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Kommentar character varying);"
 			    		;
 			    
-			    //Zur zuordnung, welche User auf eine CAM zugreifen dürfen.
+			    //Zur zuordnung, welche User auf eine CAM zugreifen dï¿½rfen.
 			    String createString_User_Cam_Access_Table=
 			    		  "CREATE TABLE User_Cam_Access_Table ("
 			    		+ "Id_User numeric,  "
@@ -125,7 +125,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
 				pstmt.executeUpdate();
 				
-
+				System.out.println("Datenbank wurde erfolgreich zurÃ¼ckgesetzt!");				
 				
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
