@@ -8,10 +8,10 @@
     		  username="ss15-gruppe6"
     		  password="Ebe5Del1"
     		  maxActive="250" maxIdle="5"
-	/>
+	/> 
 	
 	<!-- Test-Datenbank auf localhost daheim (Kevin G.): -->
-	<!--
+	<!-- 
 		<Resource name="jdbc/libraryDB"
 			  auth="Container"
 			  type="javax.sql.DataSource"
