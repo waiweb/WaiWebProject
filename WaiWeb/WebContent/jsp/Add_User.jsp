@@ -4,13 +4,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>    
-    <title>Konfiguration </title>
+    <title>User Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
   </head>  
   <body>
   	<font size=5> Neuen User hinzufügen </font> <br><br>	
-  		<form name=saveUser method=POST  action= edit>  
+  		<form name=addUser method=POST  action= edit>  
 		<table border="1">
 			<tbody>
 				<tr>
@@ -31,15 +31,18 @@
 				</tr>			
 			</tbody>				
 		</table>
-		<br>
+		<br style="clear: both">
 		<div class="links"> 
 			<button type="submit" name="action" value="addNewUser"> User hinzufügen</button>
 			<input type="hidden" name="id" value="add">
 		</div>
-		<div class="rechts">
-	   		<button type="submit" name="action" value="Back"> Zurück</button>	
-	  		<input type="hidden" name="id" value="back">
-	  	</div>
 	  	</form> 
+	  	<br style="clear: both">
+	  	<form name=back method=GET  action= edit>
+			<div class="rechts">
+		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		  		<input type="hidden" name="id" value="back">
+		  	</div>
+	  	</form>
   </body>
 </html>

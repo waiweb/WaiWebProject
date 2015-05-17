@@ -46,9 +46,9 @@
 		</table>
 		<br style="clear: both"> <br>
 		<div>
-			<form name=camAdd method=POST  action= edit>  
+			<form name=camAdd method=GET  action= edit>  
 		  	 	<button type="submit" name="action" value="addCam">Cam hinzufügen</button>
-		  		<input type="hidden" name="id" value="${cam.id_Cam}">
+		  		<input type="hidden" name="id" value=add>
 		 	</form>	
 		</div>
 	</body>

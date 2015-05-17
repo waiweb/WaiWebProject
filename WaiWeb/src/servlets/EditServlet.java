@@ -27,29 +27,31 @@ public class EditServlet extends HttpServlet{
 	private int rechte, id;
 	private String username, passwort, kommentar, camname, url;
 	
-	
+	//GET:
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		
 		if(action.equals("addUser")){
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_User.jsp");
 			dispatcher.forward(request, response);	
- 		}
-		
-		else if(action.equals("addCam")){
+			
+ 		} else if(action.equals("addCam")){
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_Cam.jsp");
+			dispatcher.forward(request, response);	
+			
+ 		} else if(action.equals("back")){
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
 			dispatcher.forward(request, response);	
  		}
 	}
-
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
+	//POST:
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
 		initVar();
 		
  		/** User Editierung: **/
+		//User auswählen zum editieren:
 		if(action.equals("editUser")){
 			checkUserId(request);
 			
@@ -127,6 +129,7 @@ public class EditServlet extends HttpServlet{
  		}
 		
 		/** Cam Editierung: **/
+		//Cam auswählen zum editieren:
 		if(action.equals("editCam")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
@@ -163,6 +166,25 @@ public class EditServlet extends HttpServlet{
  			
  			System.out.println("Cam mit der ID: " + id + " erfolgreich geupdatet!");
  			backToAuswahl(request, response);	
+ 	
+ 		//Neue Cam in der Datenbank hinzufügen:
+ 		} else if(action.equals("addNewCam")){
+ 	 		if (request.getParameter("camname") != null && request.getParameter("url") != null 
+ 	 				&& request.getParameter("kommentar") != null) {
+ 	 			camname = request.getParameter("camname");
+ 	 			url = request.getParameter("url");
+ 	 			kommentar = request.getParameter("kommentar");
+ 	 		}
+ 	 		
+ 	 		//Überprüfung ob Name bereits vergeben oder die Rechte im zulässigen Bereich sind! 0 = User, 1 = Admin:
+ 	 		//TODO: Check if URL is valid!
+ 	 		if (camDaoImp.isCamNameExisting(camname) == false) {
+ 	 				camDaoImp.createCamInDatabase(new Cam(camname, url, Tool_TimeStamp.getTimeStampString(), "/camimages", kommentar));
+ 	 	 			System.out.println("Neue Cam: " + camname + " erfolgreich hinzugefügt!");
+ 	 		} else {
+ 	 			System.out.println("Cam mit dem Namen: " + camname + " ist bereits vorhanden!");
+ 	 		}
+ 			backToAuswahl(request, response);
  		}
 	}
 	
