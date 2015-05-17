@@ -51,8 +51,8 @@ public class MasterServlet extends HttpServlet {
 		UserDaoImpl udb = new UserDaoImpl();
 		
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
-		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),100,Tool_TimeStamp.getTimeStampString(),"kommi"));
-		udb.createUserInDatabase(new User("UserB","meinpass",1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("UserB","meinpass",0,Tool_TimeStamp.getTimeStampString(),"kommi"));
 		
 		//Test ob userlogin korrekt ist einmal mit fehlerfall
 		System.out.println("Existing: "+udb.isUsernameExisting("UserB"));

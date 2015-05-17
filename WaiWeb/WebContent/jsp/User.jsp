@@ -36,5 +36,11 @@
 				</c:forEach>
 			</tbody>
 		</table>
+		<br style="clear: both"> <br>
+		<div>
+			<form name=userAdd method=GET  action= edit>  
+		  	 	<button type="submit" name="action" value="addUser">User hinzufügen</button>
+		 	</form>	
+		</div>
 	</body>
 </html>

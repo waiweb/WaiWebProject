@@ -1,6 +1,6 @@
 <Context>
 <!-- Datenbank im SWT Labor: -->
-	<Resource name="jdbc/libraryDB"
+	<Resource name="jdbc/libraryDB" 
 			  auth="Container"
 			  type="javax.sql.DataSource"
 			  driverClassName="org.postgresql.Driver"
@@ -10,8 +10,7 @@
     		  maxActive="250" maxIdle="5"
 	/> 
 	
-	<!-- Test-Datenbank auf localhost daheim (Kevin G.): -->
-	<!-- 
+	<!-- Test-Datenbank auf localhost daheim (Kevin G.): 
 		<Resource name="jdbc/libraryDB"
 			  auth="Container"
 			  type="javax.sql.DataSource"
