@@ -15,7 +15,8 @@
 					<td>URL</td>
 					<td>Hinzugefügt am</td>
 					<td>Verzeichnis</td>
-					<td>Kommentar</td>				
+					<td>Kommentar</td>	
+					<td>Thumbnail</td>		
 				</tr>
 				
 				<c:forEach var="cam" items="${cams}">
@@ -25,15 +26,29 @@
 						<td><c:out value="${cam.timeOfCreation}"/></td>	
 						<td><c:out value="${cam.pathOriginalImageDirectory}"/></td>
 						<td><c:out value="${cam.kommentar}"/></td>
+						<td> x <!--  Hier Thumbnail einfügen! --></td>
+					<td>
+		  	    		<form name=camEdit method=POST  action= edit>  
+		  	           		<button type="submit" name="action" value="editCam">Editieren</button>
+		  	            	<input type="hidden" name="id" value="${cam.id_Cam}">
+	                  	</form>	
+		  	    	</td>
 					<td>	 
-						<form name=checkLogin method=POST  action= edit>  
-		  	            	<button type="submit" name="action" value="DeleteCam">Cam löschen</button>
-		  	            	<input type="hidden" name="id" value="${user.rechte}">
+						<form name=camDelete method=POST  action= edit>  
+		  	            	<button type="submit" name="action" value="deleteCam">Löschen</button>
+		  	            	<input type="hidden" name="id" value="${cam.id_Cam}">
 		  	            </form>	
-		  	    	</td>	
+		  	    	</td>
 					</tr>
 				</c:forEach>	
 			</tbody>
 		</table>
+		<br style="clear: both"> <br>
+		<div>
+			<form name=camAdd method=POST  action= edit>  
+		  	 	<button type="submit" name="action" value="addCam">Cam hinzufügen</button>
+		  		<input type="hidden" name="id" value="${cam.id_Cam}">
+		 	</form>	
+		</div>
 	</body>
 </html>
