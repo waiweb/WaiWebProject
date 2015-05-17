@@ -85,17 +85,21 @@ public class EditServlet extends HttpServlet{
  	 		
  	 		//Versucht den User in der Datenbank upzudaten:
 			try {
-				user = daoImp.getUserFromDatabase(id);
-				user.setUsername(username);
-				user.setRechte(rechte);
-				user.setKommentar(kommentar);
-				daoImp.updateUser(user);
-				
+				if ((rechte == 0) || (rechte == 1)) {
+					user = daoImp.getUserFromDatabase(id);
+					user.setUsername(username);
+					user.setRechte(rechte);
+					user.setKommentar(kommentar);
+					daoImp.updateUser(user);
+		 			System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
+					
+	 	 		} else {
+	 	 			System.out.println("Falsche Angabe der Rechte! Zulässige Rechte, 0 = User, 1 = Admin!");
+	 	 		}
 			} catch (UserNotFoundExecption e) {
 				e.printStackTrace();
 			}
- 			
- 			System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
+ 
  			backToAuswahl(request, response);
  			
  		//Neuen Nutzer in die Datenbank hinzufügen:
@@ -108,11 +112,17 @@ public class EditServlet extends HttpServlet{
  	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
- 	 		//TODO: HASH Verfahren!!!
- 	 		user = new User(username, passwort, rechte, Tool_TimeStamp.getTimeStampString(), kommentar);
- 	 		daoImp.createUserInDatabase(user);
- 			
- 			System.out.println("Neuer User: " + user.getUsername() + " erfolgreich hinzugefügt!");
+ 	 		//Überprüfung ob Name bereits vergeben oder die Rechte im zulässigen Bereich sind! 0 = User, 1 = Admin:
+ 	 		if (daoImp.isUsernameExisting(username) == false) {
+ 	 			if ((rechte == 0) || (rechte == 1)) {
+ 	 	 	 		daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar));
+ 	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefügt!");
+ 	 			} else {
+ 	 				System.out.println("Falsche Angabe der Rechte! Zulässige Rechte, 0 = User, 1 = Admin!");
+ 	 			}
+ 	 		} else {
+ 	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
+ 	 		}
  			backToAuswahl(request, response);
  		}
 		

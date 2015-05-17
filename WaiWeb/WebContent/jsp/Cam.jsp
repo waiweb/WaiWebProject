@@ -33,12 +33,13 @@
 		  	            	<input type="hidden" name="id" value="${cam.id_Cam}">
 	                  	</form>	
 		  	    	</td>
-					<td>	 
+					<!-- <td>	 
 						<form name=camDelete method=POST  action= edit>  
 		  	            	<button type="submit" name="action" value="deleteCam">Löschen</button>
 		  	            	<input type="hidden" name="id" value="${cam.id_Cam}">
 		  	            </form>	
 		  	    	</td>
+		  	    	-->
 					</tr>
 				</c:forEach>	
 			</tbody>
