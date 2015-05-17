@@ -10,33 +10,35 @@
   </head>  
   <body>
   	<font size=5> Cam bearbeiten </font> <br><br>	
+  		<form name=saveCam method=POST  action= edit>  
 		<table border="1">
 			<tbody>
 				<tr>   	
-			   		<td>Konfiguration für:<c:out value="${cam.camname}"/></td>
+			   		<td>Konfiguration für: <c:out value="${cam.camname}"/></td>
 			 	</tr>
 				<tr>
 					<td>Camname:</td>
-					<td><input type="text" name="name" value="${cam.camname}"></td>		
+					<td><input type="text" name="camname" value="${cam.camname}"></td>		
 				</tr>
 				<tr>		
 					<td>URL:</td>	
 					<td><input type="text" name="url" value="${cam.url}"></td>
-				</tr>				
+				</tr>		
+				<tr>		
+					<td>Kommentar:</td>	
+					<td><input type="text" name="kommentar" value="${cam.kommentar}"></td>
+				</tr>		
 			</tbody>				
 		</table>
 		<br>
 		<div class="links">
-		<form name=deleteCam method=POST  action= edit>  
 			<button type="submit" name="action" value="deleteCam"> Cam löschen</button>
 			<input type="hidden" name="id" value="${cam.id_Cam}">
-		</form> 
 		</div>
 		<div class="rechts">
-		<form name=saveCam method=POST  action= edit>  
 	   		<button type="submit" name="action" value="saveCam"> Cam speichern</button>	
 	  		<input type="hidden" name="id" value="${cam.id_Cam}">
-	  	</form> 
 	  	</div>
+	  	</form> 
   </body>
 </html>

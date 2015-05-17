@@ -20,6 +20,11 @@ public class EditServlet extends HttpServlet{
 	
 	final UserDaoImpl daoImp = new UserDaoImpl();
 	final CamDaoImpl camDaoImp = new CamDaoImpl();
+	private User user;
+	private Cam cam;
+	private int rechte, id;
+	private String username, kommentar, camname, url;
+	
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
@@ -31,10 +36,7 @@ public class EditServlet extends HttpServlet{
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		User user = new User();
-		Cam cam = new Cam();
-		int rechte = 0, id = 0 ;
-		String username = null, kommentar = null;
+		initVar();
 		
  		if (request.getParameter("id") != null) {
 			id = Integer.valueOf(request.getParameter("id"));
@@ -60,17 +62,12 @@ public class EditServlet extends HttpServlet{
  			backToAuswahl(request, response);
  			
  		} else if(action.equals("saveUser")){
- 			//Updatet den ausgewählten User mit den eingegebenen Daten:
- 	 		if (request.getParameter("username") != null) {
+ 			//Einlesen der benötigen Daten vom request:
+ 	 		if (request.getParameter("username") != null && request.getParameter("rechte") != null
+ 	 				&& request.getParameter("kommentar") != null) {
  	 			username = request.getParameter("username");
- 	 		}
- 	 		
- 	 		if (request.getParameter("rechte") != null) {
- 				rechte = Integer.valueOf(request.getParameter("rechte"));
- 	 		}
- 	 		
- 	 		if (request.getParameter("kommentar") != null) {
- 				kommentar = request.getParameter("kommentar");
+ 	 			rechte = Integer.valueOf(request.getParameter("rechte"));
+ 	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
  	 		//Versucht den User in der Datenbank upzudaten:
@@ -108,14 +105,40 @@ public class EditServlet extends HttpServlet{
  			//TODO: Leitet auf die nächste JSP Seite um eine neue Cam hinzuzufügen:
 		
 		} else if(action.equals("saveCam")){
- 			//TODO: Camänderungen speichern:
+ 			//Einlesen der benötigen Daten vom request:
+ 	 		if (request.getParameter("camname") != null && request.getParameter("url") != null
+ 	 				&& request.getParameter("kommentar") != null) {
+ 	 			camname = request.getParameter("camname");
+ 	 			url = request.getParameter("url");
+ 	 			kommentar = request.getParameter("kommentar");
+ 	 		}
+ 	 		
+ 	 		cam = camDaoImp.getCamFromDatabase(id);
+			cam.setCamname(camname);
+			cam.setUrl(url);
+			cam.setKommentar(kommentar);
+			camDaoImp.updateUser(cam);
  			
+ 			System.out.println("Cam mit der ID: " + id + " erfolgreich geupdatet!");
+ 			backToAuswahl(request, response);	
  		}
 	}
 	
 	//Funktion um auf die User Liste zurückzukehren:
-	void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	private void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
 		dispatcher.forward(request, response);
+	}
+	
+	//Initialisierung der Variablen:
+	private void initVar() {
+		user = new User();
+		cam = new Cam();
+		rechte = 0;
+		id = 0; 
+		username = null;
+		kommentar = null;
+		camname = null;
+		url = null;
 	}
 }
