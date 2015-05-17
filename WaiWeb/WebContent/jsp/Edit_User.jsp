@@ -10,6 +10,7 @@
   </head>  
   <body>
   	<font size=5> User bearbeiten </font> <br><br>	
+  		<form name=saveUser method=POST  action= edit>  
 		<table border="1">
 			<tbody>
 			    <tr>   	
@@ -17,26 +18,27 @@
 			     </tr>
 				<tr>
 					<td>Benutzer:</td>
-					<td><input type="text" name="author" value="${user.username}"></td>		
+					<td><input type="text" name="username" value="${user.username}"></td>		
 				</tr>
 				<tr>		
 					<td>Rechte:</td>	
-					<td><input type="text" name="title" value="${user.rechte}"></td>
-				</tr>				
+					<td><input type="text" name="rechte" value="${user.rechte}"></td>
+				</tr>		
+				<tr>		
+					<td>Kommentar:</td>	
+					<td><input type="text" name="kommentar" value="${user.kommentar}"></td>
+				</tr>			
 			</tbody>				
 		</table>
 		<br>
-		<div class="links">
-		<form name=deleteUser method=POST  action= edit>  
+		<div class="links"> 
 			<button type="submit" name="action" value="deleteUser"> User Löschen</button>
 			<input type="hidden" name="id" value="${user.id_User}">
-		</form> 
 		</div>
 		<div class="rechts">
-		<form name=saveUser method=POST  action= edit>  
 	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
 	  		<input type="hidden" name="id" value="${user.id_User}">
-	  	</form> 
 	  	</div>
+	  	</form> 
   </body>
 </html>
