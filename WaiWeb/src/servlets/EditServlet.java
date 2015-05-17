@@ -38,12 +38,10 @@ public class EditServlet extends HttpServlet{
 		String action = request.getParameter("action");
 		initVar();
 		
- 		if (request.getParameter("id") != null) {
-			id = Integer.valueOf(request.getParameter("id"));
- 		}
-		
  		/** User Editierung: **/
 		if(action.equals("editUser")){
+			checkUserId(request);
+			
 			try {
 				user = daoImp.getUserFromDatabase(id);
 			} catch (UserNotFoundExecption e) {
@@ -55,6 +53,8 @@ public class EditServlet extends HttpServlet{
 			dispatcher.forward(request, response);	
 			
  		} else if(action.equals("deleteUser")){
+			checkUserId(request);
+			
  			//Löscht den ausgewählten Nutzer in der Datenbank und kehrt zur User Liste zurück:
  			daoImp.deleteUserInDatabase(id);
  			
@@ -62,6 +62,8 @@ public class EditServlet extends HttpServlet{
  			backToAuswahl(request, response);
  			
  		} else if(action.equals("saveUser")){
+			checkUserId(request);
+ 			
  			//Einlesen der benötigen Daten vom request:
  	 		if (request.getParameter("username") != null && request.getParameter("rechte") != null
  	 				&& request.getParameter("kommentar") != null) {
@@ -84,10 +86,15 @@ public class EditServlet extends HttpServlet{
  			
  			System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
  			backToAuswahl(request, response);
+ 			
+ 		} else if(action.equals("addUser")){
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_User.jsp");
+			dispatcher.forward(request, response);	
  		}
 		
 		/** Cam Editierung: **/
 		if(action.equals("editCam")){
+			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
 			
 			request.setAttribute("cam", cam);
@@ -95,6 +102,8 @@ public class EditServlet extends HttpServlet{
 			dispatcher.forward(request, response);	
 			
  		} else if(action.equals("deleteCam")){
+			checkUserId(request);
+			
  			//Löscht die ausgewählte Cam und kehrt zum Auswahlbildschirm zurück:
  			camDaoImp.deleteCamInDatabase(id);
  			
@@ -102,9 +111,13 @@ public class EditServlet extends HttpServlet{
  			backToAuswahl(request, response);
  			
  		} else if(action.equals("addCam")){
- 			//TODO: Leitet auf die nächste JSP Seite um eine neue Cam hinzuzufügen:
+ 			//Leitet auf die nächste JSP Seite um eine neue Cam hinzuzufügen:
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_Cam.jsp");
+			dispatcher.forward(request, response);	
 		
 		} else if(action.equals("saveCam")){
+			checkUserId(request);
+			
  			//Einlesen der benötigen Daten vom request:
  	 		if (request.getParameter("camname") != null && request.getParameter("url") != null
  	 				&& request.getParameter("kommentar") != null) {
@@ -140,5 +153,12 @@ public class EditServlet extends HttpServlet{
 		kommentar = null;
 		camname = null;
 		url = null;
+	}
+	
+	//Check ID, nur da verwenden wo auch gebraucht:
+	private void checkUserId(HttpServletRequest request) {
+ 		if (request.getParameter("id") != null) {
+			id = Integer.valueOf(request.getParameter("id"));
+ 		}
 	}
 }
