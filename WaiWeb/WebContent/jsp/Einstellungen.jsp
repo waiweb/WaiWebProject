@@ -12,14 +12,14 @@
 				<tbody>
 				    <tr>   	
 				     <td>Anzahl der Thumbnails</td>
-				     <td> </td>
+				     <td> <!-- TODO: Hier die Anzahl der Thumbnails übergeben! --></td>
 				     </tr>						
 				</tbody>
-			</table>
+			</table> <br>
 		<a href="settings?action=deleteDatabase">Gesamte Datenbank zurücksetzen</a>  <br>
 		<a href="settings?action=deletePictures">Alle Bilder löschen</a>  <br><br>
-	    <form name=backButton method=POST action=settings>  
-			<input type=submit name=action value="Back">
+	    <form name=backButton method=GET action=settings>
+	    	<button type="submit" name="action" value="Back">Zurück</button>	  
 	  	</form>	
 	</body>
 </html>
