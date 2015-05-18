@@ -1,25 +1,24 @@
 <html>
 <head>
 	<title> WAIWEB Login </title>
+	<link href="css/LoginEdit.css" type="text/css" rel="stylesheet">
 </head>
 	<body bgcolor="white">
 	
 		<div style="text-align: center;">
-			<font size=7 color="red"> Please Enter the following Information: </font>
+			<font size=7 color="red"> Please enter the following Information: </font>
 		</div>
 	
 	<br>
 		<!--  action=login & method=POST (Leitet direkt auf die doPost() Funktion des LoginServlet weiter) -->
 		<form name=checkLogin method=POST action=login>  
-			<div style="text-align: center;">
-				<font size=5> Username <input type=text name="username" size=20 ></font>
-				<br>
-				<font size=5>Passwort <input type="password" name="password" size="20" maxlength="20" ></font>
-				<br>
-				<!-- Type=submit, Name=action (das Attribut), 
-					 Value=Submit (über action.equals("Submit") in doPost() des LoginServlet abfragen -->
-				<input type=submit name=action value="Submit">
+			<div class="login">
+   			<input type="text" name="username" placeholder="Username" id="username">  
+  			<input type="password" name="password" placeholder="password" id="password">  
+  			<a href="#" class="forgot">forgot password?</a>
+  			<input type="submit" name=action value="Submit">
 			</div>
+			<div class="shadow"></div>
 		</form>
 	<hr>
 	<font size=3 color="red"> Note: This application does not implement the complete 
@@ -27,3 +26,7 @@
 	used with html tables and forms.</font>
 	</body>
 </html>
+
+
+
+

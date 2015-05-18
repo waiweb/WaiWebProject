@@ -40,7 +40,7 @@ public class EditServlet extends HttpServlet{
 			dispatcher.forward(request, response);	
 			
  		} else if(action.equals("back")){
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 			dispatcher.forward(request, response);	
  		}
 	}
