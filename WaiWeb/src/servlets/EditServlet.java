@@ -190,7 +190,7 @@ public class EditServlet extends HttpServlet{
 	
 	//Funktion um auf die User Liste zurückzukehren:
 	private void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 		dispatcher.forward(request, response);
 	}
 	

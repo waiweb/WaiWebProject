@@ -56,7 +56,7 @@ public class SettingsServlet extends HttpServlet {
 	
 	//Funktion um auf Auswahlmöglichkeiten zurückzukehren:
 	void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmöglichkeiten.jsp");
+		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 		dispatcher.forward(request, response);
 	}
 
