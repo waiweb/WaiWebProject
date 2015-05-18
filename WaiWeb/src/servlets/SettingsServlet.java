@@ -37,11 +37,12 @@ public class SettingsServlet extends HttpServlet {
 			databaseDelete.deleteDatabase();
 			
 			backToAuswahl(request, response);
-		}		
-		
-		else if(action.equals("deletePictures")){
-			//Alle gespeicherten Bilder löschen: TODO: Funktion um alle Bilder zu löschen!
 			
+		} else if(action.equals("deletePictures")){
+			//Alle gespeicherten Bilder löschen: TODO: Funktion um alle Bilder zu löschen!
+			backToAuswahl(request, response);
+			
+		} else if (action.equals("Back")) {
 			backToAuswahl(request, response);
 		}
 	}
@@ -50,12 +51,7 @@ public class SettingsServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String action = request.getParameter("action");
 		
-		//Für Logout zuständig, falls Login korrekt Weiterleitung an AuswahlServlet!
-		if (action.equals("Back")) {
-			backToAuswahl(request, response);
-		}
 	}
 	
 	//Funktion um auf Auswahlmöglichkeiten zurückzukehren:
