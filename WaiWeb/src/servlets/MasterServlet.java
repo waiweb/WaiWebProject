@@ -109,7 +109,7 @@ public class MasterServlet extends HttpServlet {
 		camList.add(camdao.getCamFromDatabase(1));
 		camList.add(camdao.getCamFromDatabase(2));
 		usercammapping.setUserCamMapping(user,(ArrayList)camdao.getAllCams());
-		usercammapping.setUserCamMapping(user1, camList);
+		
 
 		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));
 		
@@ -205,5 +205,9 @@ public class MasterServlet extends HttpServlet {
 		
 	}
 	
+	
+
+	
+
 
 }
