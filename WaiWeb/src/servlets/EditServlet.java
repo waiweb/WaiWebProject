@@ -57,16 +57,33 @@ public class EditServlet extends HttpServlet{
 	//POST:
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		String[] checkbox=request.getParameterValues("checked");
-		List<Cam> cams= new ArrayList<Cam>();
-		List<Cam> checkedCams=new ArrayList<Cam>();
-		List<Cam> tempCheckedCams=new ArrayList<Cam>();
+		
 		initVar();
 		
  		/** User Editierung: **/
 		//User auswählen zum editieren:
 		if(action.equals("editUser")){
 			checkUserId(request);
+			String[] checkbox=request.getParameterValues("checked");
+			List<Cam> cams= new ArrayList<Cam>();
+			List<Cam> checkedCams=new ArrayList<Cam>();
+			List<Cam> tempCheckedCams=new ArrayList<Cam>();
+			
+			
+			
+			if(checkbox!=null){
+		    	ArrayList<Cam> camList = new ArrayList<Cam>();
+		    	for (int i = 0; i < checkbox.length; i++) 
+		        {  System.out.println (checkbox[i]);
+		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
+		        }
+		    	
+		    	try {
+					ucDaoImp.setUserCamMapping(daoImp.getUserFromDatabase(id), camList);
+				} catch (UserNotFoundExecption e) {
+					e.printStackTrace();
+				}
+		    }
 			
 			try {
 				user = daoImp.getUserFromDatabase(id);
@@ -224,19 +241,7 @@ public class EditServlet extends HttpServlet{
  			backToAuswahl(request, response);
  		}
 		   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
-		    if(checkbox!=null){
-		    	ArrayList<Cam> camList = new ArrayList<Cam>();
-		    	for (int i = 0; i < checkbox.length; i++) 
-		        {  System.out.println (checkbox[i]);
-		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
-		        }
-		    	
-		    	try {
-					ucDaoImp.setUserCamMapping(daoImp.getUserFromDatabase(id), camList);
-				} catch (UserNotFoundExecption e) {
-					e.printStackTrace();
-				}
-		    }
+		    
 	}
 	
 	//Funktion um auf die User Liste zurückzukehren:
