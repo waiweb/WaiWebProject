@@ -11,7 +11,7 @@
   <body>
   	<font size=5> User bearbeiten </font> <br><br>	
   		<form name=saveUser method=POST  action= edit>  
-		<table border="1">
+		<table border="1" align="left">
 			<tbody>
 			    <tr>   	
 			     <td>Konfiguration für:  <c:out value="${user.username}"/></td>
@@ -28,6 +28,27 @@
 					<td>Kommentar:</td>	
 					<td><input type="text" name="kommentar" value="${user.kommentar}"></td>
 				</tr>			
+			</tbody>				
+		</table>
+		<table border="1" >
+			<tbody>
+			    <tr>   	
+			     <td>Cams für:  <c:out value="${user.username}"/></td>
+			     </tr>
+				<tr>
+					<c:forEach var="checkedCam" items="${checkedCams}">	
+					  <tr>
+						<td><c:out value="${checkedCam.camname}"/></td>
+						<td><input type="checkbox" name="checked" value="${checkedCam.id_Cam}" checked="checked" >	</td>
+						<tr>
+			    	</c:forEach>
+			    	 <c:forEach var="cams" items="${cams}">
+			    	  <tr>
+						<td><c:out value="${cams.camname}"/></td>
+						<td><input type="checkbox" name="checked" value="${cams.id_Cam}" >	</td>
+						<tr>
+			    	</c:forEach>	
+				</tr>
 			</tbody>				
 		</table>
 		<br>

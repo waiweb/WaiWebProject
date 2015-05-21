@@ -1,6 +1,8 @@
 package servlets;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,10 +10,13 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.sun.org.apache.bcel.internal.generic.CHECKCAST;
+
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import exception.UserNotFoundExecption;
 import Dao.CamDaoImpl;
+import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 import model.Cam;
 import model.User;
@@ -22,6 +27,7 @@ public class EditServlet extends HttpServlet{
 	
 	final UserDaoImpl daoImp = new UserDaoImpl();
 	final CamDaoImpl camDaoImp = new CamDaoImpl();
+	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
 	private User user;
 	private Cam cam;
 	private int rechte, id;
@@ -29,6 +35,9 @@ public class EditServlet extends HttpServlet{
 	
 	//GET:
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
 		String action = request.getParameter("action");
 		
 		if(action.equals("addUser")){
@@ -48,6 +57,10 @@ public class EditServlet extends HttpServlet{
 	//POST:
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
+		String[] checkbox=request.getParameterValues("checked");
+		List<Cam> cams= new ArrayList<Cam>();
+		List<Cam> checkedCams=new ArrayList<Cam>();
+		List<Cam> tempCheckedCams=new ArrayList<Cam>();
 		initVar();
 		
  		/** User Editierung: **/
@@ -57,10 +70,33 @@ public class EditServlet extends HttpServlet{
 			
 			try {
 				user = daoImp.getUserFromDatabase(id);
+			    cams=camDaoImp.getAllCams();
+			    tempCheckedCams=ucDaoImp.getUserCamMapping(daoImp.getUserFromDatabase(id));
+			    
+			    for(int i=0;i<tempCheckedCams.size();i++){
+			    	long id= tempCheckedCams.get(i).getId_Cam();
+			    	checkedCams.add(camDaoImp.getCamFromDatabase(id));
+			    	
+			    }
+			    
 			} catch (UserNotFoundExecption e) {
 				e.printStackTrace();
 			}
 			
+			// die gecheckten cams aus der liste allcams löschen
+			for(int i=cams.size()-1;i>=0;i--){
+				for(int j=checkedCams.size()-1; j>=0; j--){
+				  if(cams.get(i).getId_Cam()==checkedCams.get(j).getId_Cam()){
+				       cams.remove(i);
+				        break;}
+			     }
+			}
+			
+
+			
+			
+			request.setAttribute("checkedCams",checkedCams );
+			request.setAttribute("cams", cams);
 			request.setAttribute("user", user);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_User.jsp");
 			dispatcher.forward(request, response);	
@@ -84,6 +120,7 @@ public class EditServlet extends HttpServlet{
  	 			rechte = Integer.valueOf(request.getParameter("rechte"));
  	 			kommentar = request.getParameter("kommentar");
  	 		}
+ 	 		
  	 		
  	 		//Versucht den User in der Datenbank upzudaten:
 			try {
@@ -186,6 +223,20 @@ public class EditServlet extends HttpServlet{
  	 		}
  			backToAuswahl(request, response);
  		}
+		   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
+		    if(checkbox!=null){
+		    	ArrayList<Cam> camList = new ArrayList<Cam>();
+		    	for (int i = 0; i < checkbox.length; i++) 
+		        {  System.out.println (checkbox[i]);
+		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
+		        }
+		    	
+		    	try {
+					ucDaoImp.setUserCamMapping(daoImp.getUserFromDatabase(id), camList);
+				} catch (UserNotFoundExecption e) {
+					e.printStackTrace();
+				}
+		    }
 	}
 	
 	//Funktion um auf die User Liste zurÃ¼ckzukehren:
