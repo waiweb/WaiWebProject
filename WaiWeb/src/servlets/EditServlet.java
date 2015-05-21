@@ -139,7 +139,36 @@ public class EditServlet extends HttpServlet{
 			} catch (UserNotFoundExecption e) {
 				e.printStackTrace();
 			}
- 
+             
+			   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
+			String[] checkbox=request.getParameterValues("checked");
+			
+			if(checkbox!=null){
+				try {
+					checkUserId(request);
+					user=daoImp.getUserFromDatabase(id);
+				} catch (UserNotFoundExecption e1) {
+					e1.printStackTrace();
+				}
+		    	ArrayList<Cam> camList = new ArrayList<Cam>();
+		    	for (int i = 0; i < checkbox.length; i++) 
+		        {  System.out.println ("die cam ID: "+checkbox[i]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
+		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
+		        }
+		    	
+		    	ucDaoImp.setUserCamMapping(user, camList);
+		    }else if(checkbox==null){
+		    	try {
+					user=daoImp.getUserFromDatabase(id);
+				} catch (UserNotFoundExecption e) {
+					e.printStackTrace();
+				}
+		    	ArrayList<Cam> camList = new ArrayList<Cam>();
+		    	ucDaoImp.setUserCamMapping(user, camList);
+		    	System.out.println("es wurden alle bilder f�r den user: "+user.getUsername()+" aus der bezieungstabelle entfernt");
+		    	
+		    }
+			
  			backToAuswahl(request, response);
  			
  		//Neuen Nutzer in die Datenbank hinzufügen:
@@ -224,23 +253,7 @@ public class EditServlet extends HttpServlet{
  	 		}
  			backToAuswahl(request, response);
  		}
-		   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
-		String[] checkbox=request.getParameterValues("checked");
 		
-		if(checkbox!=null){
-			
-	    	ArrayList<Cam> camList = new ArrayList<Cam>();
-	    	for (int i = 0; i < checkbox.length; i++) 
-	        {  System.out.println (checkbox[i]);
-	          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
-	        }
-	    	
-	    	try {
-				ucDaoImp.setUserCamMapping(daoImp.getUserFromDatabase(id), camList);
-			} catch (UserNotFoundExecption e) {
-				e.printStackTrace();
-			}
-	    }
 	}
 	
 	//Funktion um auf die User Liste zurückzukehren:
