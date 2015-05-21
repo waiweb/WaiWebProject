@@ -62,7 +62,7 @@ public class EditServlet extends HttpServlet{
 		initVar();
 		
  		/** User Editierung: **/
-		//User auswaehlen zum editieren:
+		//User ausw√§hlen zum editieren:
 		if(action.equals("editUser")){
 			checkUserId(request);
 			List<Cam> cams= new ArrayList<Cam>();
@@ -228,18 +228,19 @@ public class EditServlet extends HttpServlet{
 		String[] checkbox=request.getParameterValues("checked");
 		
 		if(checkbox!=null){
-			
+			checkUserId(request);
 	    	ArrayList<Cam> camList = new ArrayList<Cam>();
+	    	try {
+				user=daoImp.getUserFromDatabase(id);
+			} catch (UserNotFoundExecption e1) {
+				e1.printStackTrace();
+			}
 	    	for (int i = 0; i < checkbox.length; i++) 
-	        {  System.out.println (checkbox[i]);
+	        {  System.out.println ("cam: "+checkbox[i]+ " wurde zu user: "+user.getUsername()+" hinzugef¸gt");
 	          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
 	        }
-	    	
-	    	try {
-				ucDaoImp.setUserCamMapping(daoImp.getUserFromDatabase(id), camList);
-			} catch (UserNotFoundExecption e) {
-				e.printStackTrace();
-			}
+	    
+	    	ucDaoImp.setUserCamMapping(user, camList);
 	    }
 	}
 	
