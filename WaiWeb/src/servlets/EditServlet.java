@@ -241,6 +241,15 @@ public class EditServlet extends HttpServlet{
 	        }
 	    
 	    	ucDaoImp.setUserCamMapping(user, camList);
+	    }else if(checkbox==null){
+	    	try {
+				user=daoImp.getUserFromDatabase(id);
+			} catch (UserNotFoundExecption e) {
+				e.printStackTrace();
+			}
+	    	ArrayList<Cam> camList = new ArrayList<Cam>();
+	    	ucDaoImp.setUserCamMapping(user, camList);
+	    	
 	    }
 	}
 	
