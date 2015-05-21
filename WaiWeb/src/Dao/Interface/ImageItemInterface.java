@@ -2,6 +2,8 @@ package Dao.Interface;
 
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -12,11 +14,10 @@ public interface ImageItemInterface {
 	
 
 	
-	public void addImage(BufferedImage bufferedimage, String name );
-	public void addImage(File file);
+	public void addImage(ImageItem item);
 	
 	//Das Argument ist eine Hashmap mit den Angaben Year, Month, Day, Hour, Minute
-	public ImageItem getImageItem(HashMap<String,String> imageHashMap);
+	public ArrayList<ImageItem> getImageItems(Timestamp begin, Timestamp end);
 	public void deleteImage(HashMap<String,String> imageHashMap);
 	
 	public void deleteImage(ImageItem imageItem);

@@ -2,6 +2,11 @@ package servlets;
 
 //import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.Date;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import javax.servlet.RequestDispatcher;
@@ -13,12 +18,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import exception.UserNotFoundExecption;
 import model.Cam;
+import model.ImageItem;
 import model.User;
 //import utils.Tool_ImageProcessing;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import Dao.CamDaoImpl;
 import Dao.DatabaseControllerImpl;
+import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 
@@ -102,8 +109,54 @@ public class MasterServlet extends HttpServlet {
 
 		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));
 		
+		Timestamp timestamp = Tool_TimeStamp.getTimeStampSQLDateFormat();
+		
+		System.out.println("Date: "+Tool_TimeStamp.getTimeStampSetFromSQLDateFormat(timestamp));
 		
 		
+		//Diese aufgabe wird später in jobs imagecapture ausgeführt 
+		//insert eines images (nur die metainformationen, das eigenliche image muss in einer job-klasse in das Dateisystem gelegt werden.
+		//Die ablage hat nun die form:   /camId/jahr/monat/tag/stunde/minute_sekunde_millisekunde.jpg  
+		
+		ImageDaoImpl imageDao = new ImageDaoImpl();
+		
+		// eines mit aktuellen zeitstempel
+		imageDao.addImage(new ImageItem(2,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+
+		
+		//ein paar fiktive bilder mit erdachten zeitstempel (später kommt diese information über die auswahl im front-end.
+		//die generateTimeStamp generiert ein "Timestamp" objekt welches man zum suchen gut verwenden kann weil die SQL datenbank
+		// in diesem format abspeichert und dann einfach verglichen werden kann.
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2012","4", "05","19"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2013","4", "05","10"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2013","4", "05","11"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2013","4", "05","11"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2013","4", "05","12"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2013","4", "05","13"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.generateTimeStamp("2013","4", "05","9"),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+		imageDao.addImage(new ImageItem(1,Tool_TimeStamp.getTimeStampSQLDateFormat(),""));
+
+
+		
+		//Selektiert alle bilder von den beiden angegebenen zeiträumen
+		ArrayList<ImageItem> imageList = imageDao.getImageItems(Tool_TimeStamp.generateTimeStamp("2013","4", "05","10"),Tool_TimeStamp.generateTimeStamp("2013","4", "05","12"));
+		for(ImageItem item: imageList){
+			System.out.println("Imageitem: "+item.getId_Image() + " path: "+item.getPath());
+		}
+		
+		
+		//Weiteres Beispiel: selektierung vom 2013-04-05 14 uhr bis "jetzt" alle bilder:
+		imageList = imageDao.getImageItems(Tool_TimeStamp.generateTimeStamp("2013","4", "05","13"),Tool_TimeStamp.getTimeStampSQLDateFormat());
+		for(ImageItem item: imageList){
+			System.out.println("Imageitem: "+item.getId_Image() + " path: "+item.getPath());
+		}
+
+				
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
 		//udb.updateUser(new User(2,"UseraaaaaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
@@ -147,5 +200,7 @@ public class MasterServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 	}
+	
+
 
 }
