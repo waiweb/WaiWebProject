@@ -62,7 +62,7 @@ public class EditServlet extends HttpServlet{
 		initVar();
 		
  		/** User Editierung: **/
-		//User ausweahlen zum editieren:
+		//User auswaehlen zum editieren:
 		if(action.equals("editUser")){
 			checkUserId(request);
 			List<Cam> cams= new ArrayList<Cam>();
