@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
+
 import jndi.JndiFactory;
 import model.Cam;
 import model.User;
@@ -57,6 +59,41 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 		
 	}
 	
+	public void setUserCamMapping(long Id_User, ArrayList<Cam> camList) {
+		
+
+		Connection connection = null;		
+		try {
+			connection = jndi.getConnection("jdbc/libraryDB");	
+			
+			
+			PreparedStatement pstmt = connection.prepareStatement("select * from User_Cam_Mapping_Table where Id_User = ?") ;
+			pstmt.setLong(1, Id_User);
+			ResultSet rs =  pstmt.executeQuery();
+			
+			if(rs.next()){
+				//update does first delete all and insert them new all.
+				pstmt = connection.prepareStatement("Delete from User_Cam_Mapping_Table where Id_User = ?") ;
+				pstmt.setLong(1, Id_User);
+				pstmt.executeUpdate();
+				}
+			
+			//insert updated list.
+			for(int i=0; i< camList.size();i++){
+				PreparedStatement pstmtt = connection.prepareStatement("INSERT INTO User_Cam_Mapping_Table (Id_User,Id_Cam) Values(?,?)");
+				pstmtt.setLong(1, Id_User);
+				pstmtt.setLong(2, camList.get(i).getId_Cam());
+				pstmtt.executeUpdate();
+			}
+			
+		} catch (Exception e) {
+			//database query feller
+		} finally {
+			closeConnection(connection);
+		}
+		
+	}
+	
 
 	//todo: evtl. ändern, dass die camliste nur aus long besteht.
 	/**
@@ -69,6 +106,8 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 		ArrayList<Cam> camList  =new ArrayList<Cam>();
 		
 		try {
+		connection = jndi.getConnection("jdbc/libraryDB");	
+
 		PreparedStatement pstmt = connection.prepareStatement("select * from User_Cam_Mapping_Table where Id_User = ? ");
 		pstmt.setLong(1, user.getId_User());
 		ResultSet rs = pstmt.executeQuery();		
@@ -81,7 +120,7 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 				camList.add(cam);
 			}
 			
-		} catch (SQLException e) {
+		} catch (SQLException | NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -95,7 +134,9 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 		ArrayList<Cam> camList  =new ArrayList<Cam>();
 		
 		try {
-		PreparedStatement pstmt = connection.prepareStatement("select * from User_Cam_Mapping_Table where Id_User = ? ");
+		connection = jndi.getConnection("jdbc/libraryDB");	
+
+		PreparedStatement pstmt = connection.prepareStatement("select * from User_Cam_Mapping_Table where Id_User = ?");
 		pstmt.setLong(1, userId);
 		ResultSet rs = pstmt.executeQuery();		
 		System.out.println("pstmt: "+pstmt.getFetchSize());
@@ -108,6 +149,9 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			}
 			
 		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (NamingException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
