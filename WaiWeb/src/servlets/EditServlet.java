@@ -146,7 +146,7 @@ public class EditServlet extends HttpServlet{
 				e.printStackTrace();
 			}
              
-			   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
+		   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
 			String[] checkbox=request.getParameterValues("checked");
 			
 			if(checkbox!=null){
@@ -166,6 +166,7 @@ public class EditServlet extends HttpServlet{
 //		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
 //		        }
 				
+				// checkbox enthaelt alle camIds die angehackt wurden
 		    	for(int i=0;i<cams.size();i++){
 			    	for(int j=0;j<checkbox.length;j++){
 			    		if(cams.get(i).getId_Cam()==Integer.valueOf(checkbox[j])){
@@ -185,7 +186,7 @@ public class EditServlet extends HttpServlet{
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	ucDaoImp.setUserCamMapping(user, camList);
 		    	System.out.println("es wurden alle bilder für den user: "+user.getUsername()+" aus der bezieungstabelle entfernt");
-		    	
+		    	// ende mit checkboxen in die cam_user_beziehung tabelle zu schreiben
 		    }
 			
  			backToAuswahl(request, response);
