@@ -62,7 +62,7 @@ public class EditServlet extends HttpServlet{
 		initVar();
 		
  		/** User Editierung: **/
-		//User auswählen zum editieren:
+		//User auswaehlen zum editieren:
 		if(action.equals("editUser")){
 			checkUserId(request);
 			List<Cam> cams= new ArrayList<Cam>();
@@ -74,15 +74,24 @@ public class EditServlet extends HttpServlet{
 			    cams=camDaoImp.getAllCams();
 			    tempCheckedCams=ucDaoImp.getUserCamMapping(daoImp.getUserFromDatabase(id));
 			    
-			    for(int i=0;i<tempCheckedCams.size();i++){
-			    	long id= tempCheckedCams.get(i).getId_Cam();
-			    	checkedCams.add(camDaoImp.getCamFromDatabase(id));
-			    	
+			    //TODO: zuviele datenbank zugriffe
+//			    for(int i=0;i<tempCheckedCams.size();i++){
+//			    	long id= tempCheckedCams.get(i).getId_Cam();
+//			    	checkedCams.add(camDaoImp.getCamFromDatabase(id));
+//			    	
+//			    }
+			    
+			    for(int i=0;i<cams.size();i++){
+			    	for(int j=0;j<tempCheckedCams.size();j++){
+			    		if(cams.get(i).getId_Cam()==tempCheckedCams.get(j).getId_Cam()){
+			    			checkedCams.add(cams.get(i));
+			    		}
+			    	}
 			    }
 			    
 			} catch (UserNotFoundExecption e) {
 				e.printStackTrace();
-			}
+			  }
 			
 			// die gecheckten cams aus der liste allcams l�schen
 			for(int i=cams.size()-1;i>=0;i--){
@@ -93,25 +102,22 @@ public class EditServlet extends HttpServlet{
 			     }
 			}
 			
-
-			
-			
 			request.setAttribute("checkedCams",checkedCams );
 			request.setAttribute("cams", cams);
 			request.setAttribute("user", user);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_User.jsp");
 			dispatcher.forward(request, response);	
 			
- 		//Löscht den ausgewählten Nutzer in der Datenbank und kehrt zur User Liste zurück:
+ 		//Loescht den ausgewählten Nutzer in der Datenbank und kehrt zur User Liste zurück:
  		} else if(action.equals("deleteUser")){
 			checkUserId(request);
 
  			daoImp.deleteUserInDatabase(id);
  			
- 			System.out.println("User mit der ID: " + id + " erfolgreich gelöscht!");
+ 			System.out.println("User mit der ID: " + id + " erfolgreich geloescht!");
  			backToAuswahl(request, response);
  		
- 		//Änderungen eines Nutzers sichern und in Datenbank updaten:
+ 		//Aenderungen eines Nutzers sichern und in Datenbank updaten:
  		} else if(action.equals("saveUser")){
 			checkUserId(request);
  			
@@ -134,7 +140,7 @@ public class EditServlet extends HttpServlet{
 		 			System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
 					
 	 	 		} else {
-	 	 			System.out.println("Falsche Angabe der Rechte! Zulässige Rechte, 0 = User, 1 = Admin!");
+	 	 			System.out.println("Falsche Angabe der Rechte! Zulaessige Rechte, 0 = User, 1 = Admin!");
 	 	 		}
 			} catch (UserNotFoundExecption e) {
 				e.printStackTrace();
@@ -149,15 +155,28 @@ public class EditServlet extends HttpServlet{
 					user=daoImp.getUserFromDatabase(id);
 				} catch (UserNotFoundExecption e1) {
 					e1.printStackTrace();
-				}
+				 }
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
-		    	for (int i = 0; i < checkbox.length; i++) 
-		        {  System.out.println ("die cam ID: "+checkbox[i]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
-		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
-		        }
+		    	List<Cam> cams= new ArrayList<Cam>();
+				cams=camDaoImp.getAllCams();
+				
+				// TODO: zuviele datenbankzugriffe
+//		    	for (int i = 0; i < checkbox.length; i++) 
+//		        {  System.out.println ("die cam ID: "+checkbox[i]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
+//		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
+//		        }
+				
+		    	for(int i=0;i<cams.size();i++){
+			    	for(int j=0;j<checkbox.length;j++){
+			    		if(cams.get(i).getId_Cam()==Integer.valueOf(checkbox[j])){
+			    			System.out.println ("die cam ID: "+checkbox[i]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
+			    			camList.add(cams.get(i));
+			    		}
+			    	}
+			    }
 		    	
 		    	ucDaoImp.setUserCamMapping(user, camList);
-		    }else if(checkbox==null){
+		     }else if(checkbox==null){
 		    	try {
 					user=daoImp.getUserFromDatabase(id);
 				} catch (UserNotFoundExecption e) {
@@ -171,7 +190,7 @@ public class EditServlet extends HttpServlet{
 			
  			backToAuswahl(request, response);
  			
- 		//Neuen Nutzer in die Datenbank hinzufügen:
+ 		//Neuen Nutzer in die Datenbank hinzufuegen:
  		} else if(action.equals("addNewUser")){
  	 		if (request.getParameter("username") != null && request.getParameter("passwort") != null 
  	 				&& request.getParameter("rechte") != null && request.getParameter("kommentar") != null) {
@@ -181,13 +200,13 @@ public class EditServlet extends HttpServlet{
  	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
- 	 		//Überprüfung ob Name bereits vergeben oder die Rechte im zulässigen Bereich sind! 0 = User, 1 = Admin:
+ 	 		//Ueberpruefung ob Name bereits vergeben oder die Rechte im zulaessigen Bereich sind! 0 = User, 1 = Admin:
  	 		if (daoImp.isUsernameExisting(username) == false) {
  	 			if ((rechte == 0) || (rechte == 1)) {
  	 	 	 		daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar));
- 	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefügt!");
+ 	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefuegt!");
  	 			} else {
- 	 				System.out.println("Falsche Angabe der Rechte! Zulässige Rechte, 0 = User, 1 = Admin!");
+ 	 				System.out.println("Falsche Angabe der Rechte! Zulaessige Rechte, 0 = User, 1 = Admin!");
  	 			}
  	 		} else {
  	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
@@ -205,13 +224,13 @@ public class EditServlet extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_Cam.jsp");
 			dispatcher.forward(request, response);	
 		
-		//Löscht die ausgewählte Cam und kehrt zum Auswahlbildschirm zurück:	
+		//Loescht die ausgewaehlte Cam und kehrt zum Auswahlbildschirm zurueck:	
  		} else if(action.equals("deleteCam")){
 			checkUserId(request);
 			
  			camDaoImp.deleteCamInDatabase(id);
  			
- 			System.out.println("Cam mit der ID: " + id + " erfolgreich gelöscht!");
+ 			System.out.println("Cam mit der ID: " + id + " erfolgreich geloescht!");
  			backToAuswahl(request, response);
  		
  		//Änderungen der Cam in der Datenbank updaten:
@@ -234,7 +253,7 @@ public class EditServlet extends HttpServlet{
  			System.out.println("Cam mit der ID: " + id + " erfolgreich geupdatet!");
  			backToAuswahl(request, response);	
  	
- 		//Neue Cam in der Datenbank hinzufügen:
+ 		//Neue Cam in der Datenbank hinzufuegen:
  		} else if(action.equals("addNewCam")){
  	 		if (request.getParameter("camname") != null && request.getParameter("url") != null 
  	 				&& request.getParameter("kommentar") != null) {
@@ -243,11 +262,11 @@ public class EditServlet extends HttpServlet{
  	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
- 	 		//Überprüfung ob Name bereits vergeben oder die Rechte im zulässigen Bereich sind! 0 = User, 1 = Admin:
+ 	 		//Ueberpruefung ob Name bereits vergeben oder die Rechte im zulaessigen Bereich sind! 0 = User, 1 = Admin:
  	 		//TODO: Check if URL is valid!
  	 		if (camDaoImp.isCamNameExisting(camname) == false) {
  	 				camDaoImp.createCamInDatabase(new Cam(camname, url, Tool_TimeStamp.getTimeStampString(), "/camimages", kommentar));
- 	 	 			System.out.println("Neue Cam: " + camname + " erfolgreich hinzugefügt!");
+ 	 	 			System.out.println("Neue Cam: " + camname + " erfolgreich hinzugefuegt!");
  	 		} else {
  	 			System.out.println("Cam mit dem Namen: " + camname + " ist bereits vorhanden!");
  	 		}
@@ -256,7 +275,7 @@ public class EditServlet extends HttpServlet{
 		
 	}
 	
-	//Funktion um auf die User Liste zurückzukehren:
+	//Funktion um auf die User Liste zurueckzukehren:
 	private void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 		dispatcher.forward(request, response);
