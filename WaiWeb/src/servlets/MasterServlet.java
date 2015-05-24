@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import exception.UserNotFoundExecption;
 import model.Cam;
 import model.User;
 //import utils.Tool_ImageProcessing;
@@ -18,6 +19,7 @@ import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import Dao.CamDaoImpl;
 import Dao.DatabaseControllerImpl;
+import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 
 /**
@@ -40,19 +42,28 @@ public class MasterServlet extends HttpServlet {
          * Momentan genutzt für Tests: USERNAME: admin PW: admin
          */
         
-        beispiele();		
+        try {
+			beispiele();
+		} catch (UserNotFoundExecption e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}		
     }
     
-    public void beispiele(){
+    public void beispiele() throws UserNotFoundExecption{
     	
 		DatabaseControllerImpl db = new DatabaseControllerImpl();
 		db.createDatabase();
 		
 		UserDaoImpl udb = new UserDaoImpl();
+		UserCamMappingImpl usercammapping = new UserCamMappingImpl();
 		
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
-		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),100,Tool_TimeStamp.getTimeStampString(),"kommi"));
-		udb.createUserInDatabase(new User("UserB","meinpass",1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("UserB","meinpass",0,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("a",new String(Tool_Security.hashFromString("aaaaaaaa")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("b",new String(Tool_Security.hashFromString("bbbbbbbb")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+
 		
 		//Test ob userlogin korrekt ist einmal mit fehlerfall
 		System.out.println("Existing: "+udb.isUsernameExisting("UserB"));
@@ -66,16 +77,32 @@ public class MasterServlet extends HttpServlet {
 		
 		//create cams
 		
-		CamDaoImpl dao = new CamDaoImpl();
+		CamDaoImpl camdao = new CamDaoImpl();
 		
-		dao.createCamInDatabase(new Cam("Wiese", "www.spielgel.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "yolo"));
-		dao.createCamInDatabase(new Cam("Fluss", "www.natur.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "fluesse"));
-		dao.createCamInDatabase(new Cam("Berg", "www.berg.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "berg"));
+		camdao.createCamInDatabase(new Cam("Wiese", "www.spielgel.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "yolo"));
+		camdao.createCamInDatabase(new Cam("Fluss", "www.natur.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "fluesse"));
+		camdao.createCamInDatabase(new Cam("Berg", "www.berg.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "berg"));
 
-		ArrayList<Cam>camlist = (ArrayList<Cam>) dao.getAllCams();
+		ArrayList<Cam>camlist = (ArrayList<Cam>) camdao.getAllCams();
 		for(Cam cam : camlist){
 			System.out.println("Id: "+cam.getCamname() + " url: "+cam.getUrl()+" erstellt am: "+cam.getTimeOfCreation()+ " directory: "+cam.getPathOriginalImageDirectory()+" kommentare: "+cam.getKommentar());
 		}
+		
+		
+		long user = udb.getUserIdFromDatabaseByName("a");
+		if(user != 0){
+			System.out.println("User != null yes");
+		}
+		else{
+			System.out.println("User == null sorry");
+		}
+		
+		usercammapping.setUserCamMapping(user,(ArrayList)camdao.getAllCams());
+		
+
+		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));
+		
+		
 		
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
@@ -105,11 +132,13 @@ public class MasterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		String action = request.getParameter("action");
 		
 		//Direkte Weiterleitung auf Login Bildschirm bei erstem Start:
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
-		dispatcher.forward(request, response);
-		
+		if (action == null) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
+			dispatcher.forward(request, response);
+		}	
 	}
 
 	/**

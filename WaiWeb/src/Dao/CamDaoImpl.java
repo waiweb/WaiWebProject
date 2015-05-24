@@ -179,12 +179,13 @@ final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz h
 			connection = jndi.getConnection("jdbc/libraryDB");	
 			
 						
-			PreparedStatement pstmt = connection.prepareStatement("update cams_table Camname=?, Url=?, TimeOfCreation=?, PathOriginalImageDirectory=? ,Kommentar=?");
+			PreparedStatement pstmt = connection.prepareStatement("update cams_table set Camname = ?, Url = ?, TimeOfCreation = ?, PathOriginalImageDirectory = ?, Kommentar = ? where Id_Cam = ?");
 			pstmt.setString(1, cam.getCamname() );
 			pstmt.setString(2, cam.getUrl());
 			pstmt.setString(3, cam.getTimeOfCreation());
 			pstmt.setString(4, cam.getPathOriginalImageDirectory());
 			pstmt.setString(5, cam.getKommentar());
+			pstmt.setLong(6, cam.getId_Cam());
 			
 			pstmt.executeUpdate();
 			

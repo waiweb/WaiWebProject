@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
-  
   <servlet>
     <servlet-name>MasterServlet</servlet-name>
     <servlet-class>servlets.MasterServlet</servlet-class>
@@ -14,12 +13,14 @@
     <servlet-name>Edit</servlet-name>
     <servlet-class>servlets.EditServlet</servlet-class>
   </servlet>
-  
+  <servlet>
+    <servlet-name>Settings</servlet-name>
+    <servlet-class>servlets.SettingsServlet</servlet-class>
+  </servlet>
   <servlet-mapping>
     <servlet-name>MasterServlet</servlet-name>
     <url-pattern>/master</url-pattern>
   </servlet-mapping>
-  
   <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>servlets.LoginServlet</servlet-class>
@@ -33,10 +34,12 @@
     <servlet-name>Auswahl</servlet-name>
     <url-pattern>/auswahl</url-pattern>
   </servlet-mapping>
-  
   <servlet-mapping>
     <servlet-name>Edit</servlet-name>
     <url-pattern>/edit</url-pattern>
   </servlet-mapping>
-  
+    <servlet-mapping>
+    <servlet-name>Settings</servlet-name>
+    <url-pattern>/settings</url-pattern>
+  </servlet-mapping>
 </web-app>

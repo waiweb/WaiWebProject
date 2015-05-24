@@ -1,17 +1,12 @@
 package servlets;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.Cam;
-import model.User;
 import utils.Tool_Security;
 import Dao.CamDaoImpl;
 import Dao.UserDaoImpl;
@@ -63,25 +58,25 @@ public class LoginServlet extends HttpServlet {
 		
 		//Falls auf den Button "Submit" geklickt wird:
 		if (action.equals("Submit")) {
+			
+			//Testen ob Logindaten richtig sind, falls ja auf Auswahlseite (todo: check if admin):
+			if (daoImp.isUserLoginValid(tempUser,new String(Tool_Security.hashFromString(tempPw))) == true ) {
 				
-				//Testen ob Logindaten richtig sind, falls ja auf Auswahlseite (todo: check if admin):
-				if (daoImp.isUserLoginValid(tempUser,new String(Tool_Security.hashFromString(tempPw))) == true ) {
-					
-					//List<User> collection = daoImp.getAllUsers();
-					//List<Cam> camcollection=camdaoImp.getAllCams();
-					//request.setAttribute("users", collection);
-					//request.setAttribute("cams", camcollection);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlm�glichkeiten.jsp");
-					dispatcher.forward(request, response);		
-					
-					
-				//Falls Logindaten falsch, auf Error-Seite weiterleiten:
-				} else {
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/LoginError.html");
-					dispatcher.forward(request, response);
-				}
+				//List<User> collection = daoImp.getAllUsers();
+				//List<Cam> camcollection=camdaoImp.getAllCams();
+				//request.setAttribute("users", collection);
+				//request.setAttribute("cams", camcollection);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
+				dispatcher.forward(request, response);		
+				
+			//Falls Logindaten falsch, auf Error-Seite weiterleiten:
+			} else {
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/LoginError.html");
+				dispatcher.forward(request, response);
+			}
 		}
 		
+		//Für Logout zuständig, falls Login korrekt Weiterleitung an AuswahlServlet!
 		if (action.equals("Logout")) {
 			
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");

@@ -35,6 +35,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Kommentar character varying);"
 			    		;
 			    
+			    //CONSTRAINT userNameUnique UNIQUE (Username) todo
 			    
 			    String createString_CamsTable=
 			    		  "CREATE TABLE Cams_Table ("
@@ -47,18 +48,17 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Kommentar character varying);"
 			    		;
 			    
-			    //Zur zuordnung, welche User auf eine CAM zugreifen dürfen.
+			    //Zur zuordnung, welche User auf eine CAM zugreifen dï¿½rfen.
 			    String createString_User_Cam_Access_Table=
-			    		  "CREATE TABLE User_Cam_Access_Table ("
+			    		  "CREATE TABLE User_Cam_Mapping_Table ("
 			    		+ "Id_User numeric,  "
-			    		+ "Id_Cam numeric, "
-			    		+ "Kommentar character varying);"
+			    		+ "Id_Cam numeric);"
 			    		;
 			    
-			    
+			    /*
 			    String createString_Cam_Images=
 			    		  "CREATE TABLE Cam_Images_Table ("
-			    		+ "Id_Image numeric PRIMARY KEY,"
+			    		+ "Id_Image serial PRIMARY KEY,"
 			    	    + "Imagename character varying,"
 			    		+ "Id_Cam numeric, "
 			    	    + "Year character varying, "
@@ -71,6 +71,18 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			    		+ "Basepath character varying,"
 			    		+ "Kommentar character varying);"
 			    		;
+			    */
+			    
+			    String createString_Cam_Images=
+			    		  "CREATE TABLE Cam_Images_Table ("
+			    		+ "Id_Image serial PRIMARY KEY,"
+			    	    + "Imagename character varying,"
+			    		+ "Id_Cam numeric, "
+			    	    + "Time Timestamp, "
+			    		+ "Path character varying,"
+			    		+ "Kommentar character varying);"
+			    		;
+
 			    
 			    
 
@@ -119,13 +131,13 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				pstmt = connection.prepareStatement("Drop Table Cams_Table; "); 
 				pstmt.executeUpdate();
 				
-				pstmt = connection.prepareStatement("Drop Table User_Cam_Access_Table; "); 
+				pstmt = connection.prepareStatement("Drop Table User_Cam_Mapping_Table; "); 
 				pstmt.executeUpdate();
 				
 				pstmt = connection.prepareStatement("Drop Table Cam_Images_Table; "); 
 				pstmt.executeUpdate();
 				
-
+				System.out.println("Datenbank wurde erfolgreich zurueckgesetzt!");				
 				
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
