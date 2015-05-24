@@ -50,7 +50,7 @@ public class MasterServlet extends HttpServlet {
 		}		
     }
     
-    public void beispiele() throws UserNotFoundExecption{
+	public void beispiele() throws UserNotFoundExecption{
     	
 		DatabaseControllerImpl db = new DatabaseControllerImpl();
 		db.createDatabase();
@@ -59,10 +59,10 @@ public class MasterServlet extends HttpServlet {
 		UserCamMappingImpl usercammapping = new UserCamMappingImpl();
 		
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
-		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
-		udb.createUserInDatabase(new User("UserB","meinpass",0,Tool_TimeStamp.getTimeStampString(),"kommi"));
-		udb.createUserInDatabase(new User("a",new String(Tool_Security.hashFromString("aaaaaaaa")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
-		udb.createUserInDatabase(new User("b",new String(Tool_Security.hashFromString("bbbbbbbb")),1,Tool_TimeStamp.getTimeStampString(),"kommi"));
+		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),"Admin"));
+		udb.createUserInDatabase(new User("user",new String(Tool_Security.hashFromString("user")),0,Tool_TimeStamp.getTimeStampString(),"User"));
+		udb.createUserInDatabase(new User("a",new String(Tool_Security.hashFromString("a")),1,Tool_TimeStamp.getTimeStampString(),"User a"));
+		udb.createUserInDatabase(new User("b",new String(Tool_Security.hashFromString("b")),0,Tool_TimeStamp.getTimeStampString(),"User b"));
 
 		
 		//Test ob userlogin korrekt ist einmal mit fehlerfall
@@ -89,7 +89,7 @@ public class MasterServlet extends HttpServlet {
 		}
 		
 		
-		long user = udb.getUserIdFromDatabaseByName("a");
+		long user = udb.getUserIdFromDatabaseByName("user");
 		if(user != 0){
 			System.out.println("User != null yes");
 		}
@@ -97,12 +97,9 @@ public class MasterServlet extends HttpServlet {
 			System.out.println("User == null sorry");
 		}
 		
-		usercammapping.setUserCamMapping(user,(ArrayList)camdao.getAllCams());
+		usercammapping.setUserCamMapping(user,(ArrayList<Cam>)camdao.getAllCams());	
 		
-
-		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));
-		
-		
+		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));	
 		
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));

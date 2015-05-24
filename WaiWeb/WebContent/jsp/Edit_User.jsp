@@ -30,11 +30,12 @@
 				</tr>			
 			</tbody>				
 		</table>
+		<br style="clear: both">
 		<table border="1" >
 			<tbody>
 			    <tr>   	
-			     <td>Cams für:  <c:out value="${user.username}"/></td>
-			     </tr>
+			  		<td>Cams für:  <c:out value="${user.username}"/></td>
+			  	</tr>
 				<tr>
 					<c:forEach var="checkedCam" items="${checkedCams}">	
 					  <tr>
