@@ -81,7 +81,6 @@ public class UserDaoImpl implements UserInterface {
 			try {
 				connection = jndi.getConnection("jdbc/libraryDB");	
 				
-				
 				PreparedStatement pstmt = connection.prepareStatement("select Id_User,username,password,rechte,timeofcreation,kommentar from users_table where Id_User = ?") ;
 				pstmt.setLong(1, userId);
 				ResultSet rs =  pstmt.executeQuery();

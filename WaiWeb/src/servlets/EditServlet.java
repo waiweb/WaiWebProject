@@ -9,8 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.sun.org.apache.bcel.internal.generic.CHECKCAST;
+import javax.servlet.http.HttpSession;
 
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
@@ -31,48 +30,66 @@ public class EditServlet extends HttpServlet{
 	private User user;
 	private Cam cam;
 	private int rechte, id;
-	private String username, passwort, kommentar, camname, url;
-	
+	private String username, passwort, kommentar, camname, url, rechteToString;	
 	
 	//GET:
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-		
 		String action = request.getParameter("action");
+		HttpSession session = request.getSession(false);
 		
-		if(action.equals("addUser")){
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_User.jsp");
-			dispatcher.forward(request, response);	
+        if(session != null) {
+        	if((int) session.getAttribute("rechte") == 1) {
+        		System.out.println("Session mit User=" + session.getAttribute("username") 
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestÃ¤tigt.");	
+        	
+				if(action == null){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
+					dispatcher.forward(request, response);	
+					
+				} else if(action.equals("addUser")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_User.jsp");
+					dispatcher.forward(request, response);	
+					
+		 		} else if(action.equals("addCam")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_Cam.jsp");
+					dispatcher.forward(request, response);	
+					
+		 		} else if(action.equals("back")){
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
+					dispatcher.forward(request, response);	
+		 		}
 			
- 		} else if(action.equals("addCam")){
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Add_Cam.jsp");
-			dispatcher.forward(request, response);	
-			
- 		} else if(action.equals("back")){
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
-			dispatcher.forward(request, response);	
- 		}
+			//FÃ¼r normale User kein Zugriff!
+        	} else {
+            	System.out.println("ERROR! Keine ausreichenden Rechte, Administrator-Rechte erforderlich!");
+        		backToAuswahl(request, response);
+        	}
+        } else {
+        	System.out.println("ERROR! Keine aktive Session gefunden!");
+        	response.sendRedirect(request.getContextPath() + "/master");
+		}
 	}
 	
 	//POST:
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		
+		HttpSession session = request.getSession(false);
 		initVar();
 		
  		/** User Editierung: **/
 		//User auswaehlen zum editieren:
 		if(action.equals("editUser")){
 			checkUserId(request);
-			List<Cam> cams= new ArrayList<Cam>();
-			List<Cam> checkedCams=new ArrayList<Cam>();
-			List<Cam> tempCheckedCams=new ArrayList<Cam>();
+			
+			List<Cam> cams = new ArrayList<Cam>();
+			List<Cam> checkedCams = new ArrayList<Cam>();
+			List<Cam> tempCheckedCams = new ArrayList<Cam>();
 			
 			try {
+				UserDaoImpl daoImp = new UserDaoImpl();
 				user = daoImp.getUserFromDatabase(id);
-			    cams=camDaoImp.getAllCams();
-			    tempCheckedCams=ucDaoImp.getUserCamMapping(daoImp.getUserFromDatabase(id));
+			    cams = camDaoImp.getAllCams();
+			    tempCheckedCams = ucDaoImp.getUserCamMapping(user);
 			    
 			    //TODO: zuviele datenbank zugriffe
 //			    for(int i=0;i<tempCheckedCams.size();i++){
@@ -93,7 +110,7 @@ public class EditServlet extends HttpServlet{
 				e.printStackTrace();
 			  }
 			
-			// die gecheckten cams aus der liste allcams löschen
+			//Die gecheckten cams aus der liste allcams loeschen
 			for(int i=cams.size()-1;i>=0;i--){
 				for(int j=checkedCams.size()-1; j>=0; j--){
 				  if(cams.get(i).getId_Cam()==checkedCams.get(j).getId_Cam()){
@@ -112,6 +129,7 @@ public class EditServlet extends HttpServlet{
  		} else if(action.equals("deleteUser")){
 			checkUserId(request);
 
+			UserDaoImpl daoImp = new UserDaoImpl();
  			daoImp.deleteUserInDatabase(id);
  			
  			System.out.println("User mit der ID: " + id + " erfolgreich geloescht!");
@@ -131,31 +149,28 @@ public class EditServlet extends HttpServlet{
  	 		
  	 		//Versucht den User in der Datenbank upzudaten:
 			try {
-				if ((rechte == 0) || (rechte == 1)) {
-					user = daoImp.getUserFromDatabase(id);
-					user.setUsername(username);
-					user.setRechte(rechte);
-					user.setKommentar(kommentar);
-					daoImp.updateUser(user);
-		 			System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
-					
-	 	 		} else {
-	 	 			System.out.println("Falsche Angabe der Rechte! Zulaessige Rechte, 0 = User, 1 = Admin!");
-	 	 		}
+				UserDaoImpl daoImp = new UserDaoImpl();
+				user = daoImp.getUserFromDatabase(id);
+				user.setUsername(username);
+				user.setRechte(rechte);
+				user.setKommentar(kommentar);
+				daoImp.updateUser(user);
+		 		System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
 			} catch (UserNotFoundExecption e) {
 				e.printStackTrace();
 			}
              
-			   // die angehackten checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
+			//Die angehakten Checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
 			String[] checkbox=request.getParameterValues("checked");
 			
-			if(checkbox!=null){
+			if (checkbox != null){
 				try {
 					checkUserId(request);
-					user=daoImp.getUserFromDatabase(id);
+					user = daoImp.getUserFromDatabase(id);
 				} catch (UserNotFoundExecption e1) {
 					e1.printStackTrace();
 				 }
+				
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	List<Cam> cams= new ArrayList<Cam>();
 				cams=camDaoImp.getAllCams();
@@ -169,23 +184,24 @@ public class EditServlet extends HttpServlet{
 		    	for(int i=0;i<cams.size();i++){
 			    	for(int j=0;j<checkbox.length;j++){
 			    		if(cams.get(i).getId_Cam()==Integer.valueOf(checkbox[j])){
-			    			System.out.println ("die cam ID: "+checkbox[i]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
+			    			System.out.println ("Die cam ID: "+checkbox[j]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
 			    			camList.add(cams.get(i));
 			    		}
 			    	}
 			    }
 		    	
 		    	ucDaoImp.setUserCamMapping(user, camList);
-		     }else if(checkbox==null){
+		    	
+		     } else if(checkbox == null){
 		    	try {
 					user=daoImp.getUserFromDatabase(id);
 				} catch (UserNotFoundExecption e) {
 					e.printStackTrace();
 				}
+		    	
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	ucDaoImp.setUserCamMapping(user, camList);
-		    	System.out.println("es wurden alle bilder für den user: "+user.getUsername()+" aus der bezieungstabelle entfernt");
-		    	
+		    	System.out.println("Es wurden alle Bilder fuer den User: "+user.getUsername()+" aus der Bezieungstabelle entfernt");
 		    }
 			
  			backToAuswahl(request, response);
@@ -196,18 +212,16 @@ public class EditServlet extends HttpServlet{
  	 				&& request.getParameter("rechte") != null && request.getParameter("kommentar") != null) {
  	 			username = request.getParameter("username");
  	 			passwort = request.getParameter("passwort");
- 	 			rechte = Integer.valueOf(request.getParameter("rechte"));
+ 	 			rechteToString = request.getParameter("rechte");
+ 	 			if (rechteToString.length() != 0) {
+ 	 				rechte = Integer.valueOf(request.getParameter("rechte"));
+ 	 			}
  	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
- 	 		//Ueberpruefung ob Name bereits vergeben oder die Rechte im zulaessigen Bereich sind! 0 = User, 1 = Admin:
  	 		if (daoImp.isUsernameExisting(username) == false) {
- 	 			if ((rechte == 0) || (rechte == 1)) {
  	 	 	 		daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar));
  	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefuegt!");
- 	 			} else {
- 	 				System.out.println("Falsche Angabe der Rechte! Zulaessige Rechte, 0 = User, 1 = Admin!");
- 	 			}
  	 		} else {
  	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
  	 		}
@@ -216,13 +230,16 @@ public class EditServlet extends HttpServlet{
 		
 		/** Cam Editierung: **/
 		//Cam auswÃ¤hlen zum editieren:
-		if(action.equals("editCam")){
+		if(action.equals("editCam") && (int) session.getAttribute("rechte") == 1 ){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
 			
 			request.setAttribute("cam", cam);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_Cam.jsp");
 			dispatcher.forward(request, response);	
+			
+		} else if (action.equals("editCam") && (int) session.getAttribute("rechte") == 0){
+			backToAuswahl(request, response);
 		
 		//Loescht die ausgewaehlte Cam und kehrt zum Auswahlbildschirm zurueck:	
  		} else if(action.equals("deleteCam")){
@@ -270,15 +287,14 @@ public class EditServlet extends HttpServlet{
  	 		} else {
  	 			System.out.println("Cam mit dem Namen: " + camname + " ist bereits vorhanden!");
  	 		}
+ 	 		//response.sendRedirect(response.encodeRedirectURL("/jsp/Auswahlmoeglichkeiten.jsp"));
  			backToAuswahl(request, response);
  		}
-		
 	}
 	
-	//Funktion um auf die User Liste zurueckzukehren:
+	//Funktion um auf die Auswahlmoeglichkeiten zurueckzukehren:
 	private void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
-		dispatcher.forward(request, response);
+        response.sendRedirect(request.getContextPath() + "/auswahl");
 	}
 	
 	//Initialisierung der Variablen:
@@ -292,6 +308,7 @@ public class EditServlet extends HttpServlet{
 		kommentar = null;
 		camname = null;
 		url = null;
+		rechteToString = null;
 	}
 	
 	//Check ID, nur da verwenden wo auch gebraucht:

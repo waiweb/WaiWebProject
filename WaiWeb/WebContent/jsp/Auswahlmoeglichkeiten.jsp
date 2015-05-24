@@ -9,7 +9,28 @@
     <title>Auswahlseite</title>     
   </head>
 	<body>
-		<font size=5> Hauptmenue </font> <br><br>
+		<%	//Zugriff überprüfen:
+			String user = null, userName = null, sessionID = null;
+			if (session.getAttribute("username") == null){
+				//Auf Loginseite zurückleiten falls keine Session erstellt wurde!
+			    response.sendRedirect(request.getContextPath() + "/master");
+			} else {
+				user = (String) session.getAttribute("username");
+			}
+			
+			Cookie[] cookies = request.getCookies();
+			if (cookies !=null){
+				for(Cookie cookie : cookies){
+				    if(cookie.getName().equals("username")) 
+				    	userName = cookie.getValue();
+				    if(cookie.getName().equals("JSESSIONID")) 
+				    	sessionID = cookie.getValue();
+				}
+			}
+		%>
+		<font size=5> Willkommen <%=userName %>! </font> <br>
+		<font size=3> Deine Session ID=<%=sessionID %></font>
+		<br> <br>
 			<a href="auswahl?action=user">Liste der User</a>  <br>
 			<a href="auswahl?action=cam">Liste der Cams</a>  <br>
 			<a href="auswahl?action=settings">Einstellungen</a>   <br>
@@ -17,7 +38,6 @@
 			<form name=checkLogin method=POST action=login>  
 		  	<input type=submit name=action value="Logout">  <!--  was soll beim logout passieren -->
 	  	</form>	
-				<!-- action auswertet und an die richtige jsp zurueckschickt wo die infos dann angezeigt werden -->
 	</body>
 </html>    
   	          

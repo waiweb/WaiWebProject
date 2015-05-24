@@ -4,12 +4,11 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 public class Tool_TimeStamp {
 	
-	@Deprecated 
+	//@Deprecated 
     public static String getTimeStampString(){
 
         long date = System.currentTimeMillis();
@@ -29,7 +28,7 @@ public class Tool_TimeStamp {
      * Generates a timestamp and returns a hashmap of strings of the timestamp 
      * @return
      */
-	@Deprecated 
+	//@Deprecated 
     public static HashMap<String,String> getTimeStampSet(){
     	
     	HashMap<String,String> timstampHashMap = new HashMap<String,String>();
