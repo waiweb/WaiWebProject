@@ -20,13 +20,20 @@
 				</tr>
 				
 				<c:forEach var="cam" items="${cams}">
+					
 					<tr>
 						<td><c:out value="${cam.camname}"/></td>	
 						<td><c:out value="${cam.url}"/></td>
 						<td><c:out value="${cam.timeOfCreation}"/></td>	
 						<td><c:out value="${cam.pathOriginalImageDirectory}"/></td>
 						<td><c:out value="${cam.kommentar}"/></td>
-						<td> x <!--  Hier Thumbnail einfügen! --></td>
+						<!-- TODO: Cams Thumbnails hier einbinden! -->
+						<td>
+							<form name=imageShow method=POST  action= edit>  
+								<button type="submit" name="action" value="showImages"><img width="75" height="75" src="<%=request.getContextPath()%>/camimages/test.jpg"/></button>
+								<input type="hidden" name="id" value="${cam.id_Cam}">
+							</form>
+						</td>
 					<td>
 		  	    		<form name=camEdit method=POST  action= edit>  
 		  	           		<button type="submit" name="action" value="editCam">Editieren</button>

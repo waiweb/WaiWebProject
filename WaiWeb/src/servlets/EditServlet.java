@@ -289,7 +289,16 @@ public class EditServlet extends HttpServlet{
  	 		}
  	 		//response.sendRedirect(response.encodeRedirectURL("/jsp/Auswahlmoeglichkeiten.jsp"));
  			backToAuswahl(request, response);
- 		}
+ 			
+ 		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
+ 		} else if (action.equals("showImages")){
+			checkUserId(request);
+			cam = camDaoImp.getCamFromDatabase(id);
+			
+			request.setAttribute("cam", cam);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+			dispatcher.forward(request, response);		
+		}
 	}
 	
 	//Funktion um auf die Auswahlmoeglichkeiten zurueckzukehren:
