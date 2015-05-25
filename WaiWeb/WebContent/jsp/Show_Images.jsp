@@ -25,7 +25,9 @@
 		<table border="1">
 			<tbody>
 				<tr>
-					<td><a href="<%=request.getContextPath()%>/camimages/test.jpg"><img width="250" height="250" src="<%=request.getContextPath()%>/camimages/test.jpg"/></a><br><br>Name / Timestamp</td>	
+					<!-- Hier alle, bzw. einen Teil der Bilder der Cam anzeigen! -->
+					<td><a href="<%=request.getContextPath()%>/camimages/test.jpg"><img width="250" height="250" src="<%=request.getContextPath()%>/camimages/test.jpg"/></a>
+					<br><br>Name / Timestamp</td>	
 				</tr>	
 			</tbody>				
 		</table>

@@ -62,8 +62,7 @@ public class AuswahlServlet extends HttpServlet {
 				//Einstellungen anzeigen:
         		} else if(action.equals("settings")){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Einstellungen.jsp");
-					dispatcher.forward(request, response);	
-					
+					dispatcher.forward(request, response);		
 				}
 			
 			//Rechte überprüfen: (USER):
