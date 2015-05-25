@@ -44,7 +44,7 @@ public class AuswahlServlet extends HttpServlet {
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
 				
-				//Alle Cams anzeigen:
+				//Alle Cams anzeigen: TODO: Thumbnail anzeigen für die einzelnen Cams!
 				} else if (action.equals("cam")) {
 					List<Cam> collection = camdaoImp.getAllCams();
 					
@@ -57,12 +57,13 @@ public class AuswahlServlet extends HttpServlet {
 					List<User> collection = daoImp.getAllUsers();
 					request.setAttribute("users", collection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
-					dispatcher.forward(request, response);				
+					dispatcher.forward(request, response);		
 
 				//Einstellungen anzeigen:
         		} else if(action.equals("settings")){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Einstellungen.jsp");
-					dispatcher.forward(request, response);			
+					dispatcher.forward(request, response);	
+					
 				}
 			
 			//Rechte überprüfen: (USER):
