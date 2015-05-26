@@ -58,11 +58,11 @@ public class EditServlet extends HttpServlet{
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
 		 		}else if(action.equals("refresh")){
-					String start=request.getParameter("timestamp");
-					String end=request.getParameter("timestamp2");
+					String start=request.getParameter("inputField");
+					String end=request.getParameter("inputField2");
 					System.out.println(" Refresh gedrückt");
 					if(start!=""&&end!="" && start!=null && end!=null){
-					System.out.println("Bilder von "+request.getParameter("timestamp")+" bis "+ request.getParameter("timestamp2"));
+					System.out.println("Bilder von "+start+" bis "+ end);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 					dispatcher.forward(request, response);
 					}else{
