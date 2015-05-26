@@ -12,40 +12,16 @@
   </head>  
   <body>
   	<font size=5> Cam Images</font> <br><br>	
-     <!--  	<div class="rechts">	--> 
-  <!-- 	<font size=4> Von</font> 
-  		<form  name="startDate" method=GET action=edit>
- <input type="Text" name="timestamp" value="">
- <a href="javascript:show_calendar('document.startDate.timestamp', document.startDate.timestamp.value);"><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-    <input type="hidden" name="startDate1" value="Niat">
-  </form>
-</div>   --> 
-  
-  
-  <!--   	<font size=4> Bis</font> 
-  	<form name="endDate2" method=POST action=edit>
-    <input type="Text" name="timestamps" value="">    
-<a href="javascript:show_calendar('document.endDate.timestamps', document.endDate.timestamps.value);"><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-  </form>  --> 
-  
   		<form name=getImages method=GET  action= edit> 
 		<table border="1">
 			<tbody>
 				<tr>   	
 			   		<td>Aktuelle Bilder für: <c:out value="${cam.camname}"/></td>
 			 	</tr>		
-			 	<tr>   	
-			 	</tr>
 			</tbody>	
 			
 		</table>
-<!--   	<div class="rechts">	 	
-  	<font size=4> Von</font> 
-  	
- <input type="Text" name="timestamp" value="">
- <a href="javascript:show_calendar('document.startDate.timestamp', document.startDate.timestamp.value);"><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></a>
-    <input type="hidden" name="startDate1" value="Niat">
-<!--  </div>  -->  
+
 <br style="clear: both">
    	<div class="rechts">
    	 <font size=4> Von</font>
