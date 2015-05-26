@@ -23,7 +23,7 @@ public class AuswahlServlet extends HttpServlet {
     final UserDaoImpl daoImp = new UserDaoImpl();
     final CamDaoImpl camdaoImp= new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
-	private ArrayList<Cam> camList;
+	private ArrayList<Cam> camList = new ArrayList<Cam>();
     private String username;
     private Long id;
 	
@@ -62,8 +62,7 @@ public class AuswahlServlet extends HttpServlet {
 				//Einstellungen anzeigen:
         		} else if(action.equals("settings")){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Einstellungen.jsp");
-					dispatcher.forward(request, response);	
-					
+					dispatcher.forward(request, response);		
 				}
 			
 			//Rechte überprüfen: (USER):
@@ -80,9 +79,11 @@ public class AuswahlServlet extends HttpServlet {
 					camList = ucDaoImp.getUserCamMapping(id);
 					
 					List<Cam> collection = new ArrayList<Cam>();
+					long tempID = 0;
 					
 					for(int i=0;i<camList.size();i++) {
-						collection.add(i, (camdaoImp.getCamFromDatabase(camList.get(i).getId_Cam())));
+						tempID = camList.get(i).getId_Cam();
+						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
 					}
 					
 					request.setAttribute("cams", collection);

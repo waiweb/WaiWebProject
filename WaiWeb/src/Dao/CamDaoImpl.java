@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
 import exception.CamNotAddedExecption;
 import exception.CamNotFoundExecption;
 import model.Cam;
@@ -32,7 +31,6 @@ final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz h
 			try {
 				connection = jndi.getConnection("jdbc/libraryDB");	
 				
-		
 				PreparedStatement pstmt = connection.prepareStatement("INSERT INTO cams_table (Camname,Url,TimeOfCreation,PathOriginalImageDirectory,Kommentar) Values(?,?,?,?,?)");
 				pstmt.setString(1, cam.getCamname() );
 				pstmt.setString(2, cam.getUrl());
@@ -93,6 +91,7 @@ final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz h
 			
 
 	} catch (Exception e) {
+		e.printStackTrace();
 		//throw new UserNotFoundExecption(userId);
 		//database fehler
 	} finally {
