@@ -163,12 +163,6 @@ public class EditServlet extends HttpServlet{
 			String[] checkbox=request.getParameterValues("checked");
 			
 			if (checkbox != null){
-				try {
-					checkUserId(request);
-					user = daoImp.getUserFromDatabase(id);
-				} catch (UserNotFoundExecption e1) {
-					e1.printStackTrace();
-				 }
 				
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	List<Cam> cams= new ArrayList<Cam>();
@@ -192,15 +186,10 @@ public class EditServlet extends HttpServlet{
 		    	ucDaoImp.setUserCamMapping(user, camList);
 		    	
 		     } else if(checkbox == null){
-		    	try {
-					user=daoImp.getUserFromDatabase(id);
-				} catch (UserNotFoundExecption e) {
-					e.printStackTrace();
-				}
 		    	
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	ucDaoImp.setUserCamMapping(user, camList);
-		    	System.out.println("Es wurden alle Bilder fuer den User: "+user.getUsername()+" aus der Bezieungstabelle entfernt");
+		    	System.out.println("Es wurden alle Bilder fuer den User: "+ user.getUsername() + " aus der Bezieungstabelle entfernt");
 		    }
 			
  			backToAuswahl(request, response);
