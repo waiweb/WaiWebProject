@@ -49,7 +49,7 @@
 			<tbody>
 			<tr>
 			 
-                <td> <input type="text" size="12" id="inputField" name="inputField" /></td>
+                <td> <input type="text" size="12" id="inputField" name="inputField"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
 				</tr>	
 			</tbody>				
 		</table>
@@ -60,7 +60,7 @@
 		<table border="1">
 			<tbody>
 			<tr>
-			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/></td>
+			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
 				</tr>	
 			</tbody>				
 		</table>
