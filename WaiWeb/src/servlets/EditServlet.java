@@ -146,7 +146,6 @@ public class EditServlet extends HttpServlet{
  	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
- 	 		
  	 		//Versucht den User in der Datenbank upzudaten:
 			try {
 				UserDaoImpl daoImp = new UserDaoImpl();
@@ -164,12 +163,6 @@ public class EditServlet extends HttpServlet{
 			String[] checkbox=request.getParameterValues("checked");
 			
 			if (checkbox != null){
-				try {
-					checkUserId(request);
-					user = daoImp.getUserFromDatabase(id);
-				} catch (UserNotFoundExecption e1) {
-					e1.printStackTrace();
-				 }
 				
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	List<Cam> cams= new ArrayList<Cam>();
@@ -184,7 +177,7 @@ public class EditServlet extends HttpServlet{
 		    	for(int i=0;i<cams.size();i++){
 			    	for(int j=0;j<checkbox.length;j++){
 			    		if(cams.get(i).getId_Cam()==Integer.valueOf(checkbox[j])){
-			    			System.out.println ("Die cam ID: "+checkbox[j]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
+			    			System.out.println ("Die cam ID: "+checkbox[j]+" wurde dem User: "+ user.getUsername()+" hinzugefuegt");
 			    			camList.add(cams.get(i));
 			    		}
 			    	}
@@ -193,15 +186,10 @@ public class EditServlet extends HttpServlet{
 		    	ucDaoImp.setUserCamMapping(user, camList);
 		    	
 		     } else if(checkbox == null){
-		    	try {
-					user=daoImp.getUserFromDatabase(id);
-				} catch (UserNotFoundExecption e) {
-					e.printStackTrace();
-				}
 		    	
 		    	ArrayList<Cam> camList = new ArrayList<Cam>();
 		    	ucDaoImp.setUserCamMapping(user, camList);
-		    	System.out.println("Es wurden alle Bilder fuer den User: "+user.getUsername()+" aus der Bezieungstabelle entfernt");
+		    	System.out.println("Es wurden alle Bilder fuer den User: "+ user.getUsername() + " aus der Bezieungstabelle entfernt");
 		    }
 			
  			backToAuswahl(request, response);
@@ -229,7 +217,7 @@ public class EditServlet extends HttpServlet{
  		}
 		
 		/** Cam Editierung: **/
-		//Cam auswählen zum editieren:
+		//Cam auswählen zum editieren, nur Administrator:
 		if(action.equals("editCam") && (int) session.getAttribute("rechte") == 1 ){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
@@ -237,7 +225,8 @@ public class EditServlet extends HttpServlet{
 			request.setAttribute("cam", cam);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_Cam.jsp");
 			dispatcher.forward(request, response);	
-			
+		
+		//Ohne Rechte zurück zur Auswahl:
 		} else if (action.equals("editCam") && (int) session.getAttribute("rechte") == 0){
 			backToAuswahl(request, response);
 		
@@ -279,15 +268,14 @@ public class EditServlet extends HttpServlet{
  	 			kommentar = request.getParameter("kommentar");
  	 		}
  	 		
- 	 		//Ueberpruefung ob Name bereits vergeben oder die Rechte im zulaessigen Bereich sind! 0 = User, 1 = Admin:
  	 		//TODO: Check if URL is valid!
  	 		if (camDaoImp.isCamNameExisting(camname) == false) {
  	 				camDaoImp.createCamInDatabase(new Cam(camname, url, Tool_TimeStamp.getTimeStampString(), "/camimages", kommentar));
  	 	 			System.out.println("Neue Cam: " + camname + " erfolgreich hinzugefuegt!");
+ 	 	 			
  	 		} else {
  	 			System.out.println("Cam mit dem Namen: " + camname + " ist bereits vorhanden!");
  	 		}
- 	 		//response.sendRedirect(response.encodeRedirectURL("/jsp/Auswahlmoeglichkeiten.jsp"));
  			backToAuswahl(request, response);
  			
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
