@@ -57,8 +57,19 @@ public class EditServlet extends HttpServlet{
 		 		} else if(action.equals("back")){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
-		 		}
-			
+		 		}else if(action.equals("refresh")){
+					String start=request.getParameter("timestamp");
+					String end=request.getParameter("timestamp2");
+					System.out.println(" Refresh gedrückt");
+					if(start!=""&&end!="" && start!=null && end!=null){
+					System.out.println("Bilder von "+request.getParameter("timestamp")+" bis "+ request.getParameter("timestamp2"));
+					}else{
+					   System.out.println("Keine korrekte eingabe !");
+					   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+					   dispatcher.forward(request, response);
+					}
+		 		
+				}
 			//FÃ¼r normale User kein Zugriff!
         	} else {
             	System.out.println("ERROR! Keine ausreichenden Rechte, Administrator-Rechte erforderlich!");
@@ -75,6 +86,8 @@ public class EditServlet extends HttpServlet{
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession(false);
 		initVar();
+		
+		
 		
  		/** User Editierung: **/
 		//User auswaehlen zum editieren:
@@ -299,6 +312,9 @@ public class EditServlet extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);		
 		}
+		
+		
+		
 	}
 	
 	//Funktion um auf die Auswahlmoeglichkeiten zurueckzukehren:
