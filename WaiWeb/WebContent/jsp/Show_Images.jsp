@@ -8,7 +8,6 @@
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/css/jsDatePick_ltr.min.css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jsDatePick.min.1.3.js"></script>
-    <script language="JavaScript" src="<%=request.getContextPath()%>/js/ts_picker.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
     <script src="<%=request.getContextPath()%>/js/moment.min.js"></script> 
     <script src="<%=request.getContextPath()%>/js/combodate.js"></script>

@@ -16,7 +16,7 @@
 			  type="javax.sql.DataSource"
 			  driverClassName="org.postgresql.Driver"
 		      url="jdbc:postgresql://localhost/postgres"
-    		  username="postgres"
+    		  username="wai"
     		  password="wai"
     		  maxActive="250" maxIdle="5"
 	/> 
