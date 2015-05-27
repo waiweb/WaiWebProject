@@ -1,8 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javafx.util.converter.DateStringConverter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -58,11 +65,19 @@ public class EditServlet extends HttpServlet{
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
 		 		}else if(action.equals("refresh")){
-					String start=request.getParameter("inputField");
-					String end=request.getParameter("inputField2");
+					String dateStart=request.getParameter("inputField");
+					String dateEnd=request.getParameter("inputField2");
+					String timeStart=request.getParameter("datetime");
+					String timeEnd=request.getParameter("datetime2");
 					System.out.println(" Refresh gedrückt");
-					if(start!=""&&end!="" && start!=null && end!=null){
-					System.out.println("Bilder von "+start+" bis "+ end);
+					Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
+					Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
+					
+					System.out.println("Timestamp Start: "+timestampStart);
+					System.out.println("Timestamp End: "+timestampEnd);
+					
+					if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
+					System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 					dispatcher.forward(request, response);
 					}else{
@@ -327,4 +342,18 @@ public class EditServlet extends HttpServlet{
 			id = Integer.valueOf(request.getParameter("id"));
  		}
 	}
+	
+	private static Timestamp convertStringToTimestamp(String date,String time) {
+		Timestamp timestamp = null;
+		try{
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		    Date parsedDate = dateFormat.parse(date+" "+time);
+		    timestamp = new java.sql.Timestamp(parsedDate.getTime());
+		}catch(Exception e){//this generic but you can control another types of exception
+		 System.out.println("Fehler bei der Konvertierung von String in Timestamp !!");
+		}
+		
+		return timestamp;
+	  }
+
 }

@@ -16,12 +16,12 @@
 		new JsDatePick({
 			useMode:2,
 			target:"inputField",
-			dateFormat:"%d-%M-%Y"
+			dateFormat:"%d-%m-%Y"
 		});
 		new JsDatePick({
 			useMode:2,
 			target:"inputField2",
-			dateFormat:"%d-%M-%Y"
+			dateFormat:"%d-%m-%Y"
 		});
 	};
 </script>
@@ -76,7 +76,7 @@ $(function(){
 			<tbody>
 			<tr>
 			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
-			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
+			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="datetime2"></td>
 				</tr>	
 			</tbody>	
 					
