@@ -64,29 +64,7 @@ public class EditServlet extends HttpServlet{
 		 		} else if(action.equals("back")){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
-		 		}else if(action.equals("refresh")){
-					String dateStart=request.getParameter("inputField");
-					String dateEnd=request.getParameter("inputField2");
-					String timeStart=request.getParameter("datetime");
-					String timeEnd=request.getParameter("datetime2");
-					System.out.println(" Refresh gedrückt");
-					Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
-					Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
-					
-					System.out.println("Timestamp Start: "+timestampStart);
-					System.out.println("Timestamp End: "+timestampEnd);
-					
-					if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
-					System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
-					dispatcher.forward(request, response);
-					}else{
-					   System.out.println("Keine korrekte eingabe !");
-					   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
-					   dispatcher.forward(request, response);
-					}
-		 		
-				}
+		 		}
 			//FÃ¼r normale User kein Zugriff!
         	} else {
             	System.out.println("ERROR! Keine ausreichenden Rechte, Administrator-Rechte erforderlich!");
@@ -314,7 +292,28 @@ public class EditServlet extends HttpServlet{
 			request.setAttribute("cam", cam);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);		
-		}
+		}else if(action.equals("refresh")){
+			String dateStart=request.getParameter("inputField");
+			String dateEnd=request.getParameter("inputField2");
+			String timeStart=request.getParameter("datetime");
+			String timeEnd=request.getParameter("datetime2");
+			System.out.println(" Refresh gedrückt");
+			Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
+			Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
+			
+			System.out.println("Timestamp Start: "+timestampStart);
+			System.out.println("Timestamp End: "+timestampEnd);
+			
+			if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
+			System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+			dispatcher.forward(request, response);
+			}else{
+				   System.out.println("Keine korrekte eingabe !");
+				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+				   dispatcher.forward(request, response);
+				}
+		 }	
 	}
 	
 	//Funktion um auf die Auswahlmoeglichkeiten zurueckzukehren:

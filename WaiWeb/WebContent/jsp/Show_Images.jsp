@@ -44,7 +44,7 @@ $(function(){
   	<font size=5> Cam Images</font> <br><br>	
    
   
-  		<form name=getImages method=GET  action= edit> 
+  		<form name=getImages method=POST  action= edit> 
 		<table border="1">
 			<tbody>
 				<tr>   	
@@ -79,11 +79,10 @@ $(function(){
 			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="datetime2"></td>
 				</tr>	
 			</tbody>	
-					
 		</table>
 			</div> 
-			
-		<br style="clear: both"><br><br>
+		
+		<br style="clear: both"><br style="clear: both">
 		<table border="1">
 			<tbody>
 				<tr>   <!-- hier alle bilder bzw die bilder im zeitrahmen ausgeben -->
@@ -92,15 +91,16 @@ $(function(){
 			</tbody>				
 		</table>
 	
+       
+	  	<div class="rechts">
 	  	<br style="clear: both">
-			<div class="rechts">
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
-		  		<input type="hidden" name="id" value="back">
-		  	</div>
-		  	<div class="rechts">
 		   		<button type="submit" name="action" value="refresh"> Aktualisieren</button>	
 		  		<input type="hidden" name="id" value="refresh">
 		  	</div>
+	</form>
+		<form name=getImages method=GET  action= edit> 
+		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		  		<input type="hidden" name="id" value="back">
 	  	</form> 
   </body>
 </html>
