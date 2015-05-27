@@ -9,6 +9,9 @@
     <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/css/jsDatePick_ltr.min.css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jsDatePick.min.1.3.js"></script>
     <script language="JavaScript" src="<%=request.getContextPath()%>/js/ts_picker.js"></script>
+    <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
+    <script src="<%=request.getContextPath()%>/js/moment.min.js"></script> 
+    <script src="<%=request.getContextPath()%>/js/combodate.js"></script>
     <script type="text/javascript">
 	window.onload = function(){
 		new JsDatePick({
@@ -22,6 +25,18 @@
 			dateFormat:"%d-%M-%Y"
 		});
 	};
+</script>
+    <script>
+$(function(){
+    $('#time').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 5
+    });  
+    $('#time2').combodate({
+        firstItem: 'name', //show 'hour' and 'minute' string at first item of dropdown
+        minuteStep: 5
+    });  
+});
 </script>
 
 
@@ -50,6 +65,7 @@
 			<tr>
 			 
                 <td> <input type="text" size="12" id="inputField" name="inputField"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
+                <td><input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
 				</tr>	
 			</tbody>				
 		</table>
@@ -61,6 +77,7 @@
 			<tbody>
 			<tr>
 			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
+			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
 				</tr>	
 			</tbody>				
 		</table>
