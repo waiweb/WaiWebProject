@@ -86,7 +86,7 @@ $(function(){
 		<br style="clear: both"><br><br>
 		<table border="1">
 			<tbody>
-				<tr>
+				<tr>   <!-- hier alle bilder bzw die bilder im zeitrahmen ausgeben -->
 					<td><a href="<%=request.getContextPath()%>/camimages/test.jpg"><img width="250" height="250" src="<%=request.getContextPath()%>/camimages/test.jpg"/></a><br><br>Name / Timestamp</td>	
 				</tr>	
 			</tbody>				
