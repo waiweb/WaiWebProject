@@ -67,10 +67,10 @@ $(function(){
                 <td> <input type="text" size="12" id="inputField" name="inputField"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
                 <td><input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
 				</tr>	
-			</tbody>				
+			</tbody>
 		</table>
 		</div> 
-		
+	
 		<div class="rechts">
 		<font size=4> Bis</font>
 		<table border="1">
@@ -79,11 +79,12 @@ $(function(){
 			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
 			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
 				</tr>	
-			</tbody>				
+			</tbody>	
+					
 		</table>
 			</div> 
-		
-		<br style="clear: both">
+			
+		<br style="clear: both"><br><br>
 		<table border="1">
 			<tbody>
 				<tr>
@@ -91,6 +92,7 @@ $(function(){
 				</tr>	
 			</tbody>				
 		</table>
+	
 	  	<br style="clear: both">
 			<div class="rechts">
 		   		<button type="submit" name="action" value="back"> Zurück</button>	
