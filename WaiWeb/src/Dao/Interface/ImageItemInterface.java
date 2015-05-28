@@ -19,6 +19,7 @@ public interface ImageItemInterface {
 	//Das Argument ist eine Hashmap mit den Angaben Year, Month, Day, Hour, Minute
 	public ArrayList<ImageItem> getImageItems(Timestamp begin, Timestamp end);
 	public void deleteImage(HashMap<String,String> imageHashMap);
+	public ArrayList<ImageItem> getImageItemsOfCam(int Id_cam, Timestamp begin, Timestamp end);
 	
 	public void deleteImage(ImageItem imageItem);
 	public List<ImageItem> getAllImageItems();
