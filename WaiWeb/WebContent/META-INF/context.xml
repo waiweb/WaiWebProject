@@ -5,9 +5,9 @@
 			  auth="Container"
 			  type="javax.sql.DataSource"
 			  driverClassName="org.postgresql.Driver"
-		      url="jdbc:postgresql://141.19.96.94/ss15-gruppe6_DB"
-    		  username="ss15-gruppe6"
-    		  password="Ebe5Del1"
+		      url="jdbc:postgresql://localhost/postgres"
+    		  username="wai"
+    		  password="wai"
     		  maxActive="250" maxIdle="5"
 	/> 
 
