@@ -20,7 +20,7 @@
 			<caption>User bearbeiten</caption>
 			<thead>
 			</thead>
-			 <caption>Konfiguration für:  <c:out value="${user.username}"/></caption>
+			 <caption>Konfiguration fÃ¼r:  <c:out value="${user.username}"/></caption>
 					  
 				<tr>
 					<td>Benutzer:</td>
@@ -43,7 +43,7 @@
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			    <tr>   	
-			  		<td>Cams für:  <c:out value="${user.username}"/></td>
+			  		<td>Cams fÃ¼r:  <c:out value="${user.username}"/></td>
 			  	</tr>
 				<tr>
 					<c:forEach var="checkedCam" items="${checkedCams}">	
@@ -61,16 +61,34 @@
 				</tr>
 			</tbody>				
 		</table>
+	
 		</div>
+			</form>
 		<br style="clear: both">  
 		<div class="links"> 
-			<button type="submit" name="action" value="deleteUser"> User Löschen</button>
+			<button type="submit" name="action" value="deleteUser"> User LÃ¶schen</button>
 			<input type="hidden" name="id" value="${user.id_User}">
 		</div>
+		
+		
 		<div class="rechts">
+		
+			<form name=back method=POST  action= edit>
+			
 	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
 	  		<input type="hidden" name="id" value="${user.id_User}">
+				  </form> 
 	  	</div>
-	  	</form> 
+	  	
+	  	
+	  	<div class="rechts">
+	 			<form name=back method=GET  action= edit>
+		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		  		<input type="hidden" name="id" value="back">
+				</form>
+		  	</div>
+	  	
+	  	
+	  	
   </body>
 </html>
