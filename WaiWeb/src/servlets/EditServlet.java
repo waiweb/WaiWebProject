@@ -208,15 +208,22 @@ public class EditServlet extends HttpServlet{
  	 				rechte = Integer.valueOf(request.getParameter("rechte"));
  	 			}
  	 			kommentar = request.getParameter("kommentar");
+ 	 		} else {
+ 	 			System.out.println("Falsche Eingabe der Daten! Felder dürfen nicht NULL sein!");
+ 	 			backToAuswahl(request, response);
  	 		}
  	 		
  	 		if (daoImp.isUsernameExisting(username) == false) {
- 	 	 	 		daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar));
+ 	 			if((daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar)) == true)){
  	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefuegt!");
+ 	 	 			backToAuswahl(request, response);
+ 	 			} else {
+ 	 	 			backToAuswahl(request, response);
+ 	 	 		}
  	 		} else {
  	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
+ 	 			backToAuswahl(request, response);
  	 		}
- 			backToAuswahl(request, response);
  		}
 		
 		/** Cam Editierung: **/
