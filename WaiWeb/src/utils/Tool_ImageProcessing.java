@@ -14,7 +14,7 @@ public class Tool_ImageProcessing {
 	
 	public static final int IMG_WIDTH_Thumbnail = 100;
 	public static final int IMG_HEIGHT_Thumbnail = 100;
-	
+
 	
 	/**
 	 * Liest das Originalbild von einem pfad erzeugt eine Thumbnail und schreibt diese in den Zielpfad.
@@ -27,17 +27,28 @@ public class Tool_ImageProcessing {
 		Tool_ImageProcessing.writeImageToPath(bufThumbnail, pathTarget);
 	}
 	
-	/**
-	 * Erzeugt aus einem BufferedImage eine Thumbnail und schreibt diese in den Zielpfad
-	 * @param bufferedImage
-	 * @param pathTarget
-	 */
+
+	
 	public static void generateThumbnailFromBufferedImageSaveToPath(BufferedImage bufferedImage, String pathTarget){
 
 		BufferedImage bufThumbnail = Tool_ImageProcessing.getThumbnailOfImage(bufferedImage);
 		Tool_ImageProcessing.writeImageToPath(bufThumbnail, pathTarget);
 	}
 	
+	/**
+	 * Speichert ein Bild unter dem angegebenen Pfad+Name
+	 * @param bufferedImage
+	 * @param path
+	 * @throws IOException
+	 */
+	 static void writeImageToPath(BufferedImage bufferedImage, String pathAndName){
+		try {
+			ImageIO.write(bufferedImage, "jpg", new File(pathAndName));
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  // speichern alle bilder grundsätzlich als jpg
+	}
 	
 	/**
 	 * Read Image from Path and returns it as BufferedIamge
@@ -57,20 +68,7 @@ public class Tool_ImageProcessing {
 	}
 	
 	
-	/**
-	 * Speichert ein Bild unter dem angegebenen Pfad+Name
-	 * @param bufferedImage
-	 * @param path
-	 * @throws IOException
-	 */
-	 static void writeImageToPath(BufferedImage bufferedImage, String pathAndName){
-		try {
-			ImageIO.write(bufferedImage, "jpg", new File(pathAndName));
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}  // speichern alle bilder grundsätzlich als jpg
-	}
+
 	
 	
 	/**

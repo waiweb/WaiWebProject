@@ -16,7 +16,8 @@ public class ImageItem {
 	
 	public ImageItem(){
 	};
-
+	
+	
 	/**
 	 * Dies ist der empfohlene Konstruktor.
 	 * @param id_Image
@@ -24,6 +25,15 @@ public class ImageItem {
 	 * @param timestamp
 	 * @param kommentar
 	 */
+	public ImageItem(String name, long id_CamSource, Timestamp timestamp,String path, String kommentar) {
+		this.name = name;
+		this.Id_CamSource = id_CamSource;
+		this.timestamp = timestamp;
+		this.path = path+"/"+name;
+		this.Kommentar = kommentar;
+	}
+
+
 	public ImageItem(long id_Image,String name, long id_CamSource, Timestamp timestamp,String path, String kommentar) {
 		this.Id_Image = id_Image;
 		this.name = name;

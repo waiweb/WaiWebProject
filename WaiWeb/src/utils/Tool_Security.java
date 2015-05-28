@@ -23,5 +23,6 @@ public class Tool_Security {
 		
 		return hash;
 	}
+	
 
 }

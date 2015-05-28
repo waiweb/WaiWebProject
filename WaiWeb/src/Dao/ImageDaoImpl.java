@@ -23,6 +23,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 	
 	public static final String homeDir = "./Images";
 	final JndiFactory jndi = JndiFactory.getInstance(); 
+	
+
 
 	
 	@Override

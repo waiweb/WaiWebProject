@@ -17,14 +17,15 @@ public final class SystemStartup implements ServletContextListener {
 	
 
 	public void contextInitialized(ServletContextEvent event) {
-		/*
-		System.out.println("enter ContextInitialized");
-		JndiFactory jndiFactory = JndiFactory.getInstance();
-		String projectpath = getRelativeProjectPath(event);
-
 		
+		System.out.println("enter ContextInitialized");
+		String projectpath = getRelativeProjectPath(event);
+		System.out.println("PathToSetup: "+projectpath);
+
+
+		//In dynamisch geändert.
 		try {
-			
+			/*
 			// Initialize Logging
 			File logConfigFile = new File(jndiFactory.getEnvironmentAsString(projectpath)
 					  					+ jndiFactory.getEnvironmentAsString("configPath")
@@ -39,21 +40,32 @@ public final class SystemStartup implements ServletContextListener {
 				String logpath = logConfigFile.getPath();
 				PropertyConfigurator.configure(logpath);
 			}
+			*/
+			File logConfigFile = new File(projectpath+"/log4j.properties");
+
+			if (!logConfigFile.exists()) {
+			System.out.println("ERROR: Logging configuration file not found: " 
+					+projectpath + "/log4j.properties");
+			
+			} else {
+			String logpath = logConfigFile.getPath();
+			PropertyConfigurator.configure(logpath);
+			}
+			
 			jLog.info("ContextInitialized");
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		*/
+		
 		
 	}
 	
 	public String getRelativeProjectPath(ServletContextEvent event){
-		String relativeWebPath = "/WaiWeb";
-		String absoluteDiskPath = event.getServletContext().getRealPath(relativeWebPath);
-		System.out.println("SystemRelativepath: "+absoluteDiskPath);
-		return absoluteDiskPath;
+		
+	    String projectPath = event.getServletContext().getRealPath("/WEB-INF/config");
+		return projectPath;
 	}
 
 	public void contextDestroyed(ServletContextEvent event) {
