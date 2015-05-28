@@ -281,10 +281,19 @@ public class EditServlet extends HttpServlet{
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
 			
+			//Path Array holen:
+			ArrayList<String> pathCollection = new ArrayList<String>();
+			pathCollection.add("/camimages/test.jpg");
+			pathCollection.add("/camimages/test.jpg");
+			pathCollection.add("/camimages/test.jpg");
+			
 			request.setAttribute("cam", cam);
+			request.setAttribute("path", pathCollection);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
-			dispatcher.forward(request, response);		
-		}else if(action.equals("refresh")){
+			dispatcher.forward(request, response);	
+		
+		//Cam Refresh:
+		} else if(action.equals("refresh")){
 			String dateStart=request.getParameter("inputField");
 			String dateEnd=request.getParameter("inputField2");
 			String timeStart=request.getParameter("datetime");

@@ -24,8 +24,6 @@ public class AuswahlServlet extends HttpServlet {
     final UserDaoImpl daoImp = new UserDaoImpl();
     final CamDaoImpl camdaoImp= new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
-	private ArrayList<Cam> camList = new ArrayList<Cam>();
-	private User user;
     private String username;
     private Long id;
 	
@@ -78,16 +76,8 @@ public class AuswahlServlet extends HttpServlet {
 				} else if (action.equals("cam")){
 					username = (String) session.getAttribute("username");
 					id = daoImp.getUserIdFromDatabaseByName(username);
-					
-					try {
-						user = daoImp.getUserFromDatabase(id);
-					} catch (UserNotFoundExecption e) {
-						e.printStackTrace();
-					}
-					
-					//User - Cam Mappign neusetzen:
-					ucDaoImp.setUserCamMapping(user,(ArrayList<Cam>)camdaoImp.getAllCams());	
-					camList = ucDaoImp.getUserCamMapping(id);
+	
+					ArrayList<Cam> camList = ucDaoImp.getUserCamMapping(id);
 					
 					List<Cam> collection = new ArrayList<Cam>();
 					long tempID = 0;
