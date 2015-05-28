@@ -210,7 +210,7 @@ public class EditServlet extends HttpServlet{
  	 			kommentar = request.getParameter("kommentar");
  	 		} else {
  	 			System.out.println("Falsche Eingabe der Daten! Felder dürfen nicht NULL sein!");
- 	 			backToAuswahl(request, response);
+ 	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
  	 		}
  	 		
  	 		if (daoImp.isUsernameExisting(username) == false) {
@@ -281,7 +281,7 @@ public class EditServlet extends HttpServlet{
  	 		} else {
  	 			System.out.println("Cam mit dem Namen: " + camname + " ist bereits vorhanden!");
  	 		}
- 			backToAuswahl(request, response);
+ 	 		response.sendRedirect(request.getContextPath() + "/auswahl?action=cam");
  			
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
