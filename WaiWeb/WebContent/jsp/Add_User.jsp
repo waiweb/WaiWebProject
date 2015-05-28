@@ -7,11 +7,13 @@
     <title>User Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
+     <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
   </head> 
   <body>
-  	<font size=5> Neuen User hinzufügen </font> <br><br>	
+  		
   		<form name=addUser method=POST  action= edit>  
-		<table border="1">
+		<table class="beispiel" cellspacing="0" cellpadding="0"> 
+			<caption>Neuen User hinzufÃ¼gen </caption>
 			<tbody>
 				<tr>
 					<td>Username: </td>
@@ -31,18 +33,23 @@
 				</tr>			
 			</tbody>				
 		</table>
+		</form>
 		<br style="clear: both">
+		
+		
 		<div class="links"> 
-			<button type="submit" name="action" value="addNewUser"> User hinzufügen</button>
+	
+			<button type="submit" name="action" value="addNewUser"> User hinzufÃ¼gen</button>
 			<input type="hidden" name="id" value="add">
+	
 		</div>
-	  	</form> 
-	  	<br style="clear: both">
-	  	<form name=back method=GET  action= edit>
+		
 			<div class="rechts">
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
+	 			<form name=back method=GET  action= edit>
+		   		<button type="submit" name="action" value="back"> ZurÃ¼ck</button>	
 		  		<input type="hidden" name="id" value="back">
+				</form>
 		  	</div>
-	  	</form>
+	 
   </body>
 </html>
