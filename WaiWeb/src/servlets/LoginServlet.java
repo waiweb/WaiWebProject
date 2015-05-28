@@ -118,7 +118,6 @@ public class LoginServlet extends HttpServlet {
 	        if(session != null){
 	        	System.out.println("Session mit User = "+session.getAttribute("username") + " wird beendet!");
 	            session.invalidate();
-	            //session = null;
 	        }
 			
 	        //response.sendRedirect(request.getContextPath() + "/html/LoginError.html");

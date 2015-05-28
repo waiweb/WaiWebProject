@@ -33,9 +33,9 @@ public class AuswahlServlet extends HttpServlet {
 		HttpSession session = request.getSession();
 		
 		//Aktive Session überprüfen:
-        if(session != null){
+        if(session != null && session.getAttribute("rechte") != null){
         	//Rechte überprüfen: (ADMINISTRATOR)
-        	if((int) session.getAttribute("rechte") == 1) {
+        		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
         			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");
 
