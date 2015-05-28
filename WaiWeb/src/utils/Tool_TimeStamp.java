@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 
 public class Tool_TimeStamp {
@@ -106,6 +107,20 @@ public class Tool_TimeStamp {
 		
 		
     }
+    
+    
+	public static Timestamp convertStringToTimestamp(String date,String time) {
+		Timestamp timestamp = null;
+		try{
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		    Date parsedDate = dateFormat.parse(date+" "+time);
+		    timestamp = new java.sql.Timestamp(parsedDate.getTime());
+		}catch(Exception e){//this generic but you can control another types of exception
+		 System.out.println("Fehler bei der Konvertierung von String in Timestamp !!");
+		}
+		
+		return timestamp;
+	  }
     
     
 
