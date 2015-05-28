@@ -11,7 +11,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import exception.UserNotFoundExecption;
 import Dao.CamDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
@@ -103,7 +102,6 @@ public class AuswahlServlet extends HttpServlet {
 					}
 					
 					//Vergleichen und ggf. gelöschte Cams entfernen:
-					
 					List<Cam> collection = new ArrayList<Cam>();
 					long tempID = 0;
 					

@@ -10,7 +10,7 @@ import model.User;
 public interface UserInterface {
 	
 	
-	public void createUserInDatabase(User user);
+	public Boolean createUserInDatabase(User user);
 	public User getUserFromDatabase(long userId) throws UserNotFoundExecption;
 	public void updateUser(User user);
 	public void deleteUserInDatabase(long userId);
