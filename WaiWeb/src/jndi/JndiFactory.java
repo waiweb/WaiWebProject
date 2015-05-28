@@ -31,7 +31,7 @@ public class JndiFactory {
 		
 		if (ds == null)
 			throw new NamingException("No Datasource");
-
+		
 		Connection conn = ds.getConnection();
 
 		if (conn == null)
