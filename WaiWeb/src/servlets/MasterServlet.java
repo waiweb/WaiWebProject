@@ -2,7 +2,9 @@ package servlets;
 
 //import java.awt.image.BufferedImage;
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -13,12 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 
 import exception.UserNotFoundExecption;
 import model.Cam;
+import model.ImageItem;
 import model.User;
 //import utils.Tool_ImageProcessing;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import Dao.CamDaoImpl;
 import Dao.DatabaseControllerImpl;
+import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 
@@ -102,6 +106,18 @@ public class MasterServlet extends HttpServlet {
 		usercammapping.setUserCamMapping(user,(ArrayList<Cam>)camdao.getAllCams());	
 		
 		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));	
+		Date now= new Date();
+		ImageDaoImpl image= new ImageDaoImpl();
+		ImageItem item= new ImageItem(1,"test.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item2= new ImageItem(1,"Koala.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item3= new ImageItem(1,"Desert.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item4= new ImageItem(1,"Tulips.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item5= new ImageItem(1,"Penguins.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		image.addImage(item);
+		image.addImage(item2);
+		image.addImage(item3);
+		image.addImage(item4);
+		image.addImage(item5);
 		
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
