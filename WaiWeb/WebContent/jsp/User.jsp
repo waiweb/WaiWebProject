@@ -4,20 +4,22 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>      
-    <title>Auswahlseite</title>     
+    <title>Auswahlseite</title>    
+         <link rel="stylesheet" href="css/tabular.css" type="text/css" >     
+
   </head>
 	<body>
-		<font size=5> Liste der User </font> <br><br>
-		<table align="left" border="1">
+		<table class="beispiel" cellspacing="0" cellpadding="0"> 
 	  		<tbody>
-		  		<tr>			
+	  		<caption>Liste der User</caption>
+		  	<thead>	<tr>			
 		  			<td>ID</td>		
 					<td>User Name</td>
 					<td>Rechte</td>
 					<td>Kommentar</td>
-					<td>Hinzugefügt am</td>
+					<td>Hinzugefuegt am</td>
 					<td>User Editieren</td>
-				</tr>		
+				</tr>			
 				
 				<c:forEach var="user" items="${users}">		<!--users ist die Liste die mir vom servlet gegeben wird -->
 					<tr>
@@ -39,7 +41,7 @@
 		<br style="clear: both"> <br>
 		<div>
 			<form name=userAdd method=GET  action= edit>  
-		  	 	<button type="submit" name="action" value="addUser">User hinzufügen</button>
+		  	 	<button type="submit" name="action" value="addUser">User hinzufuegen</button>
 		 	</form>	
 		</div>
 	</body>

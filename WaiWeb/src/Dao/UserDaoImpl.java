@@ -20,7 +20,7 @@ public class UserDaoImpl implements UserInterface {
 
 
 	@Override
-	public void createUserInDatabase(User user) {
+	public Boolean createUserInDatabase(User user) {
 
 		
 		if (user == null){
@@ -39,6 +39,7 @@ public class UserDaoImpl implements UserInterface {
 				pstmt.setString(4, user.getTimeOfCreation());
 				pstmt.setString(5, user.getKommentar());
 				pstmt.executeUpdate();
+				return true;
 				
 				
 				/*//alternativ
@@ -58,9 +59,9 @@ public class UserDaoImpl implements UserInterface {
 				
 
 		} catch (Exception e) {
-			System.out.println("Fehler: "+e.getMessage());
+			System.out.println("Fehler bei Eingabe! Mind. 3 Zeichen als Passwort!");
+			return false;
 
-			throw new UserNotAddedExecption();
 		} finally {
 			closeConnection(connection);
 		}

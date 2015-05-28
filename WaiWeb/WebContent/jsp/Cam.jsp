@@ -5,19 +5,21 @@
 <html>
   <head>      
     <title>Cam-Liste</title>     
+    <link rel="stylesheet" href="css/tabular.css" type="text/css" >
   </head>
 	<body>
-		<font size=5> Liste der Cams </font> <br><br>
-		<table align="left" border="1">
-	  		<tbody>
-		  		<tr>					
-					<td>Cam Name</td>
-					<td>URL</td>
-					<td>Hinzugefügt am</td>
-					<td>Verzeichnis</td>
-					<td>Kommentar</td>	
-					<td>Thumbnail</td>		
-				</tr>
+
+<table class="beispiel" cellspacing="0" cellpadding="0"> 
+	<caption>Liste der Kameras</caption>
+		<thead><tr>
+		<th>Cam Name</th>
+		<th>URL</th>
+		<th>Hinzgefuegt am</th>
+		<th>Verzeichnis</th>
+		<th>Kommentar</th>
+		<th>Thumbnai</th>
+		</tr>
+	  
 				
 				<c:forEach var="cam" items="${cams}">
 					
@@ -47,7 +49,7 @@
 		<br style="clear: both"> <br>
 		<div>
 			<form name=camAdd method=GET  action= edit>  
-		  	 	<button type="submit" name="action" value="addCam">Cam hinzufügen</button>
+		  	 	<button type="submit" name="action" value="addCam">Cam hinzufuegen</button>
 		 	</form>	
 		</div>
 	</body>

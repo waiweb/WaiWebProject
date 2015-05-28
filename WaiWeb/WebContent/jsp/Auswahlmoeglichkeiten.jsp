@@ -6,13 +6,19 @@
 
 <html>
   <head>      
-    <title>Auswahlseite</title>     
+    <title>Auswahlseite</title>   
+       	<link rel="stylesheet" href="css/menu_styles.css" type="text/css" >
+    	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   		<script src="js/menu_script.js"></script>
   </head>
+  
+  
 	<body>
-		<%	//Zugriff überprüfen:
+
+		<%	//Zugriff Ã¼berprÃ¼fen:
 			String user = null, userName = null, sessionID = null;
 			if (session.getAttribute("username") == null){
-				//Auf Loginseite zurückleiten falls keine Session erstellt wurde!
+				//Auf Loginseite zurÃ¼ckleiten falls keine Session erstellt wurde!
 			    response.sendRedirect(request.getContextPath() + "/master");
 			} else {
 				user = (String) session.getAttribute("username");
@@ -28,16 +34,27 @@
 				}
 			}
 		%>
+		
 		<font size=5> Willkommen <%=userName %>! </font> <br>
 		<font size=3> Deine Session ID=<%=sessionID %></font>
-		<br> <br>
-			<a href="auswahl?action=user">Liste der User</a>  <br>
-			<a href="auswahl?action=cam">Liste der Cams</a>  <br>
-			<a href="auswahl?action=settings">Einstellungen</a>   <br>
-	    <br>
+	
+
+	
+	
+	<div id='cssmenu'>
+	<ul>
+		
+        <li><a href="auswahl?action=user">Liste der User</a></li>
+         <li><a href="auswahl?action=cam">Liste der Cams</a> </li>
+ 		<li><a href="auswahl?action=settings">Einstellungen</a></li>
 			<form name=checkLogin method=POST action=login>  
 		  	<input type=submit name=action value="Logout">  <!--  was soll beim logout passieren -->
-	  	</form>	
+	  
+      </ul>
+
+</div>
+	
 	</body>
+	
 </html>    
   	          
