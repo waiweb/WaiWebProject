@@ -33,17 +33,17 @@
 				</tr>			
 			</tbody>				
 		</table>
-		</form>
+		
 		<br style="clear: both">
 		
 		
 		<div class="links"> 
-	
+			
 			<button type="submit" name="action" value="addNewUser"> User hinzufügen</button>
 			<input type="hidden" name="id" value="add">
-	
-		</div>
 		
+		</div>
+		</form>
 			<div class="rechts">
 	 			<form name=back method=GET  action= edit>
 		   		<button type="submit" name="action" value="back"> Zurück</button>	
