@@ -101,6 +101,54 @@ public class ImageDaoImpl implements ImageItemInterface{
 
 		return imageItemList;
 	}
+	
+	
+	
+	@Override
+	public ArrayList<ImageItem> getImageItemsOfCam(int Id_cam, Timestamp begin, Timestamp end) {
+		
+		ArrayList<ImageItem> imageItemList = new ArrayList<ImageItem>();
+		Connection connection = null;		
+		try {
+			connection = jndi.getConnection("jdbc/libraryDB");	
+		
+		
+		
+		PreparedStatement pstmt = connection.prepareStatement("select * FROM Cam_Images_Table where Time >= ? AND Time <= ? AND Id_Cam = ?");
+		pstmt.setTimestamp(1, begin);
+		pstmt.setTimestamp(2, end);
+		pstmt.setInt(3, Id_cam);
+		
+		ResultSet rs = pstmt.executeQuery();		
+	
+
+		
+		while(rs.next()){
+			ImageItem item = new ImageItem();
+			item.setId_Image(rs.getLong("Id_Image"));
+			item.setId_CamSource(rs.getLong("Id_Cam"));
+			item.setTimestamp(rs.getTimestamp("Time"));
+			item.setPath(rs.getString("Path"));
+			item.setKommentar(rs.getString("Kommentar"));
+			
+
+			imageItemList.add(item);
+		}
+
+		
+		} catch (Exception e) {
+			System.out.println("Fehler: "+e.getMessage());
+
+			throw new UserNotAddedExecption();
+		} finally {
+			closeConnection(connection);
+		}
+		
+		
+		System.out.println("siez imagearray : "+imageItemList.size());
+
+		return imageItemList;
+	}
 
 	@Override
 	public void deleteImage(HashMap<String, String> imageHashMap) {
