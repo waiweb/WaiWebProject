@@ -63,7 +63,7 @@
 		</table>
 	
 		</div>
-			</form>
+			
 		<br style="clear: both">  
 		<div class="links"> 
 			<button type="submit" name="action" value="deleteUser"> User LÃ¶schen</button>
@@ -73,13 +73,13 @@
 		
 		<div class="rechts">
 		
-			<form name=back method=POST  action= edit>
+		
 			
 	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
 	  		<input type="hidden" name="id" value="${user.id_User}">
-				  </form> 
+				 
 	  	</div>
-	  	
+	  	</form> 
 	  	
 	  	<div class="rechts">
 	 			<form name=back method=GET  action= edit>
