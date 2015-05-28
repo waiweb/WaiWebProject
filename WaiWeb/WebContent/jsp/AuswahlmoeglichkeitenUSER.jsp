@@ -9,7 +9,7 @@
     <title>Auswahlseite</title>     
   </head>
 	<body>
-		<%	//Zugriff überprüfen:
+		<%	//Zugriff ueberpruefen:
 			String user = null, userName = null, sessionID = null;
 			if (session.getAttribute("username") == null){
 				//Auf Loginseite zurückleiten falls keine Session erstellt wurde!

@@ -220,7 +220,7 @@ public class EditServlet extends HttpServlet{
 		
 		/** Cam Editierung: **/
 		//Cam auswählen zum editieren, nur Administrator:
-		if(action.equals("editCam") && (int) session.getAttribute("rechte") == 1 ){
+		if(action.equals("editCam")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
 			
@@ -228,12 +228,7 @@ public class EditServlet extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_Cam.jsp");
 			dispatcher.forward(request, response);	
 		
-		//Ohne Rechte zurück zur Auswahl:
-		} else if (action.equals("editCam") && (int) session.getAttribute("rechte") == 0){
-			backToAuswahl(request, response);
-		
-		//Loescht die ausgewaehlte Cam und kehrt zum Auswahlbildschirm zurueck:	
- 		} else if(action.equals("deleteCam")){
+		} else if(action.equals("deleteCam")){
 			checkUserId(request);
 			
  			camDaoImp.deleteCamInDatabase(id);
