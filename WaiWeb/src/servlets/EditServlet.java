@@ -1,8 +1,15 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+
+import javafx.util.converter.DateStringConverter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -60,7 +67,6 @@ public class EditServlet extends HttpServlet{
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
 		 		}
-			
 			//FÃ¼r normale User kein Zugriff!
         	} else {
             	System.out.println("ERROR! Keine ausreichenden Rechte, Administrator-Rechte erforderlich!");
@@ -283,7 +289,28 @@ public class EditServlet extends HttpServlet{
 			request.setAttribute("cam", cam);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);		
-		}
+		}else if(action.equals("refresh")){
+			String dateStart=request.getParameter("inputField");
+			String dateEnd=request.getParameter("inputField2");
+			String timeStart=request.getParameter("datetime");
+			String timeEnd=request.getParameter("datetime2");
+			System.out.println(" Refresh gedrückt");
+			Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
+			Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
+			
+			System.out.println("Timestamp Start: "+timestampStart);
+			System.out.println("Timestamp End: "+timestampEnd);
+			
+			if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
+			System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+			dispatcher.forward(request, response);
+			}else{
+				   System.out.println("Keine korrekte eingabe !");
+				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+				   dispatcher.forward(request, response);
+				}
+		 }	
 	}
 	
 	//Funktion um auf die Auswahlmoeglichkeiten zurueckzukehren:
@@ -311,4 +338,18 @@ public class EditServlet extends HttpServlet{
 			id = Integer.valueOf(request.getParameter("id"));
  		}
 	}
+	
+	private static Timestamp convertStringToTimestamp(String date,String time) {
+		Timestamp timestamp = null;
+		try{
+		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
+		    Date parsedDate = dateFormat.parse(date+" "+time);
+		    timestamp = new java.sql.Timestamp(parsedDate.getTime());
+		}catch(Exception e){//this generic but you can control another types of exception
+		 System.out.println("Fehler bei der Konvertierung von String in Timestamp !!");
+		}
+		
+		return timestamp;
+	  }
+
 }
