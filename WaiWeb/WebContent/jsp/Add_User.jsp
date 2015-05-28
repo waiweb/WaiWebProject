@@ -7,7 +7,7 @@
     <title>User Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
-  </head>  
+  </head> 
   <body>
   	<font size=5> Neuen User hinzufügen </font> <br><br>	
   		<form name=addUser method=POST  action= edit>  

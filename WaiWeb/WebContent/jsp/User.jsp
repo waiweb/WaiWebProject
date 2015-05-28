@@ -17,7 +17,7 @@
 					<td>User Name</td>
 					<td>Rechte</td>
 					<td>Kommentar</td>
-					<td>Hinzugefügt am</td>
+					<td>Hinzugefuegt am</td>
 					<td>User Editieren</td>
 				</tr>			
 				
@@ -41,7 +41,7 @@
 		<br style="clear: both"> <br>
 		<div>
 			<form name=userAdd method=GET  action= edit>  
-		  	 	<button type="submit" name="action" value="addUser">User hinzufügen</button>
+		  	 	<button type="submit" name="action" value="addUser">User hinzufuegen</button>
 		 	</form>	
 		</div>
 	</body>

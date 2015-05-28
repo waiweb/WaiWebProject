@@ -14,7 +14,7 @@
 		<thead><tr>
 		<th>Cam Name</th>
 		<th>URL</th>
-		<th>Hinzgefügt am</th>
+		<th>Hinzgefuegt am</th>
 		<th>Verzeichnis</th>
 		<th>Kommentar</th>
 		<th>Thumbnai</th>
@@ -49,7 +49,7 @@
 		<br style="clear: both"> <br>
 		<div>
 			<form name=camAdd method=GET  action= edit>  
-		  	 	<button type="submit" name="action" value="addCam">Cam hinzufügen</button>
+		  	 	<button type="submit" name="action" value="addCam">Cam hinzufuegen</button>
 		 	</form>	
 		</div>
 	</body>
