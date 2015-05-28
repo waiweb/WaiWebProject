@@ -2,14 +2,10 @@ package servlets;
 
 import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
-import javafx.util.converter.DateStringConverter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -81,7 +77,6 @@ public class EditServlet extends HttpServlet{
 	//POST:
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		HttpSession session = request.getSession(false);
 		initVar();
 		
  		/** User Editierung: **/
@@ -294,7 +289,7 @@ public class EditServlet extends HttpServlet{
 			String dateEnd=request.getParameter("inputField2");
 			String timeStart=request.getParameter("datetime");
 			String timeEnd=request.getParameter("datetime2");
-			System.out.println(" Refresh gedrückt");
+			System.out.println(" Refresh gedrueckt");
 			Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
 			Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
 			
