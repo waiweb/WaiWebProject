@@ -69,7 +69,7 @@ public class AuswahlServlet extends HttpServlet {
         	} else if ((int) session.getAttribute("rechte") == 0) {
 	        	//Falls Action vorhanden prüfen, ansonsten auf Auswahl-Bildschirm:
 				if (action == null) {
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/AuswahlmoeglichkeitenUSER.jsp");
 					dispatcher.forward(request, response);	
 				
 				//Cams für den jeweiligen User anpassen:	
