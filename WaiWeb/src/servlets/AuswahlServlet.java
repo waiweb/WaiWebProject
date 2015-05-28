@@ -24,8 +24,6 @@ public class AuswahlServlet extends HttpServlet {
     final UserDaoImpl daoImp = new UserDaoImpl();
     final CamDaoImpl camdaoImp= new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
-	private ArrayList<Cam> camList = new ArrayList<Cam>();
-	private User user;
     private String username;
     private Long id;
 	
@@ -79,21 +77,38 @@ public class AuswahlServlet extends HttpServlet {
 					username = (String) session.getAttribute("username");
 					id = daoImp.getUserIdFromDatabaseByName(username);
 					
-					try {
-						user = daoImp.getUserFromDatabase(id);
-					} catch (UserNotFoundExecption e) {
-						e.printStackTrace();
+					//Alle Cams holen:
+					List<Cam> newMapping = camdaoImp.getAllCams();
+					//Aktuelles Mapping des Users holen:
+					ArrayList<Cam> camList = ucDaoImp.getUserCamMapping(id);
+					//Temp List:
+					ArrayList<Cam> tempList = new ArrayList<Cam>();
+					
+					if (newMapping.size() < camList.size()) {
+						for(int i=0;i<newMapping.size();i++) {
+							if(camList.get(i) != null && newMapping.get(i) != null) {
+								if(camList.get(i).getId_Cam() == newMapping.get(i).getId_Cam()) {	
+									tempList.add(camList.get(i));
+								}
+							}
+						}
+					} else {
+						for(int i=0;i<camList.size();i++) {
+							if(camList.get(i) != null && newMapping.get(i) != null) {
+								if(camList.get(i).getId_Cam() == newMapping.get(i).getId_Cam()) {	
+									tempList.add(camList.get(i));
+								}
+							}
+						}
 					}
 					
-					//User - Cam Mappign neusetzen:
-					ucDaoImp.setUserCamMapping(user,(ArrayList<Cam>)camdaoImp.getAllCams());	
-					camList = ucDaoImp.getUserCamMapping(id);
+					//Vergleichen und ggf. gelöschte Cams entfernen:
 					
 					List<Cam> collection = new ArrayList<Cam>();
 					long tempID = 0;
 					
-					for(int i=0;i<camList.size();i++) {
-						tempID = camList.get(i).getId_Cam();
+					for(int i=0;i<tempList.size();i++) {
+						tempID = tempList.get(i).getId_Cam();
 						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
 					}
 					
