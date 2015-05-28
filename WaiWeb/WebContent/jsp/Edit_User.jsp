@@ -30,7 +30,7 @@
 				</tr>			
 			</tbody>				
 		</table>
-		<br style="clear: both">
+	<!-- 	<br style="clear: both">  -->
 		<table border="1" >
 			<tbody>
 			    <tr>   	
