@@ -6,16 +6,22 @@
   <head>    
     <title>Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
-    <link href="css/userEdit.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
+<link href="css/userEdit.css" type="text/css" rel="stylesheet"> 
+	   
   </head>  
   <body>
-  	<font size=5> User bearbeiten </font> <br><br>	
+  
   		<form name=saveUser method=POST  action= edit>  
-		<table border="1" align="left">
+  		
+  		<div class="links">
+		<table class="beispiel" cellspacing="0" cellpadding="0"> 
 			<tbody>
-			    <tr>   	
-			     <td>Konfiguration für:  <c:out value="${user.username}"/></td>
-			     </tr>
+			<caption>User bearbeiten</caption>
+			<thead>
+			</thead>
+			 <caption>Konfiguration fÃ¼r:  <c:out value="${user.username}"/></caption>
+					  
 				<tr>
 					<td>Benutzer:</td>
 					<td><input type="text" name="username" value="${user.username}"></td>		
@@ -30,11 +36,14 @@
 				</tr>			
 			</tbody>				
 		</table>
-	<!-- 	<br style="clear: both">  -->
-		<table border="1" >
+		</div>
+
+
+		<div class = "rechts">
+		<table class="beispiel" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			    <tr>   	
-			  		<td>Cams für:  <c:out value="${user.username}"/></td>
+			  		<td>Cams fÃ¼r:  <c:out value="${user.username}"/></td>
 			  	</tr>
 				<tr>
 					<c:forEach var="checkedCam" items="${checkedCams}">	
@@ -52,9 +61,10 @@
 				</tr>
 			</tbody>				
 		</table>
-		<br>
+		</div>
+		<br style="clear: both">  
 		<div class="links"> 
-			<button type="submit" name="action" value="deleteUser"> User Löschen</button>
+			<button type="submit" name="action" value="deleteUser"> User LÃ¶schen</button>
 			<input type="hidden" name="id" value="${user.id_User}">
 		</div>
 		<div class="rechts">
