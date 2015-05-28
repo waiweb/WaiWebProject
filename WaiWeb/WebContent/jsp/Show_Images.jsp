@@ -69,7 +69,7 @@ $(function(){
 			</tbody>
 		</table>
 		</div> 
-	
+
 		<div class="rechts">
 		<font size=4> Bis</font>
 		<table border="1">
