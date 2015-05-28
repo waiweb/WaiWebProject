@@ -42,7 +42,6 @@ $(function(){
   </head>  
   <body>
   	<font size=5> Cam Images</font> <br><br>	
-   
   
   		<form name=getImages method=POST  action= edit> 
 		<table border="1">
@@ -53,22 +52,20 @@ $(function(){
 			 	<tr>   	
 			 	</tr>
 			</tbody>	
-			
 		</table>
 
 <br style="clear: both">
-   	<div class="rechts">
+   	 <div class="links">
    	 <font size=4> Von</font>
 		<table border="1">
 			<tbody>
 			<tr>
-			 
                 <td> <input type="text" size="12" id="inputField" name="inputField"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
                 <td><input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
 				</tr>	
 			</tbody>
 		</table>
-		</div> 
+		</div>
 
 		<div class="rechts">
 		<font size=4> Bis</font>
@@ -80,7 +77,7 @@ $(function(){
 				</tr>	
 			</tbody>	
 		</table>
-			</div> 
+		</div>
 		
 		<br style="clear: both"><br style="clear: both">
 		<table border="1">
@@ -90,17 +87,16 @@ $(function(){
 				</tr>	
 			</tbody>				
 		</table>
-	
-       
-	  	<div class="rechts">
-	  	<br style="clear: both">
+		</form>
+	  	<div class="links">
 		   		<button type="submit" name="action" value="refresh"> Aktualisieren</button>	
 		  		<input type="hidden" name="id" value="refresh">
-		  	</div>
-	</form>
+		</div>
+		<div class="rechts">
 		<form name=getImages method=GET  action= edit> 
 		   		<button type="submit" name="action" value="back"> Zurück</button>	
 		  		<input type="hidden" name="id" value="back">
 	  	</form> 
+	  	</div>
   </body>
 </html>
