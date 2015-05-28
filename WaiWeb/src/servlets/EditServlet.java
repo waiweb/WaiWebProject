@@ -144,58 +144,64 @@ public class EditServlet extends HttpServlet{
  			
  	 		if (request.getParameter("username") != null && request.getParameter("rechte") != null
  	 				&& request.getParameter("kommentar") != null) {
- 	 			username = request.getParameter("username");
- 	 			rechte = Integer.valueOf(request.getParameter("rechte"));
- 	 			kommentar = request.getParameter("kommentar");
+ 	 			rechteToString = request.getParameter("rechte");
+ 	 			if (rechteToString.length() != 0 && rechteToString.matches("1") || rechteToString.matches("0")) {
+ 	 				rechte = Integer.valueOf(request.getParameter("rechte"));
+ 	 	 			username = request.getParameter("username");
+ 	 	 			kommentar = request.getParameter("kommentar");
+ 	 	 
+ 	 	 	 		//Versucht den User in der Datenbank upzudaten:
+ 	 				try {
+ 	 					UserDaoImpl daoImp = new UserDaoImpl();
+ 	 					user = daoImp.getUserFromDatabase(id);
+ 	 					user.setUsername(username);
+ 	 					user.setRechte(rechte);
+ 	 					user.setKommentar(kommentar);
+ 	 					daoImp.updateUser(user);
+ 	 			 		System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
+ 	 				} catch (UserNotFoundExecption e) {
+ 	 					e.printStackTrace();
+ 	 				}
+ 	 	             
+ 	 				//Die angehakten Checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
+ 	 				String[] checkbox=request.getParameterValues("checked");
+ 	 				
+ 	 				if (checkbox != null){
+ 	 					
+ 	 			    	ArrayList<Cam> camList = new ArrayList<Cam>();
+ 	 			    	List<Cam> cams= new ArrayList<Cam>();
+ 	 					cams=camDaoImp.getAllCams();
+
+ 	 			    	for(int i=0;i<cams.size();i++){
+ 	 				    	for(int j=0;j<checkbox.length;j++){
+ 	 				    		if(cams.get(i).getId_Cam()==Integer.valueOf(checkbox[j])){
+ 	 				    			System.out.println ("Die cam ID: "+checkbox[j]+" wurde dem User: "+ user.getUsername()+" hinzugefuegt");
+ 	 				    			camList.add(cams.get(i));
+ 	 				    		}
+ 	 				    	}
+ 	 				    }
+ 	 			    	
+ 	 			    	ucDaoImp.setUserCamMapping(user, camList);
+ 	 			    	
+ 	 			     } else if(checkbox == null){
+ 	 			    	
+ 	 			    	ArrayList<Cam> camList = new ArrayList<Cam>();
+ 	 			    	ucDaoImp.setUserCamMapping(user, camList);
+ 	 			    	System.out.println("Es wurden alle Bilder fuer den User: "+ user.getUsername() + " aus der Bezieungstabelle entfernt");
+ 	 			    }
+ 	 				
+ 	 	 			backToAuswahl(request, response);
+ 	 	 			
+ 	 	 			
+ 	 			} else {
+ 	 	 			System.out.println("Ungültige Rechte!");
+ 	 	 			backToAuswahl(request, response);
+ 	 	 		}
+ 	 		} else {
+ 	 			System.out.println("Ungültige Eingabe der Nutzerdaten!");
+ 	 			backToAuswahl(request, response);
  	 		}
  	 		
- 	 		//Versucht den User in der Datenbank upzudaten:
-			try {
-				UserDaoImpl daoImp = new UserDaoImpl();
-				user = daoImp.getUserFromDatabase(id);
-				user.setUsername(username);
-				user.setRechte(rechte);
-				user.setKommentar(kommentar);
-				daoImp.updateUser(user);
-		 		System.out.println("User mit der ID: " + id + " erfolgreich geupdatet!");
-			} catch (UserNotFoundExecption e) {
-				e.printStackTrace();
-			}
-             
-			//Die angehakten Checkboxen werden rausgelesen und in die User_cam tabelle geschrieben
-			String[] checkbox=request.getParameterValues("checked");
-			
-			if (checkbox != null){
-				
-		    	ArrayList<Cam> camList = new ArrayList<Cam>();
-		    	List<Cam> cams= new ArrayList<Cam>();
-				cams=camDaoImp.getAllCams();
-				
-				// TODO: zuviele datenbankzugriffe
-//		    	for (int i = 0; i < checkbox.length; i++) 
-//		        {  System.out.println ("die cam ID: "+checkbox[i]+" wurde dem user: "+ user.getUsername()+" hinzugefuegt");
-//		          camList.add(camDaoImp.getCamFromDatabase(Integer.valueOf(checkbox[i])));
-//		        }
-				
-		    	for(int i=0;i<cams.size();i++){
-			    	for(int j=0;j<checkbox.length;j++){
-			    		if(cams.get(i).getId_Cam()==Integer.valueOf(checkbox[j])){
-			    			System.out.println ("Die cam ID: "+checkbox[j]+" wurde dem User: "+ user.getUsername()+" hinzugefuegt");
-			    			camList.add(cams.get(i));
-			    		}
-			    	}
-			    }
-		    	
-		    	ucDaoImp.setUserCamMapping(user, camList);
-		    	
-		     } else if(checkbox == null){
-		    	
-		    	ArrayList<Cam> camList = new ArrayList<Cam>();
-		    	ucDaoImp.setUserCamMapping(user, camList);
-		    	System.out.println("Es wurden alle Bilder fuer den User: "+ user.getUsername() + " aus der Bezieungstabelle entfernt");
-		    }
-			
- 			backToAuswahl(request, response);
  			
  		//Neuen Nutzer in die Datenbank hinzufuegen:
  		} else if(action.equals("addNewUser")){
@@ -204,25 +210,30 @@ public class EditServlet extends HttpServlet{
  	 			username = request.getParameter("username");
  	 			passwort = request.getParameter("passwort");
  	 			rechteToString = request.getParameter("rechte");
- 	 			if (rechteToString.length() != 0) {
+ 	 			
+ 	 			if (rechteToString.length() != 0 && rechteToString.matches("1") || rechteToString.matches("0")) {
  	 				rechte = Integer.valueOf(request.getParameter("rechte"));
- 	 			}
- 	 			kommentar = request.getParameter("kommentar");
+ 	 	 			kommentar = request.getParameter("kommentar");
+ 	 	 			
+ 	 	 	 		if (daoImp.isUsernameExisting(username) == false) {
+ 	 	 	 			if((daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar)) == true)){
+ 	 	 	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefuegt!");
+ 	 	 	 	 			backToAuswahl(request, response);
+ 	 	 	 			} else {
+ 	 	 	 	 			backToAuswahl(request, response);
+ 	 	 	 	 		}
+ 	 	 	 		} else {
+ 	 	 	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
+ 	 	 	 			backToAuswahl(request, response);
+ 	 	 	 		}
+ 	 	 			
+ 	 			} else {
+ 	 	 			System.out.println("Ungültige Rechte!");
+ 	 	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
+ 	 	 		}
  	 		} else {
  	 			System.out.println("Falsche Eingabe der Daten! Felder dürfen nicht NULL sein!");
  	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
- 	 		}
- 	 		
- 	 		if (daoImp.isUsernameExisting(username) == false) {
- 	 			if((daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar)) == true)){
- 	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefuegt!");
- 	 	 			backToAuswahl(request, response);
- 	 			} else {
- 	 	 			backToAuswahl(request, response);
- 	 	 		}
- 	 		} else {
- 	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
- 	 			backToAuswahl(request, response);
  	 		}
  		}
 		
