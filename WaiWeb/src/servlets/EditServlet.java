@@ -35,10 +35,12 @@ public class EditServlet extends HttpServlet{
 	//GET:
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String action = request.getParameter("action");
-		HttpSession session = request.getSession(false);
+		HttpSession session = request.getSession();
 		
-        if(session != null) {
-        	if((int) session.getAttribute("rechte") == 1) {
+		//Aktive Session überprüfen:
+        if(session != null && session.getAttribute("rechte") != null){
+        	//Rechte überprüfen: (ADMINISTRATOR)
+        		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
         			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");	
         	
