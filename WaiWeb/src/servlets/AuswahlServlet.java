@@ -87,7 +87,7 @@ public class AuswahlServlet extends HttpServlet {
 					}
 					
 					request.setAttribute("cams", collection);
-					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Cam.jsp");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/CamUSER.jsp");
 					dispatcher.forward(request, response);		
 				
 				//Kein Zugriff!
