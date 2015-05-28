@@ -78,13 +78,15 @@ $(function(){
 			</tbody>	
 		</table>
 		</div>
-		
+		 
 		<br style="clear: both"><br style="clear: both">
 		<table border="1">
 			<tbody>
+			 <c:forEach var="cam" items="${cams}">
 				<tr>   <!-- hier alle bilder bzw die bilder im zeitrahmen ausgeben -->
-					<td><a href="<%=request.getContextPath()%>/camimages/test.jpg"><img width="250" height="250" src="<%=request.getContextPath()%>/camimages/test.jpg"/></a><br><br>Name / Timestamp</td>	
-				</tr>	
+					<td><a href="<%=request.getContextPath()%>/<c:out value="${cam.path}"/>"><img width="250" height="250" src="<%=request.getContextPath()%>/<c:out value="${cam.path}"/>"/></a><br><br><c:out value="${cam.name}"/> / <c:out value="${cam.timestamp}"/></td>	
+				</tr>
+				</c:forEach>	
 			</tbody>				
 		</table>
 		</form>

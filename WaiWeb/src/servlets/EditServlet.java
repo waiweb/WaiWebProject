@@ -18,9 +18,11 @@ import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import exception.UserNotFoundExecption;
 import Dao.CamDaoImpl;
+import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 import model.Cam;
+import model.ImageItem;
 import model.User;
 
 
@@ -30,6 +32,7 @@ public class EditServlet extends HttpServlet{
 	final UserDaoImpl daoImp = new UserDaoImpl();
 	final CamDaoImpl camDaoImp = new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
+	final ImageDaoImpl imageDao= new ImageDaoImpl();
 	private User user;
 	private Cam cam;
 	private int rechte, id;
@@ -280,8 +283,13 @@ public class EditServlet extends HttpServlet{
  		} else if (action.equals("showImages")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
+			Date dateNow= new Date();
+			// gibt die letzten 4 bilder aus 
+			Timestamp now= new Timestamp(dateNow.getTime());
+			Timestamp fivePicure= new Timestamp(now.getYear(), now.getMonth(), now.getDay(), now.getHours(), now.getMinutes()-20, now.getSeconds(), now.getNanos());
+		    ArrayList<ImageItem> cams= imageDao.getImageItemsOfCam(id, now, fivePicure);
 			
-			request.setAttribute("cam", cam);
+			request.setAttribute("cam", cams);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);		
 		}else if(action.equals("refresh")){
