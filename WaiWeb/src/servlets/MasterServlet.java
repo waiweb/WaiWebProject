@@ -79,13 +79,15 @@ public class MasterServlet extends HttpServlet {
 			System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
 		}
 		
-		//create cams
-		
+		//Create cams
 		CamDaoImpl camdao = new CamDaoImpl();
 		
-		camdao.createCamInDatabase(new Cam("Wiese", "www.spielgel.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "yolo"));
-		camdao.createCamInDatabase(new Cam("Fluss", "www.natur.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "fluesse"));
-		camdao.createCamInDatabase(new Cam("Berg", "www.berg.de", Tool_TimeStamp.getTimeStampString(), "/camimages", "berg"));
+		camdao.createCamInDatabase(new Cam("Wasserturm", "https://www.mvv-energie.de/webcam_maritim/MA-Wasserturm.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("East", "http://my.dal.biz/cgi-bin/webcam/getpics.cgi?Cam=east", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("Big", "http://www.mpc-it.de/webcam/big.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("See", "http://www.die-ersten-am-see.de/webcam/camluzo.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("Fuessen", "http://webcamfuessen.de/webcam/webcamfuessen.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("Neustadthambach", "http://www.neustadthambach.de/pics/schloss.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 
 		ArrayList<Cam>camlist = (ArrayList<Cam>) camdao.getAllCams();
 		for(Cam cam : camlist){
