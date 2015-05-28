@@ -18,11 +18,9 @@ import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import exception.UserNotFoundExecption;
 import Dao.CamDaoImpl;
-import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 import model.Cam;
-import model.ImageItem;
 import model.User;
 
 
@@ -32,7 +30,6 @@ public class EditServlet extends HttpServlet{
 	final UserDaoImpl daoImp = new UserDaoImpl();
 	final CamDaoImpl camDaoImp = new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
-	final ImageDaoImpl imageDao= new ImageDaoImpl();
 	private User user;
 	private Cam cam;
 	private int rechte, id;
@@ -211,15 +208,22 @@ public class EditServlet extends HttpServlet{
  	 				rechte = Integer.valueOf(request.getParameter("rechte"));
  	 			}
  	 			kommentar = request.getParameter("kommentar");
+ 	 		} else {
+ 	 			System.out.println("Falsche Eingabe der Daten! Felder dürfen nicht NULL sein!");
+ 	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
  	 		}
  	 		
  	 		if (daoImp.isUsernameExisting(username) == false) {
- 	 	 	 		daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar));
+ 	 			if((daoImp.createUserInDatabase(new User(username,new String(Tool_Security.hashFromString(passwort)),rechte,Tool_TimeStamp.getTimeStampString(),kommentar)) == true)){
  	 	 			System.out.println("Neuer User: " + username + " erfolgreich hinzugefuegt!");
+ 	 	 			backToAuswahl(request, response);
+ 	 			} else {
+ 	 	 			backToAuswahl(request, response);
+ 	 	 		}
  	 		} else {
  	 			System.out.println("User mit dem Namen: " + username + " bereits vorhanden!");
+ 	 			backToAuswahl(request, response);
  	 		}
- 			backToAuswahl(request, response);
  		}
 		
 		/** Cam Editierung: **/
@@ -277,22 +281,26 @@ public class EditServlet extends HttpServlet{
  	 		} else {
  	 			System.out.println("Cam mit dem Namen: " + camname + " ist bereits vorhanden!");
  	 		}
- 			backToAuswahl(request, response);
+ 	 		response.sendRedirect(request.getContextPath() + "/auswahl?action=cam");
  			
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
-			Date dateNow= new Date();
-			// gibt die letzten 4 bilder aus 
-			Timestamp now= new Timestamp(dateNow.getTime());
-			Timestamp fivePicure= new Timestamp(now.getYear(), now.getMonth(), now.getDay(), now.getHours(), now.getMinutes()-20, now.getSeconds(), now.getNanos());
-		    ArrayList<ImageItem> cams= imageDao.getImageItemsOfCam(id, now, fivePicure);
 			
-			request.setAttribute("cam", cams);
+			//Path Array holen:
+			ArrayList<String> pathCollection = new ArrayList<String>();
+			pathCollection.add("/camimages/test.jpg");
+			pathCollection.add("/camimages/test.jpg");
+			pathCollection.add("/camimages/test.jpg");
+			
+			request.setAttribute("cam", cam);
+			request.setAttribute("path", pathCollection);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
-			dispatcher.forward(request, response);		
-		}else if(action.equals("refresh")){
+			dispatcher.forward(request, response);	
+		
+		//Cam Refresh:
+		} else if(action.equals("refresh")){
 			String dateStart=request.getParameter("inputField");
 			String dateEnd=request.getParameter("inputField2");
 			String timeStart=request.getParameter("datetime");

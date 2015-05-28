@@ -106,8 +106,16 @@ public class MasterServlet extends HttpServlet {
 		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));	
 		Date now= new Date();
 		ImageDaoImpl image= new ImageDaoImpl();
-		ImageItem berge= new ImageItem(1,"test.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/test.jpg" , "hallo");
-		image.addImage(berge);
+		ImageItem item= new ImageItem(1,"test.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item2= new ImageItem(1,"Koala.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item3= new ImageItem(1,"Desert.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item4= new ImageItem(1,"Tulips.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		ImageItem item5= new ImageItem(1,"Penguins.jpg" , 1, new Timestamp(now.getTime()),"D:/Box/Box Sync/Box Sync Folder/FH/7 sem/WAI - Damm/WaiWebProject/WaiWeb/WebContent/camimages/" , "hallo");
+		image.addImage(item);
+		image.addImage(item2);
+		image.addImage(item3);
+		image.addImage(item4);
+		image.addImage(item5);
 		
 		//Aenderung username und passwort, einsetzen neuen zeitstempel
 		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
