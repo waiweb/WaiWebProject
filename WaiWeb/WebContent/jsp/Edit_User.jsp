@@ -7,8 +7,8 @@
     <title>Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
-<link href="css/userEdit.css" type="text/css" rel="stylesheet"> 
-	   
+	<link href="css/userEdit.css" type="text/css" rel="stylesheet"> 
+	<link href="css/Buttons.css"  type="text/css" rel="stylesheet">
   </head>  
   <body>
   
@@ -20,7 +20,7 @@
 			<caption>User bearbeiten</caption>
 			<thead>
 			</thead>
-			 <caption>Konfiguration fÃ¼r:  <c:out value="${user.username}"/></caption>
+			 <caption>Konfiguration fÃÂ¼r:  <c:out value="${user.username}"/></caption>
 					  
 				<tr>
 					<td>Benutzer:</td>
@@ -43,7 +43,7 @@
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			    <tr>   	
-			  		<td>Cams fÃ¼r:  <c:out value="${user.username}"/></td>
+			  		<td>Cams fÃÂ¼r:  <c:out value="${user.username}"/></td>
 			  	</tr>
 				<tr>
 					<c:forEach var="checkedCam" items="${checkedCams}">	
@@ -63,27 +63,30 @@
 		</table>
 	
 		</div>
-			
+		<br style="clear: both">
+		<br style="clear: both">
 		<br style="clear: both">  
 		<div class="links"> 
-			<button type="submit" name="action" value="deleteUser"> User LÃ¶schen</button>
+			<button class="btn" type="submit" name="action" value="deleteUser"> User LÃÂ¶schen</button>
 			<input type="hidden" name="id" value="${user.id_User}">
 		</div>
 		
 		
-		<div class="rechts">
+		<br style="clear: both">
+		<div class="links">
 		
 		
 			
-	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
+	   		<button class="btn" type="submit" name="action" value="saveUser"> User Speichern</button>	
 	  		<input type="hidden" name="id" value="${user.id_User}">
 				 
 	  	</div>
 	  	</form> 
 	  	
-	  	<div class="rechts">
+		<br style="clear: both">
+	  	<div class="links">
 	 			<form name=back method=GET  action= edit>
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		   		<button class="btn" type="submit" name="action" value="back"> ZurÃ¼ck</button>	
 		  		<input type="hidden" name="id" value="back">
 				</form>
 		  	</div>
