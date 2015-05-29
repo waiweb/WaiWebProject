@@ -30,17 +30,17 @@ public final class SystemStartup implements ServletContextListener {
 	    
 	    //Statiche pfade	    
 	    String projectpath = null;
-	    String configPath = null;
 	    String log4jprop = "/log4j.properties";
+	    String projectpathAndConfigPath = null;
 	    
 		//Setzen von properties für die config-files		
 		try {
-			System.setProperty("logFilePath", jndiFactory.getEnvironmentAsString("projectPath") + jndiFactory.getEnvironmentAsString("logsPath"));
-			System.setProperty("configFileDirectoryPath", jndiFactory.getEnvironmentAsString("projectPath") + jndiFactory.getEnvironmentAsString("relativeConfigPath"));
+			System.setProperty("logFilePath", jndiFactory.getLogFilePath());
+			System.setProperty("configFileDirectoryPath", jndiFactory.getConfigDirectoryPath());
 	
 			//Statische pfade:
-			projectpath = jndiFactory.getEnvironmentAsString("projectPath");
-			configPath = jndiFactory.getEnvironmentAsString("relativeConfigPath");
+			projectpath = jndiFactory.getProjectPath();
+			projectpathAndConfigPath = jndiFactory.getConfigDirectoryPath();
 		
 		} catch (NamingException e1) {
 			// TODO Auto-generated catch block
@@ -52,11 +52,11 @@ public final class SystemStartup implements ServletContextListener {
 		try {
 			
 			// Initialize Logging
-			File logConfigFile = new File(projectpath + configPath + log4jprop);
+			File logConfigFile = new File(projectpathAndConfigPath + log4jprop);
 			
 
 			if (!logConfigFile.exists()) {
-				System.out.println("ERROR: Logging configuration file not found: "+projectpath + configPath + log4jprop);
+				System.out.println("ERROR: Logging configuration file not found: "+projectpathAndConfigPath + log4jprop);
 			} else {
 				String logpath = logConfigFile.getPath();
 				PropertyConfigurator.configure(logpath);

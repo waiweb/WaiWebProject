@@ -54,13 +54,11 @@ public class QuartzInitializerServlet extends HttpServlet {
                 String pathToQuartsJob = JndiFactory.getInstance().getConfigDirectoryPath() + "/quartz-jobs.xml";
                 QuartsPropertieParser quartsPropertieParser = new QuartsPropertieParser(pathToQuartsJob);
                 
-    			System.setProperty("quarzjobInitializerfile", JndiFactory.getInstance().getEnvironmentAsString("projectPath") 
-    					+ JndiFactory.getInstance().getEnvironmentAsString("relativeConfigPath")
+    			System.setProperty("quarzjobInitializerfile", JndiFactory.getInstance().getConfigDirectoryPath()
     					+ "/quartz.properties");
 
 
-	            String configFile = JndiFactory.getInstance().getEnvironmentAsString("projectPath")
-	    						  + JndiFactory.getInstance().getEnvironmentAsString("relativeConfigPath")
+	            String configFile = JndiFactory.getInstance().getConfigDirectoryPath()
 	    						  + "/quartz.properties";
 	            
 	            // get Properties

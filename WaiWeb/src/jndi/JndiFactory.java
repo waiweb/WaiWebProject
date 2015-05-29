@@ -42,7 +42,7 @@ public class JndiFactory {
      * java:comp/env is the node in the JNDI tree where you can find properties for the current 
      * Java EE component (a webapp, or an EJB).
      */
-    public String getEnvironmentAsString(String envName) throws NamingException {
+    private String getEnvironmentAsString(String envName) throws NamingException {
     	String env = null;
         InitialContext ictx = new InitialContext();
         Context myenv = (Context) ictx.lookup("java:comp/env");
@@ -104,7 +104,7 @@ public class JndiFactory {
      * @return Integer
      * @throws NamingException
      */
-    public Integer getEnvirontmenAsInteger(String envName) throws NamingException {
+    private Integer getEnvirontmenAsInteger(String envName) throws NamingException {
     	Integer env = null;
         InitialContext ictx = new InitialContext();
         Context myenv = (Context) ictx.lookup("java:comp/env");
