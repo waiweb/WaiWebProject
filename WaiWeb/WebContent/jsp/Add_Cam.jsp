@@ -4,14 +4,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>    
-    <title>Cam Konfiguration </title>
+    <title>Cam hinzufÃ¼gen </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
+  	
+    <link rel="stylesheet" href="css/tabular.css" type="text/css" >  
+  	
   </head>  
-  <body>
-  	<font size=5> Neue Cam hinzufügen </font> <br><br>	
+  <body>	
   		<form name=addCam method=POST  action= edit>  
-		<table border="1">
+		<table class="beispiel" cellspacing="0" cellpadding="0"> 
+		<caption>Neue Cam hinzufÃ¼gen</caption>
 			<tbody>
 				<tr>
 					<td>Camname: </td>
@@ -29,14 +32,14 @@
 		</table>
 		<br style="clear: both">
 		<div class="links"> 
-			<button type="submit" name="action" value="addNewCam"> Cam hinzufügen</button>
+			<button type="submit" name="action" value="addNewCam"> Cam hinzufÃ¼gen</button>
 			<input type="hidden" name="id" value="add">
 		</div>
 	  	</form> 
 	  	<br style="clear: both">
 	  	<form name=back method=GET  action= edit>
 			<div class="rechts">
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		   		<button type="submit" name="action" value="back"> ZurÃ¼ck</button>	
 		  		<input type="hidden" name="id" value="back">
 		  	</div>
 	  	</form>
