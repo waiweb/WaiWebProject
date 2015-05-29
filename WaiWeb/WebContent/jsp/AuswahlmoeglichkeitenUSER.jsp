@@ -12,7 +12,7 @@
    				<script src="js/menu_script.js"></script>
   </head>
 	<body>
-		<%	//Zugriff überprüfen:
+		<%	//Zugriff Ueberpruefen:
 			String user = null, userName = null, sessionID = null;
 			if (session.getAttribute("username") == null){
 				//Auf Loginseite zurückleiten falls keine Session erstellt wurde!

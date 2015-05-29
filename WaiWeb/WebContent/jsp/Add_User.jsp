@@ -13,14 +13,12 @@
  	<link rel="stylesheet" href="css/Buttons.css" type="text/css" >
   
   </head> 
-  
-  
   <body>
   		
   		<form name=addUser method=POST  action= edit>  
 		
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
-			<caption>Neuen User hinzufÃ¼gen </caption>
+			<caption>Neuen User hinzufuegen </caption>
 			<tbody>
 				<tr>
 					<td>Username: </td>
@@ -41,14 +39,12 @@
 			</tbody>				
 		</table>
 		
-		
 		<br style="clear: both">
 		
 		<div class="links"> 
-			<button class="btn" type="submit" name="action" value="addNewUser"> User hinzufÃ¼gen</button>
+			<button class="btn" type="submit" name="action" value="addNewUser"> User hinzufuegen</button>
 			<input type="hidden" name="id" value="add">		
 		</div>
-		
 		
 		</form>
 		
@@ -57,7 +53,7 @@
 		<form name=back method=GET  action= edit>
 			<div class="links">
 	 			
-		   		<button class="btn" type="submit" name="action" value="back"> ZurÃ¼ck</button>	
+		   		<button class="btn" type="submit" name="action" value="back"> Zurueck</button>	
 		  		<input type="hidden" name="id" value="back">
 				
 		  	</div>

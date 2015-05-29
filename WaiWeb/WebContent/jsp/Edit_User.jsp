@@ -20,7 +20,7 @@
 			<caption>User bearbeiten</caption>
 			<thead>
 			</thead>
-			 <caption>Konfiguration fÃÂ¼r:  <c:out value="${user.username}"/></caption>
+			 <caption>Konfiguration fuer:  <c:out value="${user.username}"/></caption>
 					  
 				<tr>
 					<td>Benutzer:</td>
@@ -38,13 +38,10 @@
 		</table>
 		</div>
 
-
 		<div class = "rechts">
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
-			<tbody>
-			    <tr>   	
-			  		<td>Cams fÃÂ¼r:  <c:out value="${user.username}"/></td>
-			  	</tr>
+			<tbody>  	
+			 <caption>Cams fuer:  <c:out value="${user.username}"/></caption>
 				<tr>
 					<c:forEach var="checkedCam" items="${checkedCams}">	
 					  <tr>
@@ -67,16 +64,13 @@
 		<br style="clear: both">
 		<br style="clear: both">  
 		<div class="links"> 
-			<button class="btn" type="submit" name="action" value="deleteUser"> User LÃÂ¶schen</button>
+			<button class="btn" type="submit" name="action" value="deleteUser"> User Loeschen</button>
 			<input type="hidden" name="id" value="${user.id_User}">
 		</div>
-		
-		
+			
 		<br style="clear: both">
 		<div class="links">
 		
-		
-			
 	   		<button class="btn" type="submit" name="action" value="saveUser"> User Speichern</button>	
 	  		<input type="hidden" name="id" value="${user.id_User}">
 				 
@@ -86,12 +80,9 @@
 		<br style="clear: both">
 	  	<div class="links">
 	 			<form name=back method=GET  action= edit>
-		   		<button class="btn" type="submit" name="action" value="back"> ZurÃ¼ck</button>	
+		   		<button class="btn" type="submit" name="action" value="back"> Zurueck</button>	
 		  		<input type="hidden" name="id" value="back">
 				</form>
-		  	</div>
-	  	
-	  	
-	  	
+		  	</div> 	
   </body>
 </html>

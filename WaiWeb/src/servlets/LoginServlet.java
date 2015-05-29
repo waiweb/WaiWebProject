@@ -92,8 +92,6 @@ public class LoginServlet extends HttpServlet {
 	            
 	            response.addCookie(userCookie);
 	            response.sendRedirect(request.getContextPath() + "/auswahl");
-				//RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
-				//dispatcher.forward(request, response);	
 				
 			//Falls Logindaten falsch, auf Error-Seite weiterleiten:
 			} else {
