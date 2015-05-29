@@ -22,8 +22,8 @@
     <schedule>
 		<job>
 			<name>WAI-Job</name>
-			<group>GROUP-1</group>
-			<job-class>application.AppCore</job-class>
+			<group>GROUP-6</group>
+			<job-class>jobs.ImagCaptureJob</job-class>
 		</job>
 	
 		<trigger>
@@ -32,7 +32,7 @@
 				<group>MYTRIGGER_GROUP</group>
 				<job-name>WAI-Job</job-name>
 				<job-group>GROUP-6</job-group>
-				<cron-expression>0 0/1 * * * ?</cron-expression>
+				<cron-expression>0/10 0/1 * * * ?</cron-expression>
 			</cron>
 		</trigger>
 	</schedule>    

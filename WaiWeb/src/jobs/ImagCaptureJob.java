@@ -8,11 +8,17 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.imageio.ImageIO;
+import javax.naming.NamingException;
 import javax.servlet.ServletContext;
+
+import jndi.JndiFactory;
+
+import org.quartz.Job;
+import org.quartz.JobExecutionContext;
+import org.quartz.JobExecutionException;
 
 import Dao.CamDaoImpl;
 import Dao.ImageDaoImpl;
-import servlets.BackgroundService;
 import utils.PicCatch;
 import utils.Tool_ImageProcessing;
 import utils.Tool_TimeStamp;
@@ -20,7 +26,7 @@ import model.Cam;
 import model.ImageItem;
 import utils.PicCatch;
 
-public class ImagCaptureJob {
+public class ImagCaptureJob implements Job {
 	
     final CamDaoImpl camdaoImp= new CamDaoImpl();
     final ImageDaoImpl imageDaoImp = new ImageDaoImpl();
@@ -28,12 +34,37 @@ public class ImagCaptureJob {
     public static final String thumbnailImageType = "_thumbnail.jpg";
     public String baseImagePath;
 
-	public ImagCaptureJob(String path){
-		baseImagePath = path;
+    
+	@Override
+	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		
+		try {
+			ImagCaptureJob core = new ImagCaptureJob();
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		
+		System.out.println("job");
+		
+	}
+	
+
+    
+	public ImagCaptureJob(){
+		capture();	
+	};
+	
+	public void capture(){
  
 	//Democam
-	Cam cam = new Cam("cam1", "http://www.hrfoto.dunkel.de/webcams/hr3/studio2.jpg", Tool_TimeStamp.getTimeStampString(), "", "");
-	
+	//Cam cam = new Cam("cam1", "http://www.hrfoto.dunkel.de/webcams/hr3/studio2.jpg", Tool_TimeStamp.getTimeStampString(), "", "");
+		try {
+		baseImagePath = JndiFactory.getInstance().getImageDirectoryPath();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 	//Holt sich die Cams
 	ArrayList<Cam> camList = (ArrayList<Cam>) camdaoImp.getAllCams();
@@ -41,10 +72,10 @@ public class ImagCaptureJob {
 		for(Cam webcam : camList){
 			
 			if(webcam != null){
-			capture(webcam);
+				captureSingelCam(webcam);
 			}
 			else{
-	    		System.out.println("System Cam: "+cam.getId_Cam()+ " was null!");
+	    		System.out.println("System Cam: "+webcam.getId_Cam()+ " was null!");
 
 			}
 	
@@ -54,7 +85,7 @@ public class ImagCaptureJob {
 	}
 	
 
-    public void capture(Cam cam){
+    public void captureSingelCam(Cam cam){
     	
 
     	//Holt das Bild mit dem Pfad aus der Cam
@@ -128,7 +159,9 @@ public class ImagCaptureJob {
     	
     	
     }
-    
+
+
+
     
     	
     	

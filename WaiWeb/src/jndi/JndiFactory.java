@@ -9,6 +9,8 @@ import javax.naming.NamingException;
 import javax.sql.DataSource;
 
 
+
+
 import org.apache.log4j.Logger;
 
 /**
@@ -23,7 +25,7 @@ public class JndiFactory {
 	
 	private static JndiFactory instance = new JndiFactory();
     private static Logger log = Logger.getLogger(JndiFactory.class);   
-   
+    private String dynamicProjectpath;
    
     protected JndiFactory() {
        // Exists only to defeat instantiation.
@@ -51,6 +53,42 @@ public class JndiFactory {
         }
         return env;
     }
+    
+
+	/**
+	 * Diese methode kann später ausgetauscht werden  gegen eine dynamische erkennung des Pfades.
+	 * @return
+	 * @throws NamingException
+	 */
+    public String getProjectPath() throws NamingException {
+
+    	
+    	return getEnvironmentAsString("projectPath");
+    	
+    }
+    
+    /**
+     * Returns the path to the image directory
+     * @return
+     * @throws NamingException
+     */
+    public String getImageDirectoryPath() throws NamingException {
+
+    	
+    	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("relativeImagePath");
+    	
+    }
+    
+    
+    public String getConfigDirectoryPath() throws NamingException {
+
+    	
+    	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("relativeConfigPath");
+    	
+    }
+   
+    
+
 
     /** Holt aus der cms.xml eine Variable als Integer
      * @param envName
@@ -111,6 +149,18 @@ public class JndiFactory {
 			throw new SQLException("No Connection found");
 
 		return conn;
-	}	
+	}
+
+
+	public String getDynamicProjectpath() {
+		return dynamicProjectpath;
+	}
+
+
+	public void setDynamicProjectpath(String dynamicProjectpath) {
+		this.dynamicProjectpath = dynamicProjectpath;
+	}
+	
+	
 }
 

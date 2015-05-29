@@ -1,0 +1,103 @@
+(2015-05-29 17:56:59)  INFO SystemStartup:67 - ContextInitialized
+(2015-05-29 17:57:02)  INFO QuartzInitializerServlet:51 - Quartz Initializer Servlet loaded, initializing Scheduler...
+(2015-05-29 17:57:02)  INFO SchedulerSignalerImpl:60 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+(2015-05-29 17:57:02)  INFO QuartzScheduler:222 - Quartz Scheduler v.1.8.5 created.
+(2015-05-29 17:57:02)  INFO XMLSchedulingDataProcessorPlugin:199 - Registering Quartz Job Initialization Plug-in.
+(2015-05-29 17:57:02)  INFO RAMJobStore:139 - RAMJobStore initialized.
+(2015-05-29 17:57:02)  INFO QuartzScheduler:244 - Scheduler meta-data: Quartz Scheduler (v1.8.5) 'waiHilfQuartzScheduler' with instanceId 'ghaleon-THINK1432915022381'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 2 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+(2015-05-29 17:57:02)  INFO StdSchedulerFactory:1280 - Quartz scheduler 'waiHilfQuartzScheduler' initialized from the specified file : 'D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz.properties'
+(2015-05-29 17:57:02)  INFO StdSchedulerFactory:1284 - Quartz scheduler version: 1.8.5
+(2015-05-29 17:57:02)  INFO XMLSchedulingDataProcessor:496 - Parsing XML file: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml with systemId: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml
+(2015-05-29 17:57:02)  INFO XMLSchedulingDataProcessor:970 - Adding 1 jobs, 1 triggers.
+(2015-05-29 17:57:02)  INFO XMLSchedulingDataProcessor:995 - Adding job: GROUP-6.WAI-Job
+(2015-05-29 17:57:02)  INFO QuartzScheduler:500 - Scheduler waiHilfQuartzScheduler_$_ghaleon-THINK1432915022381 started.
+(2015-05-29 17:57:02)  INFO QuartzInitializerServlet:83 - Scheduler has been started...
+(2015-05-29 17:57:02)  INFO QuartzInitializerServlet:97 - Group: GROUP-6 contains the following jobs
+(2015-05-29 17:57:02)  INFO QuartzInitializerServlet:101 - - WAI-Job
+(2015-05-29 17:57:02)  INFO QuartzInitializerServlet:105 - next Execution at: 29.05.2015 17:58:00
+(2015-05-29 17:58:14)  INFO SystemStartup:67 - ContextInitialized
+(2015-05-29 17:58:16)  INFO QuartzInitializerServlet:51 - Quartz Initializer Servlet loaded, initializing Scheduler...
+(2015-05-29 17:58:16)  INFO SchedulerSignalerImpl:60 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+(2015-05-29 17:58:16)  INFO QuartzScheduler:222 - Quartz Scheduler v.1.8.5 created.
+(2015-05-29 17:58:16)  INFO XMLSchedulingDataProcessorPlugin:199 - Registering Quartz Job Initialization Plug-in.
+(2015-05-29 17:58:16)  INFO RAMJobStore:139 - RAMJobStore initialized.
+(2015-05-29 17:58:16)  INFO QuartzScheduler:244 - Scheduler meta-data: Quartz Scheduler (v1.8.5) 'waiHilfQuartzScheduler' with instanceId 'ghaleon-THINK1432915096676'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 2 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+(2015-05-29 17:58:16)  INFO StdSchedulerFactory:1280 - Quartz scheduler 'waiHilfQuartzScheduler' initialized from the specified file : 'D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz.properties'
+(2015-05-29 17:58:16)  INFO StdSchedulerFactory:1284 - Quartz scheduler version: 1.8.5
+(2015-05-29 17:58:16)  INFO XMLSchedulingDataProcessor:496 - Parsing XML file: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml with systemId: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml
+(2015-05-29 17:58:16)  INFO XMLSchedulingDataProcessor:970 - Adding 1 jobs, 1 triggers.
+(2015-05-29 17:58:16)  INFO XMLSchedulingDataProcessor:995 - Adding job: GROUP-6.WAI-Job
+(2015-05-29 17:58:16)  INFO QuartzScheduler:500 - Scheduler waiHilfQuartzScheduler_$_ghaleon-THINK1432915096676 started.
+(2015-05-29 17:58:16)  INFO QuartzInitializerServlet:83 - Scheduler has been started...
+(2015-05-29 17:58:16)  INFO QuartzInitializerServlet:97 - Group: GROUP-6 contains the following jobs
+(2015-05-29 17:58:16)  INFO QuartzInitializerServlet:101 - - WAI-Job
+(2015-05-29 17:58:16)  INFO QuartzInitializerServlet:105 - next Execution at: 29.05.2015 17:58:18
+(2015-05-29 17:58:18)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  17:58:18 05/29/2015
+(2015-05-29 17:58:18)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  17:58:18 05/29/2015 and reports: null
+(2015-05-29 17:58:21)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  17:58:21 05/29/2015
+(2015-05-29 17:58:21)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  17:58:21 05/29/2015 and reports: null
+(2015-05-29 17:58:24)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  17:58:24 05/29/2015
+(2015-05-29 17:58:24)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  17:58:24 05/29/2015 and reports: null
+(2015-05-29 17:58:27)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  17:58:27 05/29/2015
+(2015-05-29 17:58:27)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  17:58:27 05/29/2015 and reports: null
+(2015-05-29 17:58:30)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  17:58:30 05/29/2015
+(2015-05-29 17:58:30)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  17:58:30 05/29/2015 and reports: null
+(2015-05-29 18:03:26)  INFO SystemStartup:67 - ContextInitialized
+(2015-05-29 18:03:33)  INFO QuartzInitializerServlet:51 - Quartz Initializer Servlet loaded, initializing Scheduler...
+(2015-05-29 18:03:33)  INFO SchedulerSignalerImpl:60 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+(2015-05-29 18:03:33)  INFO QuartzScheduler:222 - Quartz Scheduler v.1.8.5 created.
+(2015-05-29 18:03:33)  INFO XMLSchedulingDataProcessorPlugin:199 - Registering Quartz Job Initialization Plug-in.
+(2015-05-29 18:03:33)  INFO RAMJobStore:139 - RAMJobStore initialized.
+(2015-05-29 18:03:33)  INFO QuartzScheduler:244 - Scheduler meta-data: Quartz Scheduler (v1.8.5) 'waiHilfQuartzScheduler' with instanceId 'ghaleon-THINK1432915413094'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 2 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+(2015-05-29 18:03:33)  INFO StdSchedulerFactory:1280 - Quartz scheduler 'waiHilfQuartzScheduler' initialized from the specified file : 'D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz.properties'
+(2015-05-29 18:03:33)  INFO StdSchedulerFactory:1284 - Quartz scheduler version: 1.8.5
+(2015-05-29 18:03:33)  INFO XMLSchedulingDataProcessor:496 - Parsing XML file: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml with systemId: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml
+(2015-05-29 18:03:33)  INFO XMLSchedulingDataProcessor:970 - Adding 1 jobs, 1 triggers.
+(2015-05-29 18:03:33)  INFO XMLSchedulingDataProcessor:995 - Adding job: GROUP-6.WAI-Job
+(2015-05-29 18:03:33)  INFO QuartzScheduler:500 - Scheduler waiHilfQuartzScheduler_$_ghaleon-THINK1432915413094 started.
+(2015-05-29 18:03:33)  INFO QuartzInitializerServlet:83 - Scheduler has been started...
+(2015-05-29 18:03:33)  INFO QuartzInitializerServlet:97 - Group: GROUP-6 contains the following jobs
+(2015-05-29 18:03:33)  INFO QuartzInitializerServlet:101 - - WAI-Job
+(2015-05-29 18:03:33)  INFO QuartzInitializerServlet:105 - next Execution at: 29.05.2015 18:03:40
+(2015-05-29 18:03:44)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:03:44 05/29/2015
+(2015-05-29 18:03:47)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:03:47 05/29/2015 and reports: null
+(2015-05-29 18:03:53)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:03:53 05/29/2015
+(2015-05-29 18:03:55)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:03:55 05/29/2015 and reports: null
+(2015-05-29 18:04:03)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:04:03 05/29/2015
+(2015-05-29 18:04:05)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:04:05 05/29/2015 and reports: null
+(2015-05-29 18:04:13)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:04:13 05/29/2015
+(2015-05-29 18:04:15)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:04:15 05/29/2015 and reports: null
+(2015-05-29 18:04:23)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:04:23 05/29/2015
+(2015-05-29 18:04:25)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:04:25 05/29/2015 and reports: null
+(2015-05-29 18:04:33)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:04:33 05/29/2015
+(2015-05-29 18:04:35)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:04:35 05/29/2015 and reports: null
+(2015-05-29 18:04:42)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:04:42 05/29/2015
+(2015-05-29 18:04:45)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:04:45 05/29/2015 and reports: null
+(2015-05-29 18:04:52)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:04:52 05/29/2015
+(2015-05-29 18:04:55)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:04:55 05/29/2015 and reports: null
+(2015-05-29 18:05:02)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:05:02 05/29/2015
+(2015-05-29 18:05:05)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:05:05 05/29/2015 and reports: null
+(2015-05-29 18:05:13)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:05:13 05/29/2015
+(2015-05-29 18:05:16)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  18:05:16 05/29/2015 and reports: null
+(2015-05-29 18:05:23)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  18:05:23 05/29/2015
