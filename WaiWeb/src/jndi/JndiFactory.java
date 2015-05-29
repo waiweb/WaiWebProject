@@ -23,6 +23,7 @@ import org.apache.log4j.Logger;
 
 public class JndiFactory {
 	
+	private boolean useDynamicBasePath = true;
 	private static JndiFactory instance = new JndiFactory();
     private static Logger log = Logger.getLogger(JndiFactory.class);   
     private String dynamicProjectpath;
@@ -62,8 +63,10 @@ public class JndiFactory {
 	 */
     public String getProjectPath() throws NamingException {
 
-    	
-    	return getEnvironmentAsString("projectPath");
+    	if(useDynamicBasePath)
+    		return dynamicProjectpath;
+    	else
+    		return getEnvironmentAsString("projectPath");
     	
     }
     
@@ -75,7 +78,7 @@ public class JndiFactory {
     public String getImageDirectoryPath() throws NamingException {
 
     	
-    	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("relativeImagePath");
+    	return getProjectPath()+getEnvironmentAsString("relativeImagePath");
     	
     }
     
@@ -83,7 +86,7 @@ public class JndiFactory {
     public String getConfigDirectoryPath() throws NamingException {
 
     	
-    	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("relativeConfigPath");
+    	return getProjectPath()+getEnvironmentAsString("relativeConfigPath");
     	
     }
     
@@ -91,7 +94,7 @@ public class JndiFactory {
     public String getLogFilePath() throws NamingException {
 
     	
-    	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("logsPath");
+    	return getProjectPath()+getEnvironmentAsString("logsPath");
     	
     }
    
@@ -166,9 +169,20 @@ public class JndiFactory {
 	}
 
 
+	//Unglücklicherweise hängt die dynamische suche noch ein "/" am ende an. Das wird hier entfernt.
 	public void setDynamicProjectpath(String dynamicProjectpath) {
-		this.dynamicProjectpath = dynamicProjectpath;
+		
+		String temp = removeLastChar(dynamicProjectpath).replaceAll("\\\\", "/");
+
+		this.dynamicProjectpath = temp;
+		System.out.println("dynamic web path set to: "+temp);
 	}
+	
+	private static String removeLastChar(String str) {
+        return str.substring(0,str.length()-1);
+    }
+	
+	
 	
 	
 }

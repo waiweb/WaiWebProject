@@ -52,6 +52,7 @@ public class QuartzInitializerServlet extends HttpServlet {
                 
                 //Parse a owen version of the quartzproperties because the original is to static !
                 String pathToQuartsJob = JndiFactory.getInstance().getConfigDirectoryPath() + "/quartz-jobs.xml";
+
                 QuartsPropertieParser quartsPropertieParser = new QuartsPropertieParser(pathToQuartsJob);
                 
     			System.setProperty("quarzjobInitializerfile", JndiFactory.getInstance().getConfigDirectoryPath()
