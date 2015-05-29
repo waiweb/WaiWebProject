@@ -7,7 +7,8 @@
     <title>User Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
-     <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
+    <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
+ 	<link rel="stylesheet" href="css/Buttons.css" type="text/css" >
   </head> 
   <body>
   		
@@ -39,7 +40,7 @@
 		
 		<div class="links"> 
 			
-			<button type="submit" name="action" value="addNewUser"> User hinzufÃ¼gen</button>
+			<button class="btn" type="submit" name="action" value="addNewUser"> User hinzufÃ¼gen</button>
 			<input type="hidden" name="id" value="add">
 				
 		</div>
@@ -50,7 +51,7 @@
 		<form name=back method=GET  action= edit>
 			<div class="links">
 	 			
-		   		<button type="submit" name="action" value="back"> ZurÃ¼ck</button>	
+		   		<button class="btn" type="submit" name="action" value="back"> ZurÃ¼ck</button>	
 		  		<input type="hidden" name="id" value="back">
 				
 		  	</div>
