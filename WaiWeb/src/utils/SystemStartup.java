@@ -23,7 +23,9 @@ public final class SystemStartup implements ServletContextListener {
 
 		//Relative paths (unbenutzt zur zeit)
 	    String dynamicBasepath = event.getServletContext().getRealPath("/WEB-INF");
-	    String relativeConfigPath = event.getServletContext().getRealPath("/WEB-INF/config");    
+	    String relativeConfigPath = event.getServletContext().getRealPath("/WEB-INF/config"); 
+	    
+	 	    
 	    jndiFactory.setDynamicProjectpath(dynamicBasepath);
 	    
 	    

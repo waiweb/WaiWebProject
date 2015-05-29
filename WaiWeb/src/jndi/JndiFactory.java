@@ -23,7 +23,7 @@ import org.apache.log4j.Logger;
 
 public class JndiFactory {
 	
-	private boolean useDynamicBasePath = true;
+	private boolean useDynamicBasePath = false;
 	private static JndiFactory instance = new JndiFactory();
     private static Logger log = Logger.getLogger(JndiFactory.class);   
     private String dynamicProjectpath;
