@@ -7,8 +7,8 @@
     <title>Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
-<link href="css/userEdit.css" type="text/css" rel="stylesheet"> 
-	   
+	<link href="css/userEdit.css" type="text/css" rel="stylesheet"> 
+	<link href="css/Buttons.css"  type="text/css" rel="stylesheet">
   </head>  
   <body>
   
@@ -67,7 +67,7 @@
 		<br style="clear: both">
 		<br style="clear: both">  
 		<div class="links"> 
-			<button type="submit" name="action" value="deleteUser"> User LÃÂ¶schen</button>
+			<button class="btn" type="submit" name="action" value="deleteUser"> User LÃÂ¶schen</button>
 			<input type="hidden" name="id" value="${user.id_User}">
 		</div>
 		
@@ -77,7 +77,7 @@
 		
 		
 			
-	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
+	   		<button class="btn" type="submit" name="action" value="saveUser"> User Speichern</button>	
 	  		<input type="hidden" name="id" value="${user.id_User}">
 				 
 	  	</div>
@@ -86,7 +86,7 @@
 		<br style="clear: both">
 	  	<div class="links">
 	 			<form name=back method=GET  action= edit>
-		   		<button type="submit" name="action" value="back"> ZurÃ¼ck</button>	
+		   		<button class="btn" type="submit" name="action" value="back"> ZurÃ¼ck</button>	
 		  		<input type="hidden" name="id" value="back">
 				</form>
 		  	</div>
