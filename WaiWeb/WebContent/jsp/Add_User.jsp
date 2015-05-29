@@ -13,7 +13,7 @@
   		
   		<form name=addUser method=POST  action= edit>  
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
-			<caption>Neuen User hinzufügen </caption>
+			<caption>Neuen User hinzufÃ¼gen </caption>
 			<tbody>
 				<tr>
 					<td>Username: </td>
@@ -34,22 +34,26 @@
 			</tbody>				
 		</table>
 		
-		<br style="clear: both">
 		
+		<br style="clear: both">
 		
 		<div class="links"> 
 			
-			<button type="submit" name="action" value="addNewUser"> User hinzufügen</button>
+			<button type="submit" name="action" value="addNewUser"> User hinzufÃ¼gen</button>
 			<input type="hidden" name="id" value="add">
-		
+				
 		</div>
 		</form>
-			<div class="rechts">
-	 			<form name=back method=GET  action= edit>
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		
+		<br style="clear: both">
+		
+		<form name=back method=GET  action= edit>
+			<div class="links">
+	 			
+		   		<button type="submit" name="action" value="back"> ZurÃ¼ck</button>	
 		  		<input type="hidden" name="id" value="back">
-				</form>
+				
 		  	</div>
-	 
+	 </form>
   </body>
 </html>
