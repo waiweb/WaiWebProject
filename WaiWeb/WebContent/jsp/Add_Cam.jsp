@@ -4,7 +4,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>    
-    <title>Cam hinzufügen </title>
+    <title>Cam hinzufuegen </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
   	
@@ -14,7 +14,7 @@
   <body>	
   		<form name=addCam method=POST  action= edit>  
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
-		<caption>Neue Cam hinzufügen</caption>
+		<caption>Neue Cam hinzufuegen</caption>
 			<tbody>
 				<tr>
 					<td>Camname: </td>
@@ -32,14 +32,14 @@
 		</table>
 		<br style="clear: both">
 		<div class="links"> 
-			<button type="submit" name="action" value="addNewCam"> Cam hinzufügen</button>
+			<button type="submit" name="action" value="addNewCam"> Cam hinzufuegen</button>
 			<input type="hidden" name="id" value="add">
 		</div>
 	  	</form> 
 	  	<br style="clear: both">
 	  	<form name=back method=GET  action= edit>
 			<div class="rechts">
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		   		<button type="submit" name="action" value="back"> Zurueck</button>	
 		  		<input type="hidden" name="id" value="back">
 		  	</div>
 	  	</form>

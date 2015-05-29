@@ -4,11 +4,13 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>      
-    <title>Cam-Liste</title>     
+    <title>Cam-Liste</title>  
+        <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
+        <link href="css/Buttons.css"  type="text/css" rel="stylesheet">  
   </head>
 	<body>
-		<font size=5> Liste der Cams </font> <br><br>
-		<table align="left" border="1">
+		<table class="beispiel" cellspacing="0" cellpadding="0">
+			<caption>Liste der Kameras</caption>
 	  		<tbody>
 		  		<tr>					
 					<td>Cam Name</td>
@@ -27,7 +29,7 @@
 						<td><c:out value="${cam.timeOfCreation}"/></td>	
 						<td><c:out value="${cam.pathOriginalImageDirectory}"/></td>
 						<td><c:out value="${cam.kommentar}"/></td>
-						<!-- TODO: Cams Thumbnails hier einbinden! -->
+						<!-- Cams Thumbnails hier einbinden! -->
 						<td>
 							<form name=imageShow method=POST  action= edit>  
 								<button type="submit" name="action" value="showImages"><img width="75" height="75" src="<%=request.getContextPath()%>/camimages/test.jpg"/></button>
@@ -38,5 +40,8 @@
 				</c:forEach>	
 			</tbody>
 		</table>
+			<form name=back method=GET  action= edit>
+		   		<button class="btn" type="submit" name="action" value="back"> Zurueck</button>	
+			</form>
 	</body>
 </html>

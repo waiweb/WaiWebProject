@@ -47,7 +47,7 @@ $(function(){
 		<table border="1">
 			<tbody>
 				<tr>   	
-			   		<td>Aktuelle Bilder für: <c:out value="${cam.camname}"/></td>
+			   		<td>Aktuelle Bilder fuer: <c:out value="${cam.camname}"/></td>
 			 	</tr>		
 			 	<tr>   	
 			 	</tr>
@@ -84,7 +84,7 @@ $(function(){
 			<tbody>
 			<c:forEach var="path" items="${path}">
 				<tr>
-					<td><a href="<%=request.getContextPath()%><c:out value="${path}"/>"><img width="250" height="250" src="<%=request.getContextPath()%>/camimages/test.jpg"/></a><br><br>Name / Timestamp</td>	
+					<td><a href="<%=request.getContextPath()%><c:out value="${path}"/>"><img width="250" height="250" src="<%=request.getContextPath()%>/WEB-INF/camimages/test.jpg"/></a><br><br>Name / Timestamp</td>	
 				</tr>
 			</c:forEach>	
 			</tbody>				
@@ -96,7 +96,7 @@ $(function(){
 		</div>
 		<div class="rechts">
 		<form name=getImages method=GET  action= edit> 
-		   		<button type="submit" name="action" value="back"> Zurück</button>	
+		   		<button type="submit" name="action" value="back"> Zurueck</button>	
 		  		<input type="hidden" name="id" value="back">
 	  	</form> 
 	  	</div>

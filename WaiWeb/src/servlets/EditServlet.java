@@ -94,13 +94,6 @@ public class EditServlet extends HttpServlet{
 			    cams = camDaoImp.getAllCams();
 			    tempCheckedCams = ucDaoImp.getUserCamMapping(user);
 			    
-			    //TODO: zuviele datenbank zugriffe
-//			    for(int i=0;i<tempCheckedCams.size();i++){
-//			    	long id= tempCheckedCams.get(i).getId_Cam();
-//			    	checkedCams.add(camDaoImp.getCamFromDatabase(id));
-//			    	
-//			    }
-			    
 			    for(int i=0;i<cams.size();i++){
 			    	for(int j=0;j<tempCheckedCams.size();j++){
 			    		if(cams.get(i).getId_Cam()==tempCheckedCams.get(j).getId_Cam()){
@@ -301,9 +294,9 @@ public class EditServlet extends HttpServlet{
 			
 			//Path Array holen:
 			ArrayList<String> pathCollection = new ArrayList<String>();
-			pathCollection.add("/camimages/test.jpg");
-			pathCollection.add("/camimages/test.jpg");
-			pathCollection.add("/camimages/test.jpg");
+			pathCollection.add("/WEB-INF/camimages/test.jpg");
+			pathCollection.add("/WEB-INF/camimages/test.jpg");
+			pathCollection.add("/WEB-INF/camimages/test.jpg");
 			
 			request.setAttribute("cam", cam);
 			request.setAttribute("path", pathCollection);
@@ -324,10 +317,10 @@ public class EditServlet extends HttpServlet{
 			System.out.println("Timestamp End: "+timestampEnd);
 			
 			if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
-			System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
-			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
-			dispatcher.forward(request, response);
-			}else{
+				System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
+				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
+				dispatcher.forward(request, response);
+			} else {
 				   System.out.println("Keine korrekte eingabe !");
 				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				   dispatcher.forward(request, response);
@@ -363,6 +356,7 @@ public class EditServlet extends HttpServlet{
 	
 	private static Timestamp convertStringToTimestamp(String date,String time) {
 		Timestamp timestamp = null;
+		
 		try{
 		    SimpleDateFormat dateFormat = new SimpleDateFormat("dd-MM-yyyy hh:mm");
 		    Date parsedDate = dateFormat.parse(date+" "+time);

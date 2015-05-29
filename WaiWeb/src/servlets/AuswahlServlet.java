@@ -83,6 +83,7 @@ public class AuswahlServlet extends HttpServlet {
 					//Temp List:
 					ArrayList<Cam> tempList = new ArrayList<Cam>();
 					
+					//Neues Mapping der User - Cams erstellen:
 					if (newMapping.size() < camList.size()) {
 						for(int i=0;i<newMapping.size();i++) {
 							if(camList.get(i) != null && newMapping.get(i) != null) {

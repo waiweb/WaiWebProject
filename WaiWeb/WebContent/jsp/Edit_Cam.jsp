@@ -4,65 +4,43 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
   <head>    
-    <title>Konfiguration </title>
+    <title>Cam Konfiguration </title>
     <!--  Hier die CSS Referenz angeben: -->
-  <!-- <link href="css/userEdit.css" type="text/css" rel="stylesheet"> -->  
-	  <link rel="stylesheet" href="css/tabular.css" type="text/css" >  
+    <link rel="stylesheet" href="css/tabular.css" type="text/css" > 
+	<link href="css/userEdit.css" type="text/css" rel="stylesheet"> 
+	<link href="css/Buttons.css"  type="text/css" rel="stylesheet">
   </head>  
   <body>
-  
-  		<form name=saveUser method=POST  action= edit>  
-		<table class="beispiel" cellspacing="0" cellpadding="0"> 
+  		<form name=saveCam method=POST  action= edit>  
+		<table class="beispiel" cellspacing="0" cellpadding="0" >
 			<tbody>
-			<caption>User bearbeiten</caption>
+				<caption>Cam bearbeiten</caption>
 			<thead>
 			</thead>
-			 <caption>Konfiguration für:  <c:out value="${user.username}"/></caption>
-					  
+			 <caption>Konfiguration fuer: <c:out value="${cam.camname}"/></caption>
+			<tbody>
 				<tr>
-					<td>Benutzer:</td>
-					<td><input type="text" name="username" value="${user.username}"></td>		
+					<td>Camname:</td>
+					<td><input type="text" name="camname" value="${cam.camname}"></td>		
 				</tr>
 				<tr>		
-					<td>Rechte:</td>	
-					<td><input type="text" name="rechte" value="${user.rechte}"></td>
+					<td>URL:</td>	
+					<td><input type="text" name="url" value="${cam.url}"></td>
 				</tr>		
 				<tr>		
 					<td>Kommentar:</td>	
-					<td><input type="text" name="kommentar" value="${user.kommentar}"></td>
-				</tr>			
-			</tbody>				
-		</table>
-	<!-- 	<br style="clear: both">  -->
-		<table class="beispiel" cellspacing="0" cellpadding="0"> 
-			<tbody>
-			    <tr>   	
-			  		<td>Cams für:  <c:out value="${user.username}"/></td>
-			  	</tr>
-				<tr>
-					<c:forEach var="checkedCam" items="${checkedCams}">	
-					  <tr>
-						<td><c:out value="${checkedCam.camname}"/></td>
-						<td><input type="checkbox" name="checked" value="${checkedCam.id_Cam}" checked="checked" >	</td>
-						<tr>
-			    	</c:forEach>
-			    	 <c:forEach var="cams" items="${cams}">
-			    	  <tr>
-						<td><c:out value="${cams.camname}"/></td>
-						<td><input type="checkbox" name="checked" value="${cams.id_Cam}" >	</td>
-						<tr>
-			    	</c:forEach>	
-				</tr>
+					<td><input type="text" name="kommentar" value="${cam.kommentar}"></td>
+				</tr>		
 			</tbody>				
 		</table>
 		<br>
-		<div class="links"> 
-			<button type="submit" name="action" value="deleteUser"> User Löschen</button>
-			<input type="hidden" name="id" value="${user.id_User}">
+		<div class="links">
+			<button class="btn" type="submit" name="action" value="deleteCam"> Cam loeschen</button>
+			<input type="hidden" name="id" value="${cam.id_Cam}">
 		</div>
 		<div class="rechts">
-	   		<button type="submit" name="action" value="saveUser"> User Speichern</button>	
-	  		<input type="hidden" name="id" value="${user.id_User}">
+	   		<button class="btn" type="submit" name="action" value="saveCam"> Cam speichern</button>	
+	  		<input type="hidden" name="id" value="${cam.id_Cam}">
 	  	</div>
 	  	</form> 
   </body>

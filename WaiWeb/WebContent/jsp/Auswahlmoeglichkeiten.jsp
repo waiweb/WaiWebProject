@@ -15,10 +15,10 @@
   
 	<body>
 
-		<%	//Zugriff überprüfen:
+		<%	//Zugriff Ueberpruefen:
 			String user = null, userName = null, sessionID = null;
 			if (session.getAttribute("username") == null){
-				//Auf Loginseite zurückleiten falls keine Session erstellt wurde!
+				//Auf Loginseite zurueckleiten falls keine Session erstellt wurde!
 			    response.sendRedirect(request.getContextPath() + "/master");
 			} else {
 				user = (String) session.getAttribute("username");
