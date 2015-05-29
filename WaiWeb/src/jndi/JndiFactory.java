@@ -86,6 +86,15 @@ public class JndiFactory {
     	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("relativeConfigPath");
     	
     }
+    
+    
+    public String getLogFilePath() throws NamingException {
+
+    	
+    	return getEnvironmentAsString("projectPath")+getEnvironmentAsString("logsPath");
+    	
+    }
+   
    
     
 
