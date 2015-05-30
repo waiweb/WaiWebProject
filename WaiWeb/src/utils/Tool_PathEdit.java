@@ -36,7 +36,8 @@ public class Tool_PathEdit {
 		for(ImageItem item : list){
 			
 			ImageItem nItem = new ImageItem(item);
-			nItem.setPath(imageDirctoryPath + "/"+ item.getPath()  + originalImageType);
+			//Hier der Laufwerk Pfad entfernt! Geht jetzt los ab /CamId/Year/...
+			nItem.setPath("/"+ item.getPath()  + originalImageType);
 			editedList.add(nItem);
 		}
 		
