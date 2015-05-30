@@ -1,28 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:web="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
- 
-   <listener>
-    <listener-class>utils.SystemStartup</listener-class> 
+  <listener>
+    <listener-class>utils.SystemStartup</listener-class>
   </listener>
- 
-   <servlet>
+  <servlet>
     <servlet-name>LoginServlet</servlet-name>
     <servlet-class>servlets.LoginServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
-  
   <servlet>
     <servlet-name>MasterServlet</servlet-name>
     <servlet-class>servlets.MasterServlet</servlet-class>
     <load-on-startup>0</load-on-startup>
   </servlet>
-  
   <servlet>
-    <servlet-name>QuartzInitializer</servlet-name> 
-    <servlet-class>utils.QuartzInitializerServlet</servlet-class> 
-    <load-on-startup>1</load-on-startup> 
+    <servlet-name>QuartzInitializer</servlet-name>
+    <servlet-class>utils.QuartzInitializerServlet</servlet-class>
+    <load-on-startup>1</load-on-startup>
   </servlet>
-  
   <servlet>
     <servlet-name>Auswahl</servlet-name>
     <servlet-class>servlets.AuswahlServlet</servlet-class>
@@ -31,6 +26,18 @@
     <servlet-name>Edit</servlet-name>
     <servlet-class>servlets.EditServlet</servlet-class>
   </servlet>
+  
+  
+    <servlet>
+    <servlet-name>Testservlet</servlet-name>
+    <servlet-class>servlets.Testservlet</servlet-class>
+  </servlet>
+  
+    <servlet-mapping>
+    <servlet-name>Testservlet</servlet-name>
+    <url-pattern>/testservlet</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>Settings</servlet-name>
     <servlet-class>servlets.SettingsServlet</servlet-class>
@@ -39,7 +46,6 @@
     <servlet-name>MasterServlet</servlet-name>
     <url-pattern>/master</url-pattern>
   </servlet-mapping>
-
   <servlet-mapping>
     <servlet-name>LoginServlet</servlet-name>
     <url-pattern>/login</url-pattern>

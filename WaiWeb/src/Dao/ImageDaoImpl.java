@@ -166,8 +166,44 @@ public class ImageDaoImpl implements ImageItemInterface{
 
 	@Override
 	public List<ImageItem> getAllImageItems() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<ImageItem> imageItemList = new ArrayList<ImageItem>();
+		Connection connection = null;		
+		try {
+			connection = jndi.getConnection("jdbc/libraryDB");	
+		
+		
+		
+		PreparedStatement pstmt = connection.prepareStatement("select * FROM Cam_Images_Table");
+
+		ResultSet rs = pstmt.executeQuery();		
+	
+
+		
+		while(rs.next()){
+			ImageItem item = new ImageItem();
+			item.setId_Image(rs.getLong("Id_Image"));
+			item.setId_CamSource(rs.getLong("Id_Cam"));
+			item.setTimestamp(rs.getTimestamp("Time"));
+			item.setPath(rs.getString("Path"));
+			item.setKommentar(rs.getString("Kommentar"));
+			
+
+			imageItemList.add(item);
+		}
+
+		
+		} catch (Exception e) {
+			System.out.println("Fehler: "+e.getMessage());
+
+			throw new UserNotAddedExecption();
+		} finally {
+			closeConnection(connection);
+		}
+		
+		
+		System.out.println("siez imagearray : "+imageItemList.size());
+
+		return imageItemList;
 	}
 
 
