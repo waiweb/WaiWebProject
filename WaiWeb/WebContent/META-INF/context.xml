@@ -1,13 +1,13 @@
 <Context>
 
 <Environment name="enableQuarz" value="true" type="java.lang.Boolean" override="false"/>
-<Environment name="projectPath" value="D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF" type="java.lang.String" override="false"/>
+<Environment name="projectPath" value="/Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF" type="java.lang.String" override="false"/>
 <Environment name="relativeImagePath" value="/camimages" type="java.lang.String" override="false"/>
 <Environment name="relativeConfigPath" value="/config" type="java.lang.String" override="false"/>
 <Environment name="logsPath" value="/logs/waiweblog.log" type="java.lang.String" override="false"/>
 
 <!-- Datenbank im SWT Labor: -->
-<!-- PFAD: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF -->
+<!-- PFAD: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF
 
 		<Resource name="jdbc/libraryDB"
 			auth="Container"
@@ -18,10 +18,10 @@
 			password="Ebe5Del1"
 			maxActive="250" maxIdle="5"
 
-		/>
+		/> -->
 
 	<!-- Test-Datenbank auf localhost daheim (Kevin G.), bitte nicht löschen: -->
-	<!-- /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF 
+	<!-- /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF  -->
 
 		<Resource name="jdbc/libraryDB"
 			auth="Container"
@@ -31,6 +31,6 @@
 			username="postgres"
 			password="wai"
 			maxActive="250" maxIdle="5"
-		/> -->
+		/> 
 
 </Context>
