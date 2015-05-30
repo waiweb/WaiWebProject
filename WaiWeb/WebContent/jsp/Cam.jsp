@@ -44,7 +44,7 @@
 			</c:forEach>	
 		</tbody>
 	</table>
-		<br style="clear: both"> <br>
+		<br style="clear: both">
 			<div class="links">
 				<form name=camAdd method=GET  action= edit>  
 			  	 	<button class="btn" type="submit" name="action" value="addCam">Cam hinzufuegen</button>

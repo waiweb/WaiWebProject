@@ -40,6 +40,7 @@
 				</c:forEach>	
 			</tbody>
 		</table>
+		<br style="clear: both">
 			<form name=back method=GET  action= edit>
 		   		<button class="btn" type="submit" name="action" value="back"> Zurueck</button>	
 			</form>

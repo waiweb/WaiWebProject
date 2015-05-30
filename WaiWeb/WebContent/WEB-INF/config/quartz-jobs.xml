@@ -7,7 +7,6 @@
 
 
 	<!--
-
 		cron expressions:
 		1. Seconds
 		2. Minutes
@@ -16,7 +15,6 @@
 		5. Month
 		6. Day-of-Week
 		7. Year (optional field)
-
 	-->
 
     <schedule>
@@ -32,7 +30,7 @@
 				<group>MYTRIGGER_GROUP</group>
 				<job-name>WAI-Job</job-name>
 				<job-group>GROUP-6</job-group>
-				<cron-expression>0/30 0/1 * * * ?</cron-expression>
+				<cron-expression>0/0 0/3 * * * ?</cron-expression>
 			</cron>
 		</trigger>
 	</schedule>    

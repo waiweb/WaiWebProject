@@ -7,9 +7,10 @@
 <html>
   <head>      
     <title>Auswahlseite</title>     
-    	      	<link rel="stylesheet" href="css/menu_styles.css" type="text/css" >
-    			<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
-   				<script src="js/menu_script.js"></script>
+       	<link rel="stylesheet" href="css/menu_styles.css" type="text/css" >
+    	<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+   		<script src="js/menu_script.js"></script>
+   		<link href="css/Buttons.css"  type="text/css" rel="stylesheet">
   </head>
 	<body>
 		<%	//Zugriff Ueberpruefen:
@@ -31,23 +32,17 @@
 				}
 			}
 		%>
-			<font size=5> Willkommen <%=userName %>! </font> <br>
+		<font size=5> Willkommen <%=userName %>! </font> <br>
 		<font size=3> Deine Session ID=<%=sessionID %></font>
-	
 
-	
-	
+	<form name=checkLogin method=POST action=login>  
 	<div id='cssmenu'>
-	<ul>
-
-         <li><a href="auswahl?action=cam">Liste der Cams</a> </li>
- 		
-			<form name=checkLogin method=POST action=login>  
-		  	<input type=submit name=action value="Logout">  <!--  was soll beim logout passieren -->
-	  
-      </ul>
-
-</div>
+	<ul>		
+		<li><a href="auswahl?action=cam">Liste der Cams</a> </li>
+	</ul><br>
+		<button class="btn" type=submit name=action value="Logout"> Logout </button>
+	</div>
+	</form>
 	
 	</body>
 </html>    

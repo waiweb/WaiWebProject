@@ -35,7 +35,8 @@ public final class SystemStartup implements ServletContextListener {
 	    String log4jprop = "/log4j.properties";
 	    String projectpathAndConfigPath = null;
 	    
-		//Setzen von properties für die config-files		
+	    
+		//Setzen von properties fÃ¼r die config-files		
 		try {
 			System.setProperty("logFilePath", jndiFactory.getLogFilePath());
 			System.setProperty("configFileDirectoryPath", jndiFactory.getConfigDirectoryPath());
@@ -50,7 +51,7 @@ public final class SystemStartup implements ServletContextListener {
 		}
 		
 
-		//In dynamisch geändert.
+		//In dynamisch geÃ¤ndert.
 		try {
 			
 			// Initialize Logging

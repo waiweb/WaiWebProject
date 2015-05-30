@@ -6,6 +6,8 @@
   <head>    
     <title>Cam Images </title>
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
+    <link rel="stylesheet" href="css/tabular.css" type="text/css" >
+   	<link href="css/Buttons.css"  type="text/css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" media="all" href="<%=request.getContextPath()%>/css/jsDatePick_ltr.min.css" />
     <script type="text/javascript" src="<%=request.getContextPath()%>/js/jsDatePick.min.1.3.js"></script>
     <script src="<%=request.getContextPath()%>/js/jquery.js"></script>
@@ -44,20 +46,18 @@ $(function(){
   	<font size=5> Cam Images</font> <br><br>	
   
   		<form name=getImages method=POST  action= edit> 
-		<table border="1">
+		<table class="beispiel2" cellspacing="0" cellpadding="0"> 
 			<tbody>
 				<tr>   	
 			   		<td>Aktuelle Bilder fuer: <c:out value="${cam.camname}"/></td>
 			 	</tr>		
-			 	<tr>   	
-			 	</tr>
 			</tbody>	
 		</table>
 
-<br style="clear: both">
+	<br style="clear: both">
    	 <div class="links">
    	 <font size=4> Von</font>
-		<table border="1">
+		<table class="beispiel2" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			<tr>
                 <td> <input type="text" size="12" id="inputField" name="inputField"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
@@ -69,7 +69,7 @@ $(function(){
 
 		<div class="rechts">
 		<font size=4> Bis</font>
-		<table border="1">
+		<table class="beispiel2" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			<tr>
 			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
@@ -91,12 +91,12 @@ $(function(){
 		</table>
 		</form>
 	  	<div class="links">
-		   		<button type="submit" name="action" value="refresh"> Aktualisieren</button>	
+		   		<button class="btn" type="submit" name="action" value="refresh"> Aktualisieren</button>	
 		  		<input type="hidden" name="id" value="refresh">
 		</div>
 		<div class="rechts">
 		<form name=getImages method=GET  action= edit> 
-		   		<button type="submit" name="action" value="back"> Zurueck</button>	
+		   		<button class="btn"  type="submit" name="action" value="back"> Zurueck</button>	
 		  		<input type="hidden" name="id" value="back">
 	  	</form> 
 	  	</div>

@@ -7,7 +7,7 @@
     <title>Cam hinzufuegen </title>
     <!--  Hier die CSS Referenz angeben: -->
     <link href="css/userEdit.css" type="text/css" rel="stylesheet">
-  	
+ 	<link href="css/Buttons.css"  type="text/css" rel="stylesheet"> 
     <link rel="stylesheet" href="css/tabular.css" type="text/css" >  
   	
   </head>  
@@ -32,14 +32,14 @@
 		</table>
 		<br style="clear: both">
 		<div class="links"> 
-			<button type="submit" name="action" value="addNewCam"> Cam hinzufuegen</button>
+			<button class="btn" type="submit" name="action" value="addNewCam"> Cam hinzufuegen</button>
 			<input type="hidden" name="id" value="add">
 		</div>
 	  	</form> 
-	  	<br style="clear: both">
+	  			<br style="clear: both">
 	  	<form name=back method=GET  action= edit>
 			<div class="rechts">
-		   		<button type="submit" name="action" value="back"> Zurueck</button>	
+		   		<button class="btn" type="submit" name="action" value="back"> Zurueck</button>	
 		  		<input type="hidden" name="id" value="back">
 		  	</div>
 	  	</form>

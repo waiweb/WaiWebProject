@@ -56,8 +56,7 @@ public class JndiFactory {
     }
     
 
-	/**
-	 * Diese methode kann später ausgetauscht werden  gegen eine dynamische erkennung des Pfades.
+	 /* Diese methode kann spÃ¤ter ausgetauscht werden  gegen eine dynamische erkennung des Pfades.
 	 * @return
 	 * @throws NamingException
 	 */
@@ -169,7 +168,7 @@ public class JndiFactory {
 	}
 
 
-	//Unglücklicherweise hängt die dynamische suche noch ein "/" am ende an. Das wird hier entfernt.
+	//UnglÃ¼cklicherweise hï¿½ngt die dynamische suche noch ein "/" am ende an. Das wird hier entfernt.
 	public void setDynamicProjectpath(String dynamicProjectpath) {
 		
 		String temp = removeLastChar(dynamicProjectpath).replaceAll("\\\\", "/");
@@ -186,4 +185,3 @@ public class JndiFactory {
 	
 	
 }
-
