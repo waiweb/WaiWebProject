@@ -32,6 +32,18 @@ public class ImageItem {
 		this.path = path+"/"+name;
 		this.Kommentar = kommentar;
 	}
+	
+	public ImageItem(ImageItem item){
+		
+		this.Id_Image = item.getId_Image();  
+		this.Id_CamSource = item.getId_CamSource();
+		this.timestamp = item.getTimestamp();
+		this.name = item.getName();
+		this.path = item.getPath();
+		this.Kommentar = item.getKommentar();
+		
+		
+	}
 
 
 	public ImageItem(long id_Image,String name, long id_CamSource, Timestamp timestamp,String path, String kommentar) {
