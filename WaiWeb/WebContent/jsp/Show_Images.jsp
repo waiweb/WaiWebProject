@@ -84,7 +84,8 @@ $(function(){
 			<tbody>
 			<c:forEach var="path" items="${path}">
 				<tr>
-					<td><a href="<%=request.getContextPath()%><c:out value="${path}"/>"><img width="250" height="250" src="<%=request.getContextPath()%>/WEB-INF/camimages/test.jpg"/></a><br><br>Name / Timestamp</td>	
+					<!--  HIER werden die Image Pfade eingefügt! Über getContextPath(): Zugriff auf WebContent, dann restlichen Path angeben, also /camimages/ID/Year/... -->
+					<td><a href="<%=request.getContextPath()%><c:out value="${path.getPath()}"/>"><img width="250" height="250" src="<%=request.getContextPath()%><c:out value="${path.getPath()}"/>"></a><br><br><c:out value="${path.getName()}"/>/<c:out value="${path.getTimestamp()}"/></td>	
 				</tr>
 			</c:forEach>	
 			</tbody>				

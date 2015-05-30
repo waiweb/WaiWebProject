@@ -14,13 +14,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import utils.Tool_PathEdit;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import exception.UserNotFoundExecption;
 import Dao.CamDaoImpl;
+import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 import model.Cam;
+import model.ImageItem;
 import model.User;
 
 
@@ -29,6 +32,7 @@ public class EditServlet extends HttpServlet{
 	
 	final UserDaoImpl daoImp = new UserDaoImpl();
 	final CamDaoImpl camDaoImp = new CamDaoImpl();
+	private ImageDaoImpl imgDaoImp = new ImageDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
 	private User user;
 	private Cam cam;
@@ -290,16 +294,19 @@ public class EditServlet extends HttpServlet{
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
 			checkUserId(request);
+			
+			//Cam Pfade holen, momentan erstmal alle:
 			cam = camDaoImp.getCamFromDatabase(id);
+			ArrayList<ImageItem> allImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToOriginalImagePath(imgDaoImp.getAllImageItems());
 			
-			//Path Array holen:
-			ArrayList<String> pathCollection = new ArrayList<String>();
-			pathCollection.add("/WEB-INF/camimages/test.jpg");
-			pathCollection.add("/WEB-INF/camimages/test.jpg");
-			pathCollection.add("/WEB-INF/camimages/test.jpg");
+			//Testausgabe um die Pfade anzuzeigen die wir übergeben:
+			for(int i=0;i<allImages.size();i++) {
+				System.out.println("PATH: "+ allImages.get(i).getPath());
+			}
 			
+			//Überabe an die Show_Images.jsp:
 			request.setAttribute("cam", cam);
-			request.setAttribute("path", pathCollection);
+			request.setAttribute("path", allImages);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);	
 		
