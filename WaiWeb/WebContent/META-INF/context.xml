@@ -21,7 +21,7 @@
 		/> 
 
 	<!-- Test-Datenbank auf localhost daheim (Kevin G.), bitte nicht löschen: -->
-	<!-- /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF  
+	<!-- /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF 
 
 		<Resource name="jdbc/libraryDB"
 			auth="Container"

@@ -861,3 +861,94 @@
 (2015-05-31 00:36:21)  INFO QuartzScheduler:688 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433025138969 shutdown complete.
 (2015-05-31 00:36:21)  INFO QuartzInitializerServlet:137 - Quartz Scheduler successful shutdown.
 (2015-05-31 00:36:21)  INFO SystemStartup:84 - ContextDestroyed
+(2015-05-31 00:54:44)  INFO SystemStartup:70 - ContextInitialized
+(2015-05-31 00:54:44)  INFO QuartzInitializerServlet:51 - Quartz Initializer Servlet loaded, initializing Scheduler...
+(2015-05-31 00:54:45)  INFO SchedulerSignalerImpl:60 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+(2015-05-31 00:54:45)  INFO QuartzScheduler:222 - Quartz Scheduler v.1.8.5 created.
+(2015-05-31 00:54:45)  INFO XMLSchedulingDataProcessorPlugin:199 - Registering Quartz Job Initialization Plug-in.
+(2015-05-31 00:54:45)  INFO RAMJobStore:139 - RAMJobStore initialized.
+(2015-05-31 00:54:45)  INFO QuartzScheduler:244 - Scheduler meta-data: Quartz Scheduler (v1.8.5) 'waiHilfQuartzScheduler' with instanceId 'kevinmac1433026485036'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 2 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+(2015-05-31 00:54:45)  INFO StdSchedulerFactory:1280 - Quartz scheduler 'waiHilfQuartzScheduler' initialized from the specified file : '/Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz.properties'
+(2015-05-31 00:54:45)  INFO StdSchedulerFactory:1284 - Quartz scheduler version: 1.8.5
+(2015-05-31 00:54:45)  INFO XMLSchedulingDataProcessor:496 - Parsing XML file: /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml with systemId: /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml
+(2015-05-31 00:54:45)  INFO XMLSchedulingDataProcessor:970 - Adding 1 jobs, 1 triggers.
+(2015-05-31 00:54:45)  INFO XMLSchedulingDataProcessor:995 - Adding job: GROUP-6.WAI-Job
+(2015-05-31 00:54:45)  INFO QuartzScheduler:500 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026485036 started.
+(2015-05-31 00:54:45)  INFO QuartzInitializerServlet:82 - Scheduler has been started...
+(2015-05-31 00:54:45)  INFO QuartzInitializerServlet:96 - Group: GROUP-6 contains the following jobs
+(2015-05-31 00:54:45)  INFO QuartzInitializerServlet:100 - - WAI-Job
+(2015-05-31 00:54:45)  INFO QuartzInitializerServlet:104 - next Execution at: 31.05.2015 00:57:00
+(2015-05-31 00:57:03)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  00:57:03 05/31/2015
+(2015-05-31 00:57:04)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  00:57:04 05/31/2015 and reports: null
+(2015-05-31 00:58:56)  INFO QuartzScheduler:616 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026485036 shutting down.
+(2015-05-31 00:58:56)  INFO QuartzScheduler:537 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026485036 paused.
+(2015-05-31 00:58:56)  INFO QuartzScheduler:688 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026485036 shutdown complete.
+(2015-05-31 00:58:56)  INFO QuartzInitializerServlet:137 - Quartz Scheduler successful shutdown.
+(2015-05-31 00:58:56)  INFO SystemStartup:84 - ContextDestroyed
+(2015-05-31 00:58:57)  INFO SystemStartup:70 - ContextInitialized
+(2015-05-31 00:58:57)  INFO QuartzInitializerServlet:51 - Quartz Initializer Servlet loaded, initializing Scheduler...
+(2015-05-31 00:58:57)  INFO SchedulerSignalerImpl:60 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+(2015-05-31 00:58:57)  INFO QuartzScheduler:222 - Quartz Scheduler v.1.8.5 created.
+(2015-05-31 00:58:57)  INFO XMLSchedulingDataProcessorPlugin:199 - Registering Quartz Job Initialization Plug-in.
+(2015-05-31 00:58:57)  INFO RAMJobStore:139 - RAMJobStore initialized.
+(2015-05-31 00:58:57)  INFO QuartzScheduler:244 - Scheduler meta-data: Quartz Scheduler (v1.8.5) 'waiHilfQuartzScheduler' with instanceId 'kevinmac1433026737242'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 2 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+(2015-05-31 00:58:57)  INFO StdSchedulerFactory:1280 - Quartz scheduler 'waiHilfQuartzScheduler' initialized from the specified file : '/Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz.properties'
+(2015-05-31 00:58:57)  INFO StdSchedulerFactory:1284 - Quartz scheduler version: 1.8.5
+(2015-05-31 00:58:57)  INFO XMLSchedulingDataProcessor:496 - Parsing XML file: /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml with systemId: /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml
+(2015-05-31 00:58:57)  INFO XMLSchedulingDataProcessor:970 - Adding 1 jobs, 1 triggers.
+(2015-05-31 00:58:57)  INFO XMLSchedulingDataProcessor:995 - Adding job: GROUP-6.WAI-Job
+(2015-05-31 00:58:57)  INFO QuartzScheduler:500 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026737242 started.
+(2015-05-31 00:58:57)  INFO QuartzInitializerServlet:82 - Scheduler has been started...
+(2015-05-31 00:58:57)  INFO QuartzInitializerServlet:96 - Group: GROUP-6 contains the following jobs
+(2015-05-31 00:58:57)  INFO QuartzInitializerServlet:100 - - WAI-Job
+(2015-05-31 00:58:57)  INFO QuartzInitializerServlet:104 - next Execution at: 31.05.2015 01:00:00
+(2015-05-31 00:59:00)  INFO QuartzScheduler:616 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026737242 shutting down.
+(2015-05-31 00:59:00)  INFO QuartzScheduler:537 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026737242 paused.
+(2015-05-31 00:59:00)  INFO QuartzScheduler:688 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026737242 shutdown complete.
+(2015-05-31 00:59:00)  INFO QuartzInitializerServlet:137 - Quartz Scheduler successful shutdown.
+(2015-05-31 00:59:00)  INFO SystemStartup:84 - ContextDestroyed
+(2015-05-31 00:59:13)  INFO SystemStartup:70 - ContextInitialized
+(2015-05-31 00:59:13)  INFO QuartzInitializerServlet:51 - Quartz Initializer Servlet loaded, initializing Scheduler...
+(2015-05-31 00:59:13)  INFO SchedulerSignalerImpl:60 - Initialized Scheduler Signaller of type: class org.quartz.core.SchedulerSignalerImpl
+(2015-05-31 00:59:13)  INFO QuartzScheduler:222 - Quartz Scheduler v.1.8.5 created.
+(2015-05-31 00:59:13)  INFO XMLSchedulingDataProcessorPlugin:199 - Registering Quartz Job Initialization Plug-in.
+(2015-05-31 00:59:13)  INFO RAMJobStore:139 - RAMJobStore initialized.
+(2015-05-31 00:59:13)  INFO QuartzScheduler:244 - Scheduler meta-data: Quartz Scheduler (v1.8.5) 'waiHilfQuartzScheduler' with instanceId 'kevinmac1433026753538'
+  Scheduler class: 'org.quartz.core.QuartzScheduler' - running locally.
+  NOT STARTED.
+  Currently in standby mode.
+  Number of jobs executed: 0
+  Using thread pool 'org.quartz.simpl.SimpleThreadPool' - with 2 threads.
+  Using job-store 'org.quartz.simpl.RAMJobStore' - which does not support persistence. and is not clustered.
+
+(2015-05-31 00:59:13)  INFO StdSchedulerFactory:1280 - Quartz scheduler 'waiHilfQuartzScheduler' initialized from the specified file : '/Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz.properties'
+(2015-05-31 00:59:13)  INFO StdSchedulerFactory:1284 - Quartz scheduler version: 1.8.5
+(2015-05-31 00:59:13)  INFO XMLSchedulingDataProcessor:496 - Parsing XML file: /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml with systemId: /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF/config/quartz-jobs.xml
+(2015-05-31 00:59:13)  INFO XMLSchedulingDataProcessor:970 - Adding 1 jobs, 1 triggers.
+(2015-05-31 00:59:13)  INFO XMLSchedulingDataProcessor:995 - Adding job: GROUP-6.WAI-Job
+(2015-05-31 00:59:13)  INFO QuartzScheduler:500 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026753538 started.
+(2015-05-31 00:59:13)  INFO QuartzInitializerServlet:82 - Scheduler has been started...
+(2015-05-31 00:59:13)  INFO QuartzInitializerServlet:96 - Group: GROUP-6 contains the following jobs
+(2015-05-31 00:59:13)  INFO QuartzInitializerServlet:100 - - WAI-Job
+(2015-05-31 00:59:13)  INFO QuartzInitializerServlet:104 - next Execution at: 31.05.2015 01:00:00
+(2015-05-31 01:00:03)  INFO LoggingJobHistoryPlugin:467 - Job GROUP-6.WAI-Job fired (by trigger MYTRIGGER_GROUP.WAITrigger) at:  01:00:03 05/31/2015
+(2015-05-31 01:00:04)  INFO LoggingJobHistoryPlugin:511 - Job GROUP-6.WAI-Job execution complete at  01:00:04 05/31/2015 and reports: null
+(2015-05-31 01:01:45)  INFO QuartzScheduler:616 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026753538 shutting down.
+(2015-05-31 01:01:45)  INFO QuartzScheduler:537 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026753538 paused.
+(2015-05-31 01:01:45)  INFO QuartzScheduler:688 - Scheduler waiHilfQuartzScheduler_$_kevinmac1433026753538 shutdown complete.
+(2015-05-31 01:01:45)  INFO QuartzInitializerServlet:137 - Quartz Scheduler successful shutdown.
+(2015-05-31 01:01:45)  INFO SystemStartup:84 - ContextDestroyed
