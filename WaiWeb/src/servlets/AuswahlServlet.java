@@ -11,6 +11,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jndi.JndiFactory;
+
+import com.sun.istack.internal.logging.Logger;
+
 import utils.Tool_PathEdit;
 import Dao.CamDaoImpl;
 import Dao.ImageDaoImpl;
@@ -26,6 +30,7 @@ public class AuswahlServlet extends HttpServlet {
     final UserDaoImpl daoImp = new UserDaoImpl();
     final CamDaoImpl camdaoImp= new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
+	private static Logger log = Logger.getLogger(JndiFactory.class);
 	private ImageDaoImpl imgDaoImp = new ImageDaoImpl();
     private String username;
     private Long id;
@@ -39,7 +44,7 @@ public class AuswahlServlet extends HttpServlet {
         if(session != null && session.getAttribute("rechte") != null){
         	//Rechte überprüfen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
-        		System.out.println("Session mit User=" + session.getAttribute("username") 
+        		log.info("Session mit User=" + session.getAttribute("username") 
         			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");
 
 	        	//Falls Action vorhanden prüfen, ansonsten auf Auswahl-Bildschirm:
@@ -155,7 +160,7 @@ public class AuswahlServlet extends HttpServlet {
 	}
 	
 	void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Rechte nicht ausreichend, Administrator-Rechte benötigt!");
+		log.info("Rechte nicht ausreichend, Administrator-Rechte benötigt!");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 		dispatcher.forward(request, response);	
 	}

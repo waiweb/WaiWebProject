@@ -39,7 +39,7 @@ public class ImagCaptureJob implements Job {
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		
 		try {
-			ImagCaptureJob core = new ImagCaptureJob();
+			capture();	
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -52,7 +52,7 @@ public class ImagCaptureJob implements Job {
 
     
 	public ImagCaptureJob(){
-		capture();	
+		//capture();	
 	};
 	
 	public void capture(){
@@ -80,8 +80,7 @@ public class ImagCaptureJob implements Job {
 			}
 	
 		}
-	
-	
+
 	}
 	
 
