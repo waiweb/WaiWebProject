@@ -294,26 +294,22 @@ public class EditServlet extends HttpServlet{
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
 			checkUserId(request);
-			
-			//Cam Pfade holen, momentan erstmal alle:
+			Date date= new Date();
+			Timestamp now = new Timestamp(date.getTime());
+			Timestamp five= new Timestamp(now.getYear(), now.getMonth(), now.getDay(),now.getHours(), now.getMinutes()-20, 0, 0);
+			ArrayList<ImageItem> images= imgDaoImp.getImageItemsOfCam(id,five, now);
 			cam = camDaoImp.getCamFromDatabase(id);
-			ArrayList<ImageItem> allImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToOriginalImagePath(imgDaoImp.getAllImageItems());
-			ArrayList<ImageItem> allIDImages = new ArrayList<ImageItem>();
 			
-			//Testausgabe um die Pfade anzuzeigen die wir übergeben:
-			for(int i=0;i<allImages.size();i++) {
-				if(allImages.get(i).getId_CamSource() == id)
-					allIDImages.add(allImages.get(i));
-			}
-			
+		    List<ImageItem> path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
 			//Überabe an die Show_Images.jsp:
 			request.setAttribute("cam", cam);
-			request.setAttribute("path", allIDImages);
+			request.setAttribute("path", path);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);	
 		
 		//Cam Refresh:
 		} else if(action.equals("refresh")){
+			checkUserId(request);
 			String dateStart=request.getParameter("inputField");
 			String dateEnd=request.getParameter("inputField2");
 			String timeStart=request.getParameter("datetime");
@@ -321,16 +317,21 @@ public class EditServlet extends HttpServlet{
 			System.out.println(" Refresh gedrueckt");
 			Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
 			Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
+			ArrayList<ImageItem> images= imgDaoImp.getImageItemsOfCam(id,timestampEnd, timestampStart);
+			cam = camDaoImp.getCamFromDatabase(id);
+			List<ImageItem> path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
 			
-			System.out.println("Timestamp Start: "+timestampStart);
-			System.out.println("Timestamp End: "+timestampEnd);
+			System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
 			
 			if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
-				System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
+				
+				request.setAttribute("cam", cam);
+				request.setAttribute("path", path);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				dispatcher.forward(request, response);
+				
 			} else {
-				   System.out.println("Keine korrekte eingabe !");
+				   System.out.println("Keine korrekte Kalender eingabe !");
 				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				   dispatcher.forward(request, response);
 				}

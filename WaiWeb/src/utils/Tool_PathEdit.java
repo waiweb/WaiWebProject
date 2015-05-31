@@ -1,8 +1,6 @@
 package utils;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -25,6 +23,7 @@ public class Tool_PathEdit {
 		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
 		//Collections.copy(editedList, list);
 		
+		@SuppressWarnings("unused")
 		String imageDirctoryPath = null;
 		try {
 			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
@@ -45,11 +44,37 @@ public class Tool_PathEdit {
 	}
 	
 	
+public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem> list){
+		
+		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
+		//Collections.copy(editedList, list);
+		
+		@SuppressWarnings("unused")
+		String imageDirctoryPath = null;
+		try {
+			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		for(ImageItem item : list){
+			
+			ImageItem nItem = new ImageItem(item);
+			//Hier der Laufwerk Pfad entfernt! Geht jetzt los ab /CamId/Year/...
+			nItem.setPath("/camimages/"+ item.getPath());
+			editedList.add(nItem);
+		}
+		
+		return editedList;
+	}
+	
 	public static List<ImageItem> editImageListToThumbnailImagePath(List<ImageItem> list){
 		
 		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
 		//Collections.copy(editedList, list);
 		
+		@SuppressWarnings("unused")
 		String imageDirctoryPath = null;
 		try {
 			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
