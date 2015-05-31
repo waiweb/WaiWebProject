@@ -135,6 +135,17 @@ public class AuswahlServlet extends HttpServlet {
 						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
 					}
 					
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgDaoImp.getAllImageItems());
+					
+					for(int j=0;j<collection.size();j++){
+						for(int i=0;i<allThumbImages.size();i++){
+							if(collection.get(j).getId_Cam() == allThumbImages.get(i).getId_CamSource()){
+								collection.get(j).setPathOriginalImageDirectory(allThumbImages.get(i).getPath());
+								break;
+							}
+						}
+					}
+					
 					request.setAttribute("cams", collection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/CamUSER.jsp");
 					dispatcher.forward(request, response);		
