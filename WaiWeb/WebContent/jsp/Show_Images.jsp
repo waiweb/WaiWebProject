@@ -79,7 +79,7 @@ $(function(){
 		</table>
 		</div>
 		
-		<br style="clear: both"><br style="clear: both">
+		<br style="clear: both"><br>
 		<table border="1">
 			<tbody>
 			<c:forEach var="path" items="${path}">
@@ -89,13 +89,13 @@ $(function(){
 				</tr>
 			</c:forEach>	
 			</tbody>				
-		</table>
-		
+		</table><br>
 	  	<div class="links">
 		   		<button class="btn" type="submit" name="action" value="refresh"> Aktualisieren</button>	
 		  		<input type="hidden" name="id" value="${cam.id_Cam}">
 		</div>
 		</form>
+		<br style="clear: both">
 		<div class="rechts">
 		<form name=getImages method=GET  action= edit> 
 		   		<button class="btn"  type="submit" name="action" value="back"> Zurueck</button>	

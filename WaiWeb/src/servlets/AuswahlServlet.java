@@ -11,10 +11,17 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import jndi.JndiFactory;
+
+import com.sun.istack.internal.logging.Logger;
+
+import utils.Tool_PathEdit;
 import Dao.CamDaoImpl;
+import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 import model.Cam;
+import model.ImageItem;
 import model.User;
 
 public class AuswahlServlet extends HttpServlet {
@@ -23,6 +30,8 @@ public class AuswahlServlet extends HttpServlet {
     final UserDaoImpl daoImp = new UserDaoImpl();
     final CamDaoImpl camdaoImp= new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
+	private static Logger log = Logger.getLogger(JndiFactory.class);
+	private ImageDaoImpl imgDaoImp = new ImageDaoImpl();
     private String username;
     private Long id;
 	
@@ -35,7 +44,7 @@ public class AuswahlServlet extends HttpServlet {
         if(session != null && session.getAttribute("rechte") != null){
         	//Rechte überprüfen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
-        		System.out.println("Session mit User=" + session.getAttribute("username") 
+        		log.info("Session mit User=" + session.getAttribute("username") 
         			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");
 
 	        	//Falls Action vorhanden prüfen, ansonsten auf Auswahl-Bildschirm:
@@ -46,6 +55,21 @@ public class AuswahlServlet extends HttpServlet {
 				//Alle Cams anzeigen: TODO: Thumbnail anzeigen für die einzelnen Cams!
 				} else if (action.equals("cam")) {
 					List<Cam> collection = camdaoImp.getAllCams();
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgDaoImp.getAllImageItems());
+				
+					for(int j=0;j<collection.size();j++){
+						for(int i=0;i<allThumbImages.size();i++){
+							if(collection.get(j).getId_Cam() == allThumbImages.get(i).getId_CamSource()){
+								collection.get(j).setPathOriginalImageDirectory(allThumbImages.get(i).getPath());
+								break;
+							}
+						}
+					}
+					
+					//Testausgabe um die Pfade anzuzeigen die wir übergeben:
+					for(int i=0;i<allThumbImages.size();i++) {
+						System.out.println("PATH: "+ allThumbImages.get(i).getPath());
+					}
 					
 					request.setAttribute("cams", collection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Cam.jsp");
@@ -111,6 +135,17 @@ public class AuswahlServlet extends HttpServlet {
 						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
 					}
 					
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgDaoImp.getAllImageItems());
+					
+					for(int j=0;j<collection.size();j++){
+						for(int i=0;i<allThumbImages.size();i++){
+							if(collection.get(j).getId_Cam() == allThumbImages.get(i).getId_CamSource()){
+								collection.get(j).setPathOriginalImageDirectory(allThumbImages.get(i).getPath());
+								break;
+							}
+						}
+					}
+					
 					request.setAttribute("cams", collection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/CamUSER.jsp");
 					dispatcher.forward(request, response);		
@@ -136,7 +171,7 @@ public class AuswahlServlet extends HttpServlet {
 	}
 	
 	void backToAuswahl(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		System.out.println("Rechte nicht ausreichend, Administrator-Rechte benötigt!");
+		log.info("Rechte nicht ausreichend, Administrator-Rechte benötigt!");
 		RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 		dispatcher.forward(request, response);	
 	}
