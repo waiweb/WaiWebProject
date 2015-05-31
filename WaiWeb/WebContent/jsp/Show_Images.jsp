@@ -85,16 +85,17 @@ $(function(){
 			<c:forEach var="path" items="${path}">
 				<tr>
 					<!--  HIER werden die Image Pfade eingefügt! Über getContextPath(): Zugriff auf WebContent, dann restlichen Path angeben, also /camimages/ID/Year/... -->
-					<td><a href="<%=request.getContextPath()%><c:out value="${path.getPath()}"/>"><img width="250" height="250" src="<%=request.getContextPath()%><c:out value="${path.getPath()}"/>"></a><br><br><c:out value="${path.getName()}"/>/<c:out value="${path.getTimestamp()}"/></td>	
+					<td><a href="<%=request.getContextPath()%><c:out value="${path.getPath()}.jpg"/>"><img src="<%=request.getContextPath()%><c:out value="${path.getPath()}_thumbnail.jpg"/>"></a><br><br><c:out value="${path.getName()}"/>/<c:out value="${path.getTimestamp()}"/></td>	
 				</tr>
 			</c:forEach>	
 			</tbody>				
 		</table>
-		</form>
+		
 	  	<div class="links">
 		   		<button class="btn" type="submit" name="action" value="refresh"> Aktualisieren</button>	
-		  		<input type="hidden" name="id" value="refresh">
+		  		<input type="hidden" name="id" value="${cam.id_Cam}">
 		</div>
+		</form>
 		<div class="rechts">
 		<form name=getImages method=GET  action= edit> 
 		   		<button class="btn"  type="submit" name="action" value="back"> Zurueck</button>	

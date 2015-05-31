@@ -42,12 +42,12 @@ public class MasterServlet extends HttpServlet {
          * Momentan genutzt für Tests: USERNAME: admin PW: admin
          */
         
-        try {
-			beispiele();
-		} catch (UserNotFoundExecption e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}		
+//        try {
+//			beispiele();
+//		} catch (UserNotFoundExecption e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}		
     }
     
 	public void beispiele() throws UserNotFoundExecption{
