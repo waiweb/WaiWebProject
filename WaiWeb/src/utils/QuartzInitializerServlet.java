@@ -50,17 +50,20 @@ public class QuartzInitializerServlet extends HttpServlet {
 
                 mLog.info ("Quartz Initializer Servlet loaded, initializing Scheduler...");
                 
-                //Parse a owen version of the quartzproperties because the original is to static !
-                String pathToQuartsJob = JndiFactory.getInstance().getConfigDirectoryPath() + "/quartz-jobs.xml";
-
+                //Parse a owen version of the quartzproperties with the path to quartz-jobs.xml
+                String temp = JndiFactory.getInstance().getConfigDirectoryPath() + "/"+ "quartz-jobs.xml";
+                String pathToQuartsJob = temp.replaceAll("\\\\", "/");
                 QuartsPropertieParser quartsPropertieParser = new QuartsPropertieParser(pathToQuartsJob);
                 
+                /*
     			System.setProperty("quarzjobInitializerfile", JndiFactory.getInstance().getConfigDirectoryPath()
-    					+ "/quartz.properties");
+    					+ "/"+ "quartz.properties");
 
+
+                 	*/
 
 	            String configFile = JndiFactory.getInstance().getConfigDirectoryPath()
-	    						  + "/quartz.properties";
+	    						  + "/"+ "quartz.properties";
 	            
 	            // get Properties
                 factory = new StdSchedulerFactory(configFile);
