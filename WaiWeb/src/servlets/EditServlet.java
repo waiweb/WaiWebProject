@@ -324,17 +324,31 @@ public class EditServlet extends HttpServlet{
 			
 			System.out.println("Bilder vom "+timestampStart+" bis "+ timestampEnd);
 			
-			if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
+			if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null
+		       && timeStart!=""&&timeEnd!="" &&timeStart!=null && timeEnd!=null
+		       &&timestampStart.before(timestampEnd)){
 				
 				request.setAttribute("cam", cam);
 				request.setAttribute("path", path);
 				RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				dispatcher.forward(request, response);
 				
-			} else {
-				   System.out.println("Keine korrekte Kalender eingabe !");
+			} else if(dateStart!=""&&dateEnd!="" && dateStart!=null && dateEnd!=null){
+				   Date timeNow= new Date();
+				   dateStart=request.getParameter("startDate");
+				   dateEnd=request.getParameter("endDate");
+				   timestampStart = convertStringToTimestamp(dateStart,String.valueOf(timeNow.getHours())+":"+String.valueOf(timeNow.getMinutes()-10));
+				   timestampEnd = convertStringToTimestamp(dateEnd, String.valueOf(timeNow.getHours())+":"+String.valueOf(timeNow.getMinutes()));
+				   images= imgDaoImp.getImageItemsOfCam(id,timestampStart, timestampEnd);
+				   cam = camDaoImp.getCamFromDatabase(id);
+				   path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
+				   System.out.println("Keine korrekte Kalender eingabe ! Es wurden die letzten 10 min ausgegeben");
+				   request.setAttribute("cam", cam);
+				   request.setAttribute("path", path);
 				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				   dispatcher.forward(request, response);
+				}else{
+					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht möglich");
 				}
 		 }	
 	}
