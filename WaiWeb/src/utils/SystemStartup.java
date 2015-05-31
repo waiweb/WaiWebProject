@@ -21,45 +21,43 @@ public final class SystemStartup implements ServletContextListener {
 
 		System.out.println("enter ContextInitialized");
 
-		//Relative paths (unbenutzt zur zeit)
-	    String dynamicBasepath = event.getServletContext().getRealPath("/WEB-INF");
-	    String relativeConfigPath = event.getServletContext().getRealPath("/WEB-INF/config"); 
-	    
-	 	    
-	    jndiFactory.setDynamicProjectpath(dynamicBasepath);
+		//Relative paths 
+		String projectPath = event.getServletContext().getRealPath("/WEB-INF");
+	    String camImagesPath = event.getServletContext().getRealPath("/camimages");
+	    String configPath = event.getServletContext().getRealPath("/WEB-INF/config"); 
 	    
 	    
+	    jndiFactory.setCamImagePath(camImagesPath);
+	    jndiFactory.setConfigPath(configPath);
 	    
-	    //Statiche pfade	    
-	    String projectpath = null;
+	    System.out.println("camImagesPath: "+ camImagesPath);
+	    System.out.println("configPath: "+ configPath);
+
+
+	    
+	    //Einrichtung Logfile
 	    String log4jprop = "/log4j.properties";
-	    String projectpathAndConfigPath = null;
 	    
 	    
-		//Setzen von properties für die config-files		
+		//Setzen von properties fuer�r die config-files, dass auch dort der Pfad dynamisch eingetragen wird.
+		
 		try {
 			System.setProperty("logFilePath", jndiFactory.getLogFilePath());
-			System.setProperty("configFileDirectoryPath", jndiFactory.getConfigDirectoryPath());
-	
-			//Statische pfade:
-			projectpath = jndiFactory.getProjectPath();
-			projectpathAndConfigPath = jndiFactory.getConfigDirectoryPath();
-		
 		} catch (NamingException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		
+	
 
 		//In dynamisch geändert.
 		try {
 			
 			// Initialize Logging
-			File logConfigFile = new File(projectpathAndConfigPath + log4jprop);
+			File logConfigFile = new File(configPath + log4jprop);
 			
 
 			if (!logConfigFile.exists()) {
-				System.out.println("ERROR: Logging configuration file not found: "+projectpathAndConfigPath + log4jprop);
+				System.out.println("ERROR: Logging configuration file not found: "+configPath + log4jprop);
 			} else {
 				String logpath = logConfigFile.getPath();
 				PropertyConfigurator.configure(logpath);

@@ -1,7 +1,7 @@
 <Context>
 
 <Environment name="enableQuarz" value="true" type="java.lang.Boolean" override="false"/>
-<Environment name="projectPath" value="D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF" type="java.lang.String" override="false"/>
+<Environment name="projectPath" value="D:/xWAI/Semesterprojekt/WaiWebProject/WaiWeb/WebContent/WEB-INF" type="java.lang.String" override="false"/>
 <Environment name="relativeImagePath" value="/camimages" type="java.lang.String" override="false"/>
 <Environment name="relativeConfigPath" value="/config" type="java.lang.String" override="false"/>
 <Environment name="logsPath" value="/logs/waiweblog.log" type="java.lang.String" override="false"/>

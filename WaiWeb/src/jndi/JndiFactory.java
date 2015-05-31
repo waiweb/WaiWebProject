@@ -23,10 +23,13 @@ import org.apache.log4j.Logger;
 
 public class JndiFactory {
 	
-	private boolean useDynamicBasePath = false;
+	private boolean useDynamicBasePath = true;
 	private static JndiFactory instance = new JndiFactory();
     private static Logger log = Logger.getLogger(JndiFactory.class);   
-    private String dynamicProjectpath;
+    
+    //Dynamic Paths
+    private String camImagePath = "";
+    private String configPath = "";
    
     protected JndiFactory() {
        // Exists only to defeat instantiation.
@@ -60,14 +63,14 @@ public class JndiFactory {
 	 * @return
 	 * @throws NamingException
 	 */
+    
     public String getProjectPath() throws NamingException {
 
-    	if(useDynamicBasePath)
-    		return dynamicProjectpath;
-    	else
+
     		return getEnvironmentAsString("projectPath");
     	
     }
+    
     
     /**
      * Returns the path to the image directory
@@ -76,16 +79,13 @@ public class JndiFactory {
      */
     public String getImageDirectoryPath() throws NamingException {
 
-    	
-    	return getProjectPath()+getEnvironmentAsString("relativeImagePath");
-    	
+    		return this.camImagePath;    	
     }
     
     
     public String getConfigDirectoryPath() throws NamingException {
 
-    	
-    	return getProjectPath()+getEnvironmentAsString("relativeConfigPath");
+    		return this.configPath;
     	
     }
     
@@ -93,7 +93,7 @@ public class JndiFactory {
     public String getLogFilePath() throws NamingException {
 
     	
-    	return getProjectPath()+getEnvironmentAsString("logsPath");
+    	return configPath+getEnvironmentAsString("logsPath");
     	
     }
    
@@ -163,24 +163,55 @@ public class JndiFactory {
 	}
 
 
-	public String getDynamicProjectpath() {
-		return dynamicProjectpath;
+
+
+	
+
+
+	public String getCamImagePath() {
+		return camImagePath;
 	}
 
 
-	//Unglücklicherweise h�ngt die dynamische suche noch ein "/" am ende an. Das wird hier entfernt.
-	public void setDynamicProjectpath(String dynamicProjectpath) {
+	public void setCamImagePath(String camImagePath) {
 		
+		/*
 		String temp = removeLastChar(dynamicProjectpath).replaceAll("\\\\", "/");
 
 		this.dynamicProjectpath = temp;
-		System.out.println("dynamic web path set to: "+temp);
+		*/
+		System.out.println("camImagePath web path set to: "+camImagePath);
+		
+		
+		this.camImagePath = camImagePath;
 	}
-	
+
+
+	private String getConfigPath() {
+		return configPath;
+	}
+
+
+	public void setConfigPath(String configPath) {
+		this.configPath = configPath;
+	}
+
+
 	private static String removeLastChar(String str) {
         return str.substring(0,str.length()-1);
     }
 	
+	
+	
+	public boolean isUseDynamicBasePath() {
+		return useDynamicBasePath;
+	}
+
+
+	public void setUseDynamicBasePath(boolean useDynamicBasePath) {
+		this.useDynamicBasePath = useDynamicBasePath;
+	}
+
 	
 	
 	

@@ -16,7 +16,8 @@ public class QuartsPropertieParser {
 		
 		jndiFactory = JndiFactory.getInstance();
 		
-		String pathToJobInitRelaced = pathToJobInit.replace("'\'/", "/");
+		//String pathToJobInitRelaced = pathToJobInit.replace("'\'/", "/");
+		String pathToJobInitRelaced = pathToJobInit;
 		System.out.println("replaced path. "+pathToJobInitRelaced);
 		
 		String configDirecttory = null;
@@ -67,7 +68,7 @@ public class QuartsPropertieParser {
             writer.write("\n");
             writer.write("org.quartz.plugin.jobInitializer.wrapInUserTransaction=false");
     		writer.write("\n");
-            writer.write("org.quartz.plugin.jobInitializer.fileNames = "+pathToJobInitRelaced);
+            writer.write("org.quartz.plugin.jobInitializer.fileNames ="+pathToJobInitRelaced);
 
             
         } catch (Exception e) {
