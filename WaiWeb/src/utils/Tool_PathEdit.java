@@ -1,8 +1,6 @@
 package utils;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 
 import javax.naming.NamingException;
@@ -25,6 +23,7 @@ public class Tool_PathEdit {
 		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
 		//Collections.copy(editedList, list);
 		
+		@SuppressWarnings("unused")
 		String imageDirctoryPath = null;
 		try {
 			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
@@ -50,6 +49,7 @@ public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem
 		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
 		//Collections.copy(editedList, list);
 		
+		@SuppressWarnings("unused")
 		String imageDirctoryPath = null;
 		try {
 			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
@@ -74,6 +74,7 @@ public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem
 		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
 		//Collections.copy(editedList, list);
 		
+		@SuppressWarnings("unused")
 		String imageDirctoryPath = null;
 		try {
 			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
@@ -85,7 +86,7 @@ public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem
 		for(ImageItem item : list){
 			
 			ImageItem nItem = new ImageItem(item);
-			nItem.setPath(imageDirctoryPath + "/"+ item.getPath() + thumbnailImageType);
+			nItem.setPath("/camimages/"+ item.getPath() + thumbnailImageType);
 			editedList.add(nItem);
 		}
 		

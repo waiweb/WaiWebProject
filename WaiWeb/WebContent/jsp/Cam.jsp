@@ -30,7 +30,7 @@
 					<!-- TODO: Cams Thumbnails hier einbinden! -->
 					<td>
 						<form name=imageShow method=POST  action= edit>  
-							<button type="submit" name="action" value="showImages"><img width="75" height="75" src="<%=request.getContextPath()%>/camimages/test.jpg"/></button>
+							<button type="submit" name="action" value="showImages"><img width="75" height="75" src="<%=request.getContextPath()%><c:out value="${cam.getPathOriginalImageDirectory()}"/>"/></button>
 							<input type="hidden" name="id" value="${cam.id_Cam}">
 						</form>
 					</td>
@@ -41,7 +41,7 @@
 	                  	</form>	
 		  	    	</td>
 				</tr>
-			</c:forEach>	
+				</c:forEach>
 		</tbody>
 	</table>
 		<br style="clear: both">
