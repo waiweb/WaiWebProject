@@ -61,7 +61,7 @@ public class Tool_PathEdit {
 		for(ImageItem item : list){
 			
 			ImageItem nItem = new ImageItem(item);
-			nItem.setPath(imageDirctoryPath + "/"+ item.getPath() + thumbnailImageType);
+			nItem.setPath("/camimages/"+ item.getPath() + thumbnailImageType);
 			editedList.add(nItem);
 		}
 		

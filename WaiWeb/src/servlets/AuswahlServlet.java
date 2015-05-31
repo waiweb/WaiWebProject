@@ -1,6 +1,7 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,10 +12,13 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import utils.Tool_PathEdit;
 import Dao.CamDaoImpl;
+import Dao.ImageDaoImpl;
 import Dao.UserCamMappingImpl;
 import Dao.UserDaoImpl;
 import model.Cam;
+import model.ImageItem;
 import model.User;
 
 public class AuswahlServlet extends HttpServlet {
@@ -23,6 +27,7 @@ public class AuswahlServlet extends HttpServlet {
     final UserDaoImpl daoImp = new UserDaoImpl();
     final CamDaoImpl camdaoImp= new CamDaoImpl();
 	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
+	private ImageDaoImpl imgDaoImp = new ImageDaoImpl();
     private String username;
     private Long id;
 	
@@ -46,6 +51,21 @@ public class AuswahlServlet extends HttpServlet {
 				//Alle Cams anzeigen: TODO: Thumbnail anzeigen für die einzelnen Cams!
 				} else if (action.equals("cam")) {
 					List<Cam> collection = camdaoImp.getAllCams();
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgDaoImp.getAllImageItems());
+				
+					for(int j=0;j<collection.size();j++){
+						for(int i=0;i<allThumbImages.size();i++){
+							if(collection.get(j).getId_Cam() == allThumbImages.get(i).getId_CamSource()){
+								collection.get(j).setPathOriginalImageDirectory(allThumbImages.get(i).getPath());
+								break;
+							}
+						}
+					}
+					
+					//Testausgabe um die Pfade anzuzeigen die wir übergeben:
+					for(int i=0;i<allThumbImages.size();i++) {
+						System.out.println("PATH: "+ allThumbImages.get(i).getPath());
+					}
 					
 					request.setAttribute("cams", collection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Cam.jsp");

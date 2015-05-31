@@ -298,15 +298,17 @@ public class EditServlet extends HttpServlet{
 			//Cam Pfade holen, momentan erstmal alle:
 			cam = camDaoImp.getCamFromDatabase(id);
 			ArrayList<ImageItem> allImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToOriginalImagePath(imgDaoImp.getAllImageItems());
+			ArrayList<ImageItem> allIDImages = new ArrayList<ImageItem>();
 			
 			//Testausgabe um die Pfade anzuzeigen die wir übergeben:
 			for(int i=0;i<allImages.size();i++) {
-				System.out.println("PATH: "+ allImages.get(i).getPath());
+				if(allImages.get(i).getId_CamSource() == id)
+					allIDImages.add(allImages.get(i));
 			}
 			
 			//Überabe an die Show_Images.jsp:
 			request.setAttribute("cam", cam);
-			request.setAttribute("path", allImages);
+			request.setAttribute("path", allIDImages);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 			dispatcher.forward(request, response);	
 		
