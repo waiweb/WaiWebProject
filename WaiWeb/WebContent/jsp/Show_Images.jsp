@@ -60,8 +60,8 @@ $(function(){
 		<table class="beispiel2" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			<tr>
-                <td> <input type="text" size="12" id="inputField" name="inputField"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
-                <td><input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="datetime"></td>
+                <td> <input type="text" size="12" id="inputField" name="startDate"  /><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
+                <td><input type="text" id="time" data-format="HH:mm" data-template="HH : mm" name="startTime"></td>
 				</tr>	
 			</tbody>
 		</table>
@@ -72,8 +72,8 @@ $(function(){
 		<table class="beispiel2" cellspacing="0" cellpadding="0"> 
 			<tbody>
 			<tr>
-			   <td> <input type="text" size="12" id="inputField2" name="inputField2"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
-			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="datetime2"></td>
+			   <td> <input type="text" size="12" id="inputField2" name="endDate"/><img src="<%=request.getContextPath()%>/gifs/cal.gif" width="16" height="16" border="0" alt="Click Here to Pick up the timestamp"></td>
+			   <td><input type="text" id="time2" data-format="HH:mm" data-template="HH : mm" name="endTime"></td>
 				</tr>	
 			</tbody>	
 		</table>
@@ -85,7 +85,7 @@ $(function(){
 			<c:forEach var="path" items="${path}">
 				<tr>
 					<!--  HIER werden die Image Pfade eingefügt! Über getContextPath(): Zugriff auf WebContent, dann restlichen Path angeben, also /camimages/ID/Year/... -->
-					<td><a href="<%=request.getContextPath()%><c:out value="${path.getPath()}.jpg"/>"><img src="<%=request.getContextPath()%><c:out value="${path.getPath()}_thumbnail.jpg"/>"></a><br><br><c:out value="${path.getName()}"/>/<c:out value="${path.getTimestamp()}"/></td>	
+					<td><a href="<%=request.getContextPath()%><c:out value="${path.getPath()}.jpg"/>"><img src="<%=request.getContextPath()%><c:out value="${path.getPath()}_thumbnail.jpg"/>"></a><br><br><c:out value="${path.getName()}"/><c:out value="${path.getTimestamp()}"/></td>	
 				</tr>
 			</c:forEach>	
 			</tbody>				

@@ -16,9 +16,7 @@
 			url="jdbc:postgresql://141.19.96.94/ss15-gruppe6_DB"
 			username="ss15-gruppe6"
 			password="Ebe5Del1"
-			maxActive="250" maxIdle="5"
-
-		/> -->
+			maxActive="250" maxIdle="5" -->
 
 	<!-- Test-Datenbank auf localhost daheim (Kevin G.), bitte nicht löschen: -->
 	<!-- /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF -->
@@ -35,7 +33,7 @@
 
 
 
-	<!-- Test-Datenbank auf localhost daheim (Niat), bitte nicht löschen: 
+	<!-- Test-Datenbank auf localhost daheim (Niat), bitte nicht löschen:   
 	
 		<Resource name="jdbc/libraryDB"
 			auth="Container"
@@ -45,6 +43,6 @@
 			username="wai"
 			password="wai"
 			maxActive="250" maxIdle="5"
-		/> -->
+		/>    -->
 
 </Context>

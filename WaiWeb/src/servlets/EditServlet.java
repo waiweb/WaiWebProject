@@ -296,7 +296,8 @@ public class EditServlet extends HttpServlet{
 			checkUserId(request);
 			Date date= new Date();
 			Timestamp now = new Timestamp(date.getTime());
-			Timestamp five= new Timestamp(now.getYear(), now.getMonth(), now.getDay(),now.getHours(), now.getMinutes()-20, 0, 0);
+			                                                                                     // wieviel minuten angezeigt werden sollen
+			Timestamp five= new Timestamp(now.getYear(), now.getMonth(), now.getDay(),now.getHours(), now.getMinutes()-1, 0, 0);
 			ArrayList<ImageItem> images= imgDaoImp.getImageItemsOfCam(id,five, now);
 			cam = camDaoImp.getCamFromDatabase(id);
 			
@@ -310,14 +311,14 @@ public class EditServlet extends HttpServlet{
 		//Cam Refresh:
 		} else if(action.equals("refresh")){
 			checkUserId(request);
-			String dateStart=request.getParameter("inputField");
-			String dateEnd=request.getParameter("inputField2");
-			String timeStart=request.getParameter("datetime");
-			String timeEnd=request.getParameter("datetime2");
+			String dateStart=request.getParameter("startDate");
+			String dateEnd=request.getParameter("endDate");
+			String timeStart=request.getParameter("startTime");
+			String timeEnd=request.getParameter("endTime");
 			System.out.println(" Refresh gedrueckt");
 			Timestamp timestampStart = convertStringToTimestamp(dateStart, timeStart);
 			Timestamp timestampEnd = convertStringToTimestamp(dateEnd, timeEnd);
-			ArrayList<ImageItem> images= imgDaoImp.getImageItemsOfCam(id,timestampEnd, timestampStart);
+			ArrayList<ImageItem> images= imgDaoImp.getImageItemsOfCam(id,timestampStart, timestampEnd);
 			cam = camDaoImp.getCamFromDatabase(id);
 			List<ImageItem> path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
 			
