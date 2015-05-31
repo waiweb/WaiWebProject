@@ -7,7 +7,7 @@
 <Environment name="logsPath" value="/logs/waiweblog.log" type="java.lang.String" override="false"/>
 
 <!-- Datenbank im SWT Labor: -->
-<!-- PFAD: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF  
+<!-- PFAD: D:/xWAI/Wai_Semesterproject/WaiWebProject3/WaiWebProject/WaiWeb/WebContent/WEB-INF  -->
 
 		<Resource name="jdbc/libraryDB"
 			auth="Container"
@@ -18,7 +18,7 @@
 			password="Ebe5Del1"
 			maxActive="250" maxIdle="5"
 
-		/>     -->
+		/>     
 
 	<!-- Test-Datenbank auf localhost daheim (Kevin G.), bitte nicht löschen: -->
 	<!-- /Users/KevinGrygosch/Documents/GitHub/WaiWebProject/WaiWeb/WebContent/WEB-INF 
@@ -35,7 +35,7 @@
 
 
 
-	<!-- Test-Datenbank auf localhost daheim (Niat), bitte nicht löschen:   -->
+	<!-- Test-Datenbank auf localhost daheim (Niat), bitte nicht löschen:  
 	
 		<Resource name="jdbc/libraryDB"
 			auth="Container"
@@ -45,6 +45,6 @@
 			username="wai"
 			password="wai"
 			maxActive="250" maxIdle="5"
-		/>    
+		/>     -->
 
 </Context>
