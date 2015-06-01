@@ -7,6 +7,7 @@
     <title>Auswahlseite</title>    
 		<link rel="stylesheet" href="css/tabular.css" type="text/css" >   
 		<link href="css/Buttons.css"  type="text/css" rel="stylesheet">  
+		<link href="css/userEdit.css" type="text/css" rel="stylesheet">
   </head>
 	<body>
 		<table class="beispiel" cellspacing="0" cellpadding="0"> 
@@ -39,10 +40,15 @@
 			</tbody>
 		</table>
 		<br style="clear: both">
-		<div>
+		<div class="links">
 			<form name=userAdd method=GET  action= edit>  
 		  	 	<button class="btn" type="submit" name="action" value="addUser">User hinzufuegen</button>
 		 	</form>	
+		</div>
+		<div class="rechts">
+			<form name=back method=GET  action= edit>
+		   		<button class="btn" type="submit" name="action" value="back"> Zurueck</button>	
+			</form>
 		</div>
 	</body>
 </html>
