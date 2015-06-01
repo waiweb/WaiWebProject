@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import utils.Tool_TimeStamp;
 import jndi.JndiFactory;
 import exception.UserNotAddedExecption;
@@ -23,7 +25,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 	
 	public static final String homeDir = "./Images";
 	final JndiFactory jndi = JndiFactory.getInstance(); 
-	
+    private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 
 
 	
@@ -45,6 +48,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 
 	} catch (Exception e) {
 		System.out.println("Fehler: "+e.getMessage());
+		log.error("Error: ImageDaoImpl: addImage failed");
+		log.error("Erromessage: "+e.getMessage());
 
 		throw new UserNotAddedExecption();
 	} finally {
