@@ -48,6 +48,11 @@ public class Tool_PathEdit {
 	}
 	
 	
+	/**
+	 * Fügt den relativen pfad zum image-ordner vor dem relativen pfad des bildes ein.
+	 * @param list
+	 * @return
+	 */
 public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem> list){
 		
 		ArrayList<ImageItem> editedList  = new ArrayList<ImageItem>();
@@ -66,7 +71,7 @@ public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem
 			
 			ImageItem nItem = new ImageItem(item);
 			//Hier der Laufwerk Pfad entfernt! Geht jetzt los ab /CamId/Year/...
-			nItem.setPath("/camimages/"+ item.getPath());
+			nItem.setPath(JndiFactory.getInstance().getRelativeImagePath()+"/"+ item.getPath());
 			editedList.add(nItem);
 		}
 		
@@ -90,7 +95,7 @@ public static List<ImageItem> editImageListToOriginalImagePathJSP(List<ImageItem
 		for(ImageItem item : list){
 			
 			ImageItem nItem = new ImageItem(item);
-			nItem.setPath("/camimages/"+ item.getPath() + thumbnailImageType);
+			nItem.setPath(JndiFactory.getInstance().getRelativeImagePath()+"/"+ item.getPath() + thumbnailImageType);
 			editedList.add(nItem);
 		}
 		

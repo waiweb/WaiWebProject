@@ -59,7 +59,6 @@ public class MasterServlet extends HttpServlet {
 		UserCamMappingImpl usercammapping = new UserCamMappingImpl();
 		
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
-		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),"Admin"));
 		udb.createUserInDatabase(new User("user",new String(Tool_Security.hashFromString("user")),0,Tool_TimeStamp.getTimeStampString(),"User"));
 		udb.createUserInDatabase(new User("a",new String(Tool_Security.hashFromString("a")),1,Tool_TimeStamp.getTimeStampString(),"User a"));
 		udb.createUserInDatabase(new User("b",new String(Tool_Security.hashFromString("b")),0,Tool_TimeStamp.getTimeStampString(),"User b"));

@@ -7,7 +7,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 
+import jndi.JndiFactory;
+
+import org.apache.log4j.Logger;
+
 public class Tool_TimeStamp {
+	
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 	
 	//@Deprecated 
     public static String getTimeStampString(){
@@ -97,6 +104,8 @@ public class Tool_TimeStamp {
 			
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
+
 			e.printStackTrace();
 		}
 		long time = date.getTime();
@@ -116,6 +125,7 @@ public class Tool_TimeStamp {
 		    Date parsedDate = dateFormat.parse(date+" "+time);
 		    timestamp = new java.sql.Timestamp(parsedDate.getTime());
 		}catch(Exception e){//this generic but you can control another types of exception
+			log.error("Error: "+e.getMessage());
 		 System.out.println("Fehler bei der Konvertierung von String in Timestamp !!");
 		}
 		

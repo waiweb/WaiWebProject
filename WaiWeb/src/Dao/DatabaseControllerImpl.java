@@ -4,8 +4,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import model.User;
+
 import org.apache.log4j.Logger;
 
+import utils.Tool_Security;
+import utils.Tool_TimeStamp;
 import Dao.Interface.DatabaseControlInterface;
 import exception.UserNotAddedExecption;
 import jndi.JndiFactory;
@@ -114,6 +118,10 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 			closeConnection(connection);
 		}
 		
+		//admin anlegen
+		UserDaoImpl udb = new UserDaoImpl();
+		udb.createUserInDatabase(new User("admin",new String(Tool_Security.hashFromString("admin")),1,Tool_TimeStamp.getTimeStampString(),"Admin"));
+
 		
 		
 	}

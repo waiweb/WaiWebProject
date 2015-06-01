@@ -110,7 +110,7 @@ public class PicCatch {
 
 	        IpCamDevice ipCamDevice =null;
 	        try {
-	        	if(!IpCamDeviceRegistry.isRegistered(name))
+	        	//if(!IpCamDeviceRegistry.isRegistered(name))
 	        	ipCamDevice = IpCamDeviceRegistry.register(name, url, mode);
 			} catch (MalformedURLException e) {
 				log.error("Error: "+e.getMessage());
@@ -118,13 +118,28 @@ public class PicCatch {
 				e.printStackTrace();
 			}
 	        
-			WebcamUtils.capture(Webcam.getWebcams().get(0), fullname, ImageUtils.FORMAT_JPG);
-			Webcam.getWebcams().get(0).close(); //superwichtig sonst kann der stream nicht mehr wieder verwendet werden.
-
-			IpCamDeviceRegistry.unregisterAll();
+	        try{
+				WebcamUtils.capture(Webcam.getWebcams().get(0), fullname, ImageUtils.FORMAT_JPG);
+				Webcam.getWebcams().get(0).close(); //superwichtig sonst kann der stream nicht mehr wieder verwendet werden.
+	
+				IpCamDeviceRegistry.unregisterAll();
+	        }
+	        catch(Exception e){
+	        	log.info("Webcam: "+cam.getId_Cam() + " reagiert nicht bzw. ist bereits beschäftigt");
+				log.error("Error: "+e.getMessage());
+	        	
+	        }
 	    	
 	    }
 
+	 public static void restAllCameras(){
+		 
+		 for(Webcam cam : Webcam.getWebcams()){
+			 cam.close();
+		 }
+		 
+		 
+	 }
     // WIRD NICHT MEHR VERWENDET !!! Die funktion geht zwar aber sie ist ziemlich langsam. Daher verwenden wir
 	 // die eigene Implementierung.
 	@Deprecated
