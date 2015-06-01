@@ -4,6 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
+import org.apache.log4j.Logger;
+
 import Dao.Interface.DatabaseControlInterface;
 import exception.UserNotAddedExecption;
 import jndi.JndiFactory;
@@ -11,11 +13,13 @@ import jndi.JndiFactory;
 public class DatabaseControllerImpl implements DatabaseControlInterface {
 	
 	final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
-	
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
 
 
 	@Override
 	public void createDatabase() {
+		log.info("Enter create Database");
+
 		
 		//First delete Database
 		deleteDatabase();
@@ -104,7 +108,8 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
-			//throw new UserNotAddedExecption();
+			log.error("Error: "+e.getMessage());
+
 		} finally {
 			closeConnection(connection);
 		}
@@ -118,6 +123,8 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 	 */
 	@Override
 	public void deleteDatabase() {
+		log.info("Enter deleteDatabase");
+
 		
 		Connection connection = null;		
 		try {
@@ -141,7 +148,7 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
-			//throw new UserNotAddedExecption();
+			log.error("Error: "+e.getMessage());
 		} finally {
 			closeConnection(connection);
 		}
@@ -162,7 +169,8 @@ public class DatabaseControllerImpl implements DatabaseControlInterface {
 				connection.close();
 				connection = null;
 			} catch (SQLException e) {
-				// nothing to do
+				log.error("Error: "+e.getMessage());
+
 				e.printStackTrace();
 			}				
 		}

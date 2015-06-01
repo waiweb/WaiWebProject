@@ -5,23 +5,40 @@ import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
+
+import jndi.JndiFactory;
+
+import org.apache.log4j.Logger;
+
+import model.Cam;
+
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamUtils;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
+import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
+import com.github.sarxos.webcam.util.ImageUtils;
 
 public class Tool_ImageProcessing {
 	
 	public static final int IMG_WIDTH_Thumbnail = 100;
 	public static final int IMG_HEIGHT_Thumbnail = 100;
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 
 	
 	/**
 	 * Liest das Originalbild von einem pfad erzeugt eine Thumbnail und schreibt diese in den Zielpfad.
 	 * @param pathSource
 	 * @param pathTarget
+	 * @throws IOException 
 	 */
-	public static  void generateThumbnailByPathAndSaveToPath(String pathSource, String pathTarget){
+	public static  void generateThumbnailByPathAndSaveToPath(String pathSource, String pathTarget) throws IOException{
 		BufferedImage buf = Tool_ImageProcessing.readImageFromPath(pathSource);
 		BufferedImage bufThumbnail = Tool_ImageProcessing.getThumbnailOfImage(buf);
 		Tool_ImageProcessing.writeImageToPath(bufThumbnail, pathTarget);
@@ -45,7 +62,7 @@ public class Tool_ImageProcessing {
 		try {
 			ImageIO.write(bufferedImage, "jpg", new File(pathAndName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}  // speichern alle bilder grundsätzlich als jpg
 	}
@@ -56,14 +73,10 @@ public class Tool_ImageProcessing {
 	 * @return
 	 * @throws IOException
 	 */
-	public static BufferedImage readImageFromPath(String path){
+	public static BufferedImage readImageFromPath(String path) throws IOException{
 		BufferedImage originalImage = null;
-		try {
 			originalImage = ImageIO.read(new File(path));
-		} catch (IOException e) {
-			//TODO: Logger eintrag hier
-			e.printStackTrace();
-		}
+	
 		return originalImage;
 	}
 	
@@ -147,8 +160,36 @@ public class Tool_ImageProcessing {
 	}
 	
 	
+	public static boolean isImage(String path){
+		
+		if(path.endsWith(".jpg") || path.endsWith(".jpeg"))
+			return true;
+		
+		
+		return false;
+	}
 
 	
+	public static boolean isStream(String path){
+		
+		if(path.endsWith(".mjpg") || path.endsWith(".cgi"))
+			return true;
+		
+		
+		return false;
+	}
+
+	
+	public static boolean isRightFormat(String path){
+		if(path.endsWith(".jpg") || path.endsWith(".jpeg") || path.endsWith(".mjpg") || path.endsWith(".cgi"))
+			return true;
+	
+		return false;
+		
+	}
+	
+	
+
 
 
 }

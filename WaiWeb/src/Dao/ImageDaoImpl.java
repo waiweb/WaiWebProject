@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import utils.Tool_TimeStamp;
 import jndi.JndiFactory;
 import exception.UserNotAddedExecption;
@@ -23,7 +25,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 	
 	public static final String homeDir = "./Images";
 	final JndiFactory jndi = JndiFactory.getInstance(); 
-	
+    private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 
 
 	
@@ -45,6 +48,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 
 	} catch (Exception e) {
 		System.out.println("Fehler: "+e.getMessage());
+		log.error("Error: ImageDaoImpl: addImage failed");
+		log.error("Erromessage: "+e.getMessage());
 
 		throw new UserNotAddedExecption();
 	} finally {
@@ -64,9 +69,7 @@ public class ImageDaoImpl implements ImageItemInterface{
 		Connection connection = null;		
 		try {
 			connection = jndi.getConnection("jdbc/libraryDB");	
-		
-		
-		
+	
 		PreparedStatement pstmt = connection.prepareStatement("select * FROM Cam_Images_Table where Time >= ? AND Time <= ?");
 		pstmt.setTimestamp(1, begin);
 		pstmt.setTimestamp(2, end);
@@ -74,9 +77,6 @@ public class ImageDaoImpl implements ImageItemInterface{
 		ResultSet rs = pstmt.executeQuery();		
 	
 
-		
-		
-		
 		while(rs.next()){
 			ImageItem item = new ImageItem();
 			item.setId_Image(rs.getLong("Id_Image"));
@@ -85,13 +85,13 @@ public class ImageDaoImpl implements ImageItemInterface{
 			item.setPath(rs.getString("Path"));
 			item.setKommentar(rs.getString("Kommentar"));
 			
-
 			imageItemList.add(item);
 		}
 
 		
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
+			log.error("Error: "+e.getMessage());
 
 			throw new UserNotAddedExecption();
 		} finally {
@@ -100,6 +100,7 @@ public class ImageDaoImpl implements ImageItemInterface{
 		
 		
 		System.out.println("siez imagearray : "+imageItemList.size());
+		log.info("size of selected images: "+imageItemList.size());
 
 		return imageItemList;
 	}
@@ -112,9 +113,7 @@ public class ImageDaoImpl implements ImageItemInterface{
 		ArrayList<ImageItem> imageItemList = new ArrayList<ImageItem>();
 		Connection connection = null;		
 		try {
-			connection = jndi.getConnection("jdbc/libraryDB");	
-		
-		
+			connection = jndi.getConnection("jdbc/libraryDB");		
 		
 		PreparedStatement pstmt = connection.prepareStatement("select * FROM Cam_Images_Table where Time >= ? AND Time <= ? AND Id_Cam = ?");
 		pstmt.setTimestamp(1, begin);
@@ -123,8 +122,7 @@ public class ImageDaoImpl implements ImageItemInterface{
 		
 		ResultSet rs = pstmt.executeQuery();		
 	
-
-		
+	
 		while(rs.next()){
 			ImageItem item = new ImageItem();
 			item.setId_Image(rs.getLong("Id_Image"));
@@ -140,6 +138,7 @@ public class ImageDaoImpl implements ImageItemInterface{
 		
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
+			log.error("Error: "+e.getMessage());
 
 			throw new UserNotAddedExecption();
 		} finally {
@@ -148,6 +147,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 		
 		
 		System.out.println("siez imagearray : "+imageItemList.size());
+		log.info("size of selected images: "+imageItemList.size());
+
 
 		return imageItemList;
 	}
@@ -194,6 +195,7 @@ public class ImageDaoImpl implements ImageItemInterface{
 		
 		} catch (Exception e) {
 			System.out.println("Fehler: "+e.getMessage());
+			log.error("Error: "+e.getMessage());
 
 			throw new UserNotAddedExecption();
 		} finally {
@@ -202,6 +204,8 @@ public class ImageDaoImpl implements ImageItemInterface{
 		
 		
 		System.out.println("siez imagearray : "+imageItemList.size());
+		log.info("size of selected images: "+imageItemList.size());
+
 
 		return imageItemList;
 	}

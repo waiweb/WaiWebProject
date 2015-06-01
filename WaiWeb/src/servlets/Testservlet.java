@@ -1,17 +1,43 @@
 package servlets;
 
+import java.awt.FlowLayout;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
+import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.List;
 
+import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JFrame;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamUtils;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDevice;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
+import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
+import com.github.sarxos.webcam.ds.ipcam.IpCamStorage;
+import com.github.sarxos.webcam.util.ImageUtils;
+
+import model.Cam;
 import model.ImageItem;
+import Dao.CamDaoImpl;
 import Dao.ImageDaoImpl;
+import jndi.JndiFactory;
+import jobs.ImagCaptureJob;
+import utils.Tool_ImageProcessing;
 import utils.Tool_PathEdit;
+import utils.Tool_Security;
+import utils.Tool_TimeStamp;
 
 /**
  * Servlet implementation class Testservlet
@@ -19,6 +45,8 @@ import utils.Tool_PathEdit;
 @WebServlet("/Testservlet")
 public class Testservlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	public ImagCaptureJob imajob;
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -26,7 +54,77 @@ public class Testservlet extends HttpServlet {
     public Testservlet() {
         super();
         // TODO Auto-generated constructor stub
+        
+        
+       // Webcam.setDriver(new IpCamDriver());
+        
+      
+        
+        
+        /*
+		try {
+			IpCamDeviceRegistry.register("Lignano", "http://www.mpc-it.de/webcam/big.jpg", IpCamMode.PUSH);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		BufferedImage buf =Webcam.getWebcams().get(0).getImage();
+		*/
+		
+        /*
+        CamDaoImpl camdao = new CamDaoImpl();
+        
+       
+		ArrayList<Cam> camList = (ArrayList<Cam>) camdao.getAllCams();
+		
+		
+		for(Cam cam : camList){
+			
+			if(Tool_ImageProcessing.isImage(cam.getUrl())){
+				System.out.println("Cam: "+cam.getCamname()+ " is image");
+				imageCapture(cam);
+
+			}
+			else if(Tool_ImageProcessing.isStream(cam.getUrl())){
+				System.out.println("Cam: "+cam.getCamname() + " is stream!!!");
+				streamCapture(cam);
+
+			}
+			
+		}*/
+			/*
+		    String name = "name";
+	        String url = "http://ce3014.myfoscam.org:20054/videostream.cgi";
+	        IpCamMode mode = IpCamMode.PUSH;
+
+	        try {
+				IpCamDeviceRegistry.register(name, url, mode);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+	        /*
+
+		if( buf != null)
+		System.out.println("image != null");
+		else
+			System.out.println("image = null");
+		
+		
+		System.out.println("Size WebcamlistList: "+Webcam.getWebcams().size());
+
+		*/
+		/*
+		WebcamUtils.capture(Webcam.getWebcams().get(0), "D:/xxx/test2", ImageUtils.FORMAT_JPG);
+		
+		byte[] bytes = WebcamUtils.getImageBytes(Webcam.getWebcams().get(0), "jpg");
+		System.out.println("Bytes length: " + bytes.length);
+*/
     }
+       
+        
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -34,24 +132,17 @@ public class Testservlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Enter doGet of TestServlet");
 		
-		ImageDaoImpl imageDato = new ImageDaoImpl();
-		
-		//
-		ArrayList<ImageItem> list = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToOriginalImagePath(imageDato.getAllImageItems());
-	
-	
-		for(ImageItem item : list){
-			System.out.println("Start priting originalImagePath");
-			System.out.println("Item id: "+item.getId_Image()+ " path: "+item.getPath());
+		if(imajob == null){
+		 imajob= new ImagCaptureJob();
+
+		 
 		}
 		
-		list = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imageDato.getAllImageItems());
+	   
+
 		
-		
-		for(ImageItem item : list){
-			System.out.println("Start priting ThumbnailImagePath");
-			System.out.println("Item id: "+item.getId_Image()+ " path: "+item.getPath());
-		}
+		imajob.capture();
+
 	
 	}
 

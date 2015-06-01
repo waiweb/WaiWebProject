@@ -5,6 +5,8 @@ import java.util.List;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
+
 import jndi.JndiFactory;
 import model.ImageItem;
 
@@ -12,6 +14,8 @@ public class Tool_PathEdit {
 	
     public static final String originalImageType = ".jpg";
     public static final String thumbnailImageType = "_thumbnail.jpg";
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 	
     /**
      * Returns a new List with copyed values of the original - and with path to the images and the type of the originalimage.
@@ -28,7 +32,7 @@ public class Tool_PathEdit {
 		try {
 			imageDirctoryPath = JndiFactory.getInstance().getImageDirectoryPath();
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}
 		

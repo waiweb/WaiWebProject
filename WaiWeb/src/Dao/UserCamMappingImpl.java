@@ -8,6 +8,8 @@ import java.util.ArrayList;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
+
 import jndi.JndiFactory;
 import model.Cam;
 import model.User;
@@ -16,6 +18,7 @@ import Dao.Interface.UserCamMappingInterface;
 public class UserCamMappingImpl implements UserCamMappingInterface{
 
 	final JndiFactory jndi = JndiFactory.getInstance();
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
 
 	
 	/**
@@ -52,7 +55,7 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			}
 			
 		} catch (Exception e) {
-			//database query feller
+			log.error("Error: "+e.getMessage());
 		} finally {
 			closeConnection(connection);
 		}
@@ -87,7 +90,7 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			}
 			
 		} catch (Exception e) {
-			//database query feller
+			log.error("Error: "+e.getMessage());
 		} finally {
 			closeConnection(connection);
 		}
@@ -111,7 +114,6 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 		PreparedStatement pstmt = connection.prepareStatement("select * from User_Cam_Mapping_Table where Id_User = ? ");
 		pstmt.setLong(1, user.getId_User());
 		ResultSet rs = pstmt.executeQuery();		
-		System.out.println("pstmt: "+pstmt.getFetchSize());
 		
 		
 			while(rs.next()){
@@ -121,7 +123,7 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			}
 			
 		} catch (SQLException | NamingException e) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -139,7 +141,6 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 		PreparedStatement pstmt = connection.prepareStatement("select * from User_Cam_Mapping_Table where Id_User = ?");
 		pstmt.setLong(1, userId);
 		ResultSet rs = pstmt.executeQuery();		
-		System.out.println("pstmt: "+pstmt.getFetchSize());
 		
 		
 			while(rs.next()){
@@ -149,10 +150,10 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			}
 			
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		} catch (NamingException e) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}
 
@@ -167,7 +168,7 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 				connection.close();
 				connection = null;
 			} catch (SQLException e) {
-				// nothing to do
+				log.error("Error: "+e.getMessage());
 				e.printStackTrace();
 			}				
 		}

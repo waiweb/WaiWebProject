@@ -6,11 +6,15 @@ import java.io.FileWriter;
 
 import javax.naming.NamingException;
 
+import org.apache.log4j.Logger;
+
 import jndi.JndiFactory;
 
 public class QuartsPropertieParser {
 	
 	JndiFactory jndiFactory;
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 	
 	public QuartsPropertieParser(String pathToJobInit){
 		
@@ -18,13 +22,14 @@ public class QuartsPropertieParser {
 		
 		//String pathToJobInitRelaced = pathToJobInit.replace("'\'/", "/");
 		String pathToJobInitRelaced = pathToJobInit;
-		System.out.println("replaced path. "+pathToJobInitRelaced);
+		System.out.println("Path zu "+pathToJobInitRelaced);
+
 		
 		String configDirecttory = null;
 		try {
 			configDirecttory = jndiFactory.getConfigDirectoryPath();
 		} catch (NamingException e1) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e1.getMessage());
 			e1.printStackTrace();
 		}
 		String filename = "quartz.properties";
@@ -38,6 +43,8 @@ public class QuartsPropertieParser {
 
             // This will output the full path where the file will be written to...
             System.out.println(quartsprop.getCanonicalPath());
+			log.debug("QuartsProperties Generierung, pfad der eingesetzt wird: "+quartsprop.getCanonicalPath());
+
 
             writer = new BufferedWriter(new FileWriter(quartsprop));
             writer.write("org.quartz.scheduler.instanceName = waiHilfQuartzScheduler");
@@ -72,12 +79,16 @@ public class QuartsPropertieParser {
 
             
         } catch (Exception e) {
+			log.error("Error: "+e.getMessage());
+
             e.printStackTrace();
         } finally {
             try {
                 // Close the writer regardless of what happens...
                 writer.close();
             } catch (Exception e) {
+    			log.error("Error: "+e.getMessage());
+
             }
         }
 
