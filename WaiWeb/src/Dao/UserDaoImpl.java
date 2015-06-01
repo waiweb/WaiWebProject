@@ -7,6 +7,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import Dao.Interface.UserInterface;
 import exception.UserNotAddedExecption;
 import exception.UserNotFoundExecption;
@@ -17,6 +19,7 @@ public class UserDaoImpl implements UserInterface {
 	
 	
 	final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
 
 
 	@Override
@@ -59,6 +62,8 @@ public class UserDaoImpl implements UserInterface {
 				
 
 		} catch (Exception e) {
+			log.info("Error von user: Fehler bei Eingabe! Mind. 3 Zeichen als Passwort");
+
 			System.out.println("Fehler bei Eingabe! Mind. 3 Zeichen als Passwort!");
 			return false;
 
@@ -97,13 +102,15 @@ public class UserDaoImpl implements UserInterface {
 					return user;
 				}
 				else {
+					log.error("Error: user Id not found: "+userId);
+
 				throw new UserNotFoundExecption(userId);
 				}
 				
 
 		} catch (Exception e) {
-			//throw new UserNotFoundExecption(userId);
-			//database fehler
+			log.error("Error: "+e.getMessage());
+
 		} finally {
 			closeConnection(connection);
 		}
@@ -130,6 +137,8 @@ public class UserDaoImpl implements UserInterface {
 			
 
 	} catch (Exception e) {
+		log.error("Error: updatefehler");
+
 		System.out.println("Updatefehler: "+e.getMessage());
 	} finally {
 		closeConnection(connection);
@@ -153,8 +162,8 @@ public class UserDaoImpl implements UserInterface {
 			
 
 	} catch (Exception e) {
-		//throw new UserNotFoundExecption(userId);
-		//database fehler
+		log.error("Error: "+e.getMessage());
+
 	} finally {
 		closeConnection(connection);
 	}
@@ -177,8 +186,8 @@ public class UserDaoImpl implements UserInterface {
 			
 
 	} catch (Exception e) {
-		//throw new UserNotFoundExecption(userId);
-		//database fehler
+		log.error("Error: "+e.getMessage());
+
 	} finally {
 		closeConnection(connection);
 	}
@@ -198,7 +207,6 @@ public class UserDaoImpl implements UserInterface {
 			
 			PreparedStatement pstmt = connection.prepareStatement("select * from users_table");
 			ResultSet rs = pstmt.executeQuery();		
-			System.out.println("pstmt: "+pstmt.getFetchSize());
 			
 			
 			while(rs.next()){
@@ -215,8 +223,8 @@ public class UserDaoImpl implements UserInterface {
 			
 
 	} catch (Exception e) {
-		//throw new UserNotFoundExecption(userId);
-		//database fehler
+		log.error("Error: "+e.getMessage());
+
 	} finally {
 		closeConnection(connection);
 	}
@@ -233,7 +241,8 @@ public class UserDaoImpl implements UserInterface {
 				connection.close();
 				connection = null;
 			} catch (SQLException e) {
-				// nothing to do
+				log.error("Error: "+e.getMessage());
+
 				e.printStackTrace();
 			}				
 		}
@@ -247,8 +256,7 @@ public class UserDaoImpl implements UserInterface {
 		Connection connection = null;		
 		try {
 			connection = jndi.getConnection("jdbc/libraryDB");	
-			
-			
+					
 			PreparedStatement pstmt = connection.prepareStatement("select Id_User,username,password,rechte,timeofcreation,kommentar from users_table where username =? AND password =?") ;
 			pstmt.setString(1, username);
 			pstmt.setString(2, password);
@@ -265,8 +273,8 @@ public class UserDaoImpl implements UserInterface {
 			
 
 	} catch (Exception e) {
-		//throw new UserNotFoundExecption(userId);
-		//database fehler
+		log.error("Error: "+e.getMessage());
+
 	} finally {
 		closeConnection(connection);
 	}
@@ -303,8 +311,8 @@ public class UserDaoImpl implements UserInterface {
 			
 
 	} catch (Exception e) {
-		//throw new UserNotFoundExecption(userId);
-		//database fehler
+		log.error("Error: "+e.getMessage());
+
 	} finally {
 		closeConnection(connection);
 	}
@@ -329,13 +337,15 @@ public class UserDaoImpl implements UserInterface {
 
 			}
 			else {
+				log.error("Error: username in database mit namen: "+name+" nicht gefunden");
+
 			throw new UserNotFoundExecption(name);
 			}
 			
 
 	} catch (Exception e) {
-		//throw new UserNotFoundExecption(userId);
-		//database fehler
+		log.error("Error: "+e.getMessage());
+
 	} finally {
 		closeConnection(connection);
 	}
@@ -361,7 +371,8 @@ public class UserDaoImpl implements UserInterface {
 			return false;
 			}
 		} catch (Exception e) {
-			//database query fehler
+			log.error("Error: "+e.getMessage());
+
 		} finally {
 			closeConnection(connection);
 		}

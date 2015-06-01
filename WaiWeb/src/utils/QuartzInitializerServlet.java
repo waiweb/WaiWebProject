@@ -20,9 +20,7 @@ import org.quartz.impl.StdSchedulerFactory;
 public class QuartzInitializerServlet extends HttpServlet {
     
     private static Logger mLog = Logger.getLogger(QuartzInitializerServlet.class);
-
     private boolean performShutdown = true;
-
     private Scheduler scheduler = null;
 
     /*

@@ -16,7 +16,6 @@ public interface CamInterface {
 	public void updateUser(Cam cam);
 	public long getCamIdFromDatabaseByName(String name);
 	public boolean isCamNameExisting(String name);
-	public boolean isCamAlive(Cam cam);
 
 
 }

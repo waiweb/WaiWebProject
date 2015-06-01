@@ -24,7 +24,8 @@ public final class SystemStartup implements ServletContextListener {
 
 		System.out.println("enter ContextInitialized");
 		
-		   Webcam.setDriver(new IpCamDriver());
+		//Ladet die treibe für eine IP camera in die Sarxos api.
+		Webcam.setDriver(new IpCamDriver());
 
 		   
 

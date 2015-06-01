@@ -12,6 +12,10 @@ import java.net.MalformedURLException;
 
 import javax.imageio.ImageIO;
 
+import jndi.JndiFactory;
+
+import org.apache.log4j.Logger;
+
 import model.Cam;
 
 import com.github.sarxos.webcam.Webcam;
@@ -24,6 +28,8 @@ public class Tool_ImageProcessing {
 	
 	public static final int IMG_WIDTH_Thumbnail = 100;
 	public static final int IMG_HEIGHT_Thumbnail = 100;
+	private static Logger log = Logger.getLogger(JndiFactory.class);   
+
 
 	
 	/**
@@ -56,7 +62,7 @@ public class Tool_ImageProcessing {
 		try {
 			ImageIO.write(bufferedImage, "jpg", new File(pathAndName));
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}  // speichern alle bilder grundsätzlich als jpg
 	}

@@ -52,7 +52,10 @@ public class ImagCaptureJob implements Job {
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
 		
 		try {
-			capture();	
+			//wenn man in den einstellungen context.xml auf false stellt ignoriert diese funktion den quarz.
+			if (JndiFactory.getInstance().getEnvironmentAsBoolean("enableQuarz").booleanValue() == true){
+				capture();	
+			}
 
 		} catch (Exception e) {
 			e.printStackTrace();
