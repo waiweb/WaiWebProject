@@ -56,10 +56,9 @@ public class SettingsServlet extends HttpServlet {
 					
 					backToAuswahl(request, response);
 				
-				//Log-Datei auf JSP anzeigen:
+				//Log-Datei auf Show_Log.jsp anzeigen:
 				} else if(action.equals("showLog")) {
 					ArrayList<String> tempLog = new ArrayList<String>();
-					this.getServletContext().getContextPath();
 					
 					@SuppressWarnings("resource")
 					BufferedReader reader = new BufferedReader(new FileReader(this.getServletContext().getRealPath("/") + "WEB-INF/logs/waiweblog.log"));

@@ -11,9 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import model.ImageItem;
 import Dao.ImageDaoImpl;
-import jndi.JndiFactory;
 import utils.Tool_PathEdit;
-import utils.Tool_Security;
 
 /**
  * Servlet implementation class Testservlet

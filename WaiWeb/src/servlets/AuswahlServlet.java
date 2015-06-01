@@ -66,11 +66,6 @@ public class AuswahlServlet extends HttpServlet {
 						}
 					}
 					
-					//Testausgabe um die Pfade anzuzeigen die wir übergeben:
-					for(int i=0;i<allThumbImages.size();i++) {
-						System.out.println("PATH: "+ allThumbImages.get(i).getPath());
-					}
-					
 					request.setAttribute("cams", collection);
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Cam.jsp");
 					dispatcher.forward(request, response);	
