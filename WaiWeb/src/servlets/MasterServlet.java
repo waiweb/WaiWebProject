@@ -84,7 +84,13 @@ public class MasterServlet extends HttpServlet {
 		camdao.createCamInDatabase(new Cam("See", "http://www.die-ersten-am-see.de/webcam/camluzo.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("Fuessen", "http://webcamfuessen.de/webcam/webcamfuessen.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("Neustadthambach", "http://www.neustadthambach.de/pics/schloss.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("usa1", "http://96.10.1.168/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("usa2", "http://50.73.56.89/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("usa3", "http://trackfield.webcam.oregonstate.edu/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		camdao.createCamInDatabase(new Cam("usa4", "http://plazacam.studentaffairs.duke.edu/axis-cgi/mjpg/video.cgi", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 
+			
+			
 		ArrayList<Cam>camlist = (ArrayList<Cam>) camdao.getAllCams();
 		for(Cam cam : camlist){
 			System.out.println("Id: "+cam.getCamname() + " url: "+cam.getUrl()+" erstellt am: "+cam.getTimeOfCreation()+ " directory: "+cam.getPathOriginalImageDirectory()+" kommentare: "+cam.getKommentar());

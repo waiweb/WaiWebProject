@@ -3,6 +3,7 @@ package jobs;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,13 +14,23 @@ import javax.servlet.ServletContext;
 
 import jndi.JndiFactory;
 
+import org.apache.log4j.Logger;
 import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamUtils;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDevice;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
+import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
+import com.github.sarxos.webcam.util.ImageUtils;
+
 import Dao.CamDaoImpl;
 import Dao.ImageDaoImpl;
 import utils.PicCatch;
+import utils.SystemStartup;
 import utils.Tool_ImageProcessing;
 import utils.Tool_TimeStamp;
 import model.Cam;
@@ -28,6 +39,8 @@ import utils.PicCatch;
 
 public class ImagCaptureJob implements Job {
 	
+    private static Logger log = Logger.getLogger(JndiFactory.class);   
+
     final CamDaoImpl camdaoImp= new CamDaoImpl();
     final ImageDaoImpl imageDaoImp = new ImageDaoImpl();
     public static final String originalImageType = ".jpg";
@@ -45,7 +58,7 @@ public class ImagCaptureJob implements Job {
 			e.printStackTrace();
 		}
 		
-		System.out.println("job");
+		System.out.println("enter Execute job");
 		
 	}
 	
@@ -86,12 +99,6 @@ public class ImagCaptureJob implements Job {
 
     public void captureSingelCam(Cam cam){
     	
-
-    	//Holt das Bild mit dem Pfad aus der Cam
-    	BufferedImage image = PicCatch.PicCatch(cam);
-    	
-    	if(image != null){
-    	
     	//Erzeugt einen Zeitstempel sowie eine handlichere Hashmap
     	Timestamp timestamp = Tool_TimeStamp.getTimeStampSQLDateFormat();
     	HashMap<String,String> hashmapTimeStamp = Tool_TimeStamp.getTimeStampSetFromSQLDateFormat(timestamp);
@@ -115,49 +122,91 @@ public class ImagCaptureJob implements Job {
     			+ hashmapTimeStamp.get("second") + "_second";
     		
     	
-    	String temp = basePath+"/"+imageDirectoryPath+"/"+imageName+originalImageType;
-    	System.out.println("temp: "+temp);
     	
-    	
-    	//Speicherort Anlegen
-	    (new File(basePath+"/"+imageDirectoryPath)).mkdirs();
+    	String path = basePath+"/"+imageDirectoryPath;
+    	String fullname = path+"/"+imageName;
+					
+			
+			if(Tool_ImageProcessing.isImage(cam.getUrl())){
+				System.out.println("Cam: "+cam.getCamname()+ " is image");
+				
+				
+				BufferedImage image = PicCatch.PicCatch(cam);
 
-    	
-    	//Speichert das Originalbild im Filesystem
-        try {
-    		ImageIO.write(image, "jpg",new File(basePath+"/"+imageDirectoryPath+"/"+imageName+originalImageType));
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-        
-        
-        //Speichert die Thumbnail im Filesystem
-        try {
-    		ImageIO.write(Tool_ImageProcessing.getThumbnailOfImage(image), "jpg",new File(basePath+"/"+imageDirectoryPath+"/"+imageName+thumbnailImageType));
+				(new File(basePath+"/"+imageDirectoryPath)).mkdirs();
 
-    	} catch (IOException e) {
-    		// TODO Auto-generated catch block
-    		e.printStackTrace();
-    	}
-        
+		    	
+		    	//Speichert das Originalbild im Filesystem
+		        try {
+		    		ImageIO.write(image, "jpg",new File(basePath+"/"+imageDirectoryPath+"/"+imageName+originalImageType));
+		    	} catch (IOException e) {
+		    		log.error("Error while writing original-image to Disk of cam: "+cam.getId_Cam());
+		    		log.error("Erromessage: "+e.getMessage());
 
+		    	}
+		        
+		        
+		        //Speichert die Thumbnail im Filesystem
+		        try {
+		    		ImageIO.write(Tool_ImageProcessing.getThumbnailOfImage(image), "jpg",new File(basePath+"/"+imageDirectoryPath+"/"+imageName+thumbnailImageType));
 
-    	
-    	
-    	//Speichert die metainformationen des bildes in der Datenbank.
-    	ImageItem item = new ImageItem(imageName,cam.getId_Cam(),timestamp,imageDirectoryPath,"");
-    	imageDaoImp.addImage(item);
-    	
-    	}
-    	else{
-    		System.out.println("System image of cam: "+cam.getId_Cam()+ " was null!");
-    	}
+		    	} catch (IOException e) {
+		    		log.error("Erromessage: "+e.getMessage());
+		    	}
+
+		    	//Speichert die metainformationen des bildes in der Datenbank.
+		    	ImageItem item = new ImageItem(imageName,cam.getId_Cam(),timestamp,imageDirectoryPath,"");
+		    	imageDaoImp.addImage(item);
+		    	
+		    	
+		    				
+
+			}
+			else if(Tool_ImageProcessing.isStream(cam.getUrl())){
+				System.out.println("Cam: "+cam.getCamname() + " is stream!!!");
+				PicCatch.streamCapture(cam,path,fullname);
+
+		    	System.out.println("temp: "+fullname);
     	
 
+		        
+		        BufferedImage image=null;
+				try {
+					image = Tool_ImageProcessing.readImageFromPath(fullname+originalImageType);
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
+				
+		        if(image != null){
+
+			        //Speichert die Thumbnail im Filesystem
+			        try {
+			    		ImageIO.write(Tool_ImageProcessing.getThumbnailOfImage(image), "jpg",new File(fullname+thumbnailImageType));
+			
+			    	} catch (IOException e) {
+			    		// TODO Auto-generated catch block
+			    		e.printStackTrace();
+			    	}
+			        
+			    	
+			    	//Speichert die metainformationen des bildes in der Datenbank.
+			    	ImageItem item = new ImageItem(imageName,cam.getId_Cam(),timestamp,imageDirectoryPath,"");
+			    	imageDaoImp.addImage(item);
+		    	
+		        }
+		        else
+					System.out.println("System image of cam: "+cam.getId_Cam()+ " was null!");
+			
+		    	}
+				
+			
+				
+			}
+			
+
+  	
     	
-    	
-    }
 
 
 

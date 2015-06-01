@@ -15,6 +15,7 @@ package utils;
 import java.awt.image.BufferedImage;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -27,6 +28,14 @@ import java.text.SimpleDateFormat;
 
 import javax.imageio.ImageIO;
 import javax.naming.NamingException;
+
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.WebcamUtils;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDevice;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
+import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
+import com.github.sarxos.webcam.util.ImageUtils;
 
 import model.Cam;
 import jndi.JndiFactory;;
@@ -59,6 +68,79 @@ public class PicCatch {
 		
 
 	}
+	
+	
+	 public static void streamCapture(Cam cam,String path,String fullname){
+	    	
+			IpCamDeviceRegistry.unregisterAll();
+
+		
+		  // Webcam.setDriver(new IpCamDriver());
+
+		   
+	    	boolean pathGenerated = (new File(path)).mkdirs();
+	    	
+		
+	    	
+	    	
+	    	if(pathGenerated){
+	    		System.out.println("Path generated: yes");
+	    	}
+	    	else{
+	    		System.out.println("Path generated: no");
+
+	    	}
+
+	    	
+		    String name = String.valueOf(cam.getId_Cam());
+	        String url = cam.getUrl();
+	        IpCamMode mode = IpCamMode.PUSH;
+
+	        IpCamDevice ipCamDevice =null;
+	        try {
+	        	if(!IpCamDeviceRegistry.isRegistered(name))
+	        	ipCamDevice = IpCamDeviceRegistry.register(name, url, mode);
+			} catch (MalformedURLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	        
+			WebcamUtils.capture(Webcam.getWebcams().get(0), fullname, ImageUtils.FORMAT_JPG);
+			Webcam.getWebcams().get(0).close();
+			
+
+
+			IpCamDeviceRegistry.unregisterAll();
+	    	
+	    }
+
+    
+    public static void imageCapture(Cam cam,String path,String fullname){
+    	
+    	(new File(path)).mkdirs();
+
+    	
+		//Saxros Webcam Capture tool
+    	
+	    String name = String.valueOf(cam.getId_Cam());
+        String url = cam.getUrl();
+        IpCamMode mode = IpCamMode.PULL;
+
+        try {
+			IpCamDeviceRegistry.register(name, url, mode);
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        Webcam.getWebcams().get(0).open();
+
+		WebcamUtils.capture(Webcam.getWebcams().get(0), fullname, ImageUtils.FORMAT_JPG);
+
+
+		IpCamDeviceRegistry.unregisterAll();
+    	
+    	
+    }
 	
 
 

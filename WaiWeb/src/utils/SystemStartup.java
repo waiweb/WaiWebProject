@@ -5,6 +5,9 @@ import java.io.File;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 
+import com.github.sarxos.webcam.Webcam;
+import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
+
 import javax.naming.NamingException;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
@@ -20,6 +23,10 @@ public final class SystemStartup implements ServletContextListener {
 		JndiFactory jndiFactory = JndiFactory.getInstance();
 
 		System.out.println("enter ContextInitialized");
+		
+		   Webcam.setDriver(new IpCamDriver());
+
+		   
 
 		//Relative paths 
 		String projectPath = event.getServletContext().getRealPath("/WEB-INF");
@@ -71,7 +78,9 @@ public final class SystemStartup implements ServletContextListener {
 			e.printStackTrace();
 		}
 		
-		
+
+
+
 		
 		
 		
