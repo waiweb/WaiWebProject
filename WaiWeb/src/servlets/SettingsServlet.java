@@ -1,7 +1,11 @@
 package servlets;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -39,17 +43,39 @@ public class SettingsServlet extends HttpServlet {
 	        	System.out.println("Session mit User=" + session.getAttribute("username") 
 	        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");
 			
+				//Komplette Datenbank zurücksetzen TODO: Funktion zum rücksetzen der Datenbanken ohne Admin zu löschen!
 				if(action.equals("deleteDatabase")){
-					//Komplette Datenbank zurücksetzen TODO: Funktion zum rücksetzen der Datenbanken ohne Admin zu löschen!
+					
 					DatabaseControllerImpl databaseDelete = new DatabaseControllerImpl();
 					databaseDelete.deleteDatabase();
 					
 					backToAuswahl(request, response);
-					
+				
+				//Alle gespeicherten Bilder löschen: TODO: Funktion um alle Bilder zu löschen!	
 				} else if(action.equals("deletePictures")){
-					//Alle gespeicherten Bilder löschen: TODO: Funktion um alle Bilder zu löschen!
-					backToAuswahl(request, response);
 					
+					backToAuswahl(request, response);
+				
+				//Log-Datei auf JSP anzeigen:
+				} else if(action.equals("showLog")) {
+					ArrayList<String> tempLog = new ArrayList<String>();
+					this.getServletContext().getContextPath();
+					
+					@SuppressWarnings("resource")
+					BufferedReader reader = new BufferedReader(new FileReader(this.getServletContext().getRealPath("/") + "WEB-INF/logs/waiweblog.log"));
+					
+					String line = "";
+					line = reader.readLine();
+					
+					while(line != null){
+						tempLog.add(line);
+						line = reader.readLine();
+					}
+					
+					request.setAttribute("log", tempLog);
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Log.jsp");
+					dispatcher.forward(request, response);	
+				
 				} else if (action.equals("Back")) {
 					backToAuswahl(request, response);
 				} 
