@@ -348,7 +348,7 @@ public class EditServlet extends HttpServlet{
 				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				   dispatcher.forward(request, response);
 				}else{
-					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht möglich");
+					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht moeglich");
 				}
 		 }	
 	}
