@@ -126,6 +126,9 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}
+	 finally {
+		closeConnection(connection);
+	}
 
 		return camList;
 	}
@@ -156,6 +159,9 @@ public class UserCamMappingImpl implements UserCamMappingInterface{
 			log.error("Error: "+e.getMessage());
 			e.printStackTrace();
 		}
+	 finally {
+		closeConnection(connection);
+	}
 
 		return camList;
 	}

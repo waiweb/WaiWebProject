@@ -138,14 +138,16 @@ public class AuswahlServlet extends HttpServlet {
 						collection.add(i, tempCam);
 					}
 					
-					System.out.println("Try to get all Thumbs:");
-					Date date= new Date();
 					
-					Timestamp now = new Timestamp(date.getTime());
-					Timestamp until = new Timestamp(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes()-10,date.getSeconds(), 0);
+					ArrayList<ImageItem> templist = null;
+					try{
+					templist = (ArrayList<ImageItem>) imgDaoImp.getAllImageItems();
+					}
+					catch(Exception e){
+						System.out.println("Yoloooooooooooooooooooooo");
+					}
 					
-					List<ImageItem> imgTemp = imgDaoImp.getImageItems(until, now);
-					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgTemp);
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(templist);
 					
 					for(int j=0;j<collection.size();j++){
 						for(int i=0;i<allThumbImages.size();i++){
