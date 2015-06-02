@@ -61,7 +61,7 @@ public class SettingsServlet extends HttpServlet {
 					ArrayList<String> tempLog = new ArrayList<String>();
 					
 					@SuppressWarnings("resource")
-					BufferedReader reader = new BufferedReader(new FileReader(this.getServletContext().getRealPath("/") + "WEB-INF/logs/waiweblog.log"));
+					BufferedReader reader = new BufferedReader(new FileReader(this.getServletContext().getRealPath("/") + "WEB-INF/config/logs/waiweblog.log"));
 					
 					String line = "";
 					line = reader.readLine();
