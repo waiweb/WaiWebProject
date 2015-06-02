@@ -130,7 +130,16 @@ public class AuswahlServlet extends HttpServlet {
 						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
 					}
 					
-					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgDaoImp.getAllImageItems());
+					
+					ArrayList<ImageItem> templist = null;
+					try{
+					templist = (ArrayList<ImageItem>) imgDaoImp.getAllImageItems();
+					}
+					catch(Exception e){
+						System.out.println("Yoloooooooooooooooooooooo");
+					}
+					
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(templist);
 					
 					for(int j=0;j<collection.size();j++){
 						for(int i=0;i<allThumbImages.size();i++){
