@@ -41,7 +41,7 @@ public class SettingsServlet extends HttpServlet {
         	//Rechte überprüfen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
 	        	System.out.println("Session mit User=" + session.getAttribute("username") 
-	        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");
+	        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.(Settings)");
 			
 				//Komplette Datenbank zurücksetzen TODO: Funktion zum rücksetzen der Datenbanken ohne Admin zu löschen!
 				if(action.equals("deleteDatabase")){
@@ -51,12 +51,7 @@ public class SettingsServlet extends HttpServlet {
 					
 					backToAuswahl(request, response);
 				
-				//Alle gespeicherten Bilder löschen: TODO: Funktion um alle Bilder zu löschen!	
-				} else if(action.equals("deletePictures")){
-					
-					backToAuswahl(request, response);
-				
-				//Log-Datei auf Show_Log.jsp anzeigen:
+				//Log-File anzeigen:
 				} else if(action.equals("showLog")) {
 					ArrayList<String> tempLog = new ArrayList<String>();
 					

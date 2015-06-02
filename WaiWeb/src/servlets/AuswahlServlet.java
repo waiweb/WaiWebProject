@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -45,7 +47,7 @@ public class AuswahlServlet extends HttpServlet {
         	//Rechte überprüfen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
         		log.info("Session mit User=" + session.getAttribute("username") 
-        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt. (Auswahl)");
 
 	        	//Falls Action vorhanden prüfen, ansonsten auf Auswahl-Bildschirm:
 				if (action == null) {
@@ -123,23 +125,32 @@ public class AuswahlServlet extends HttpServlet {
 					
 					//Vergleichen und ggf. gelöschte Cams entfernen:
 					List<Cam> collection = new ArrayList<Cam>();
+					Cam tempCam = new Cam();
 					long tempID = 0;
 					
 					for(int i=0;i<tempList.size();i++) {
 						tempID = tempList.get(i).getId_Cam();
-						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
+							for(int j=0;j<newMapping.size();j++){
+								if(newMapping.get(j).getId_Cam() == tempID){
+									tempCam = newMapping.get(j);
+								}
+							}				
+						collection.add(i, tempCam);
 					}
 					
+					Date date= new Date();
+					List<ImageItem> imgTemp = null;
 					
-					ArrayList<ImageItem> templist = null;
+					Timestamp now = new Timestamp(date.getTime());
+					Timestamp until = new Timestamp(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes()-10,date.getSeconds(), 0);
+					
 					try{
-					templist = (ArrayList<ImageItem>) imgDaoImp.getAllImageItems();
-					}
-					catch(Exception e){
-						System.out.println("Yoloooooooooooooooooooooo");
-					}
-					
-					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(templist);
+						imgTemp = imgDaoImp.getImageItems(until, now);
+					}catch(Exception e){
+							System.out.println("DB Connection Error!");
+						}
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgTemp);
+
 					
 					for(int j=0;j<collection.size();j++){
 						for(int i=0;i<allThumbImages.size();i++){

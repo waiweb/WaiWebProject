@@ -16,7 +16,6 @@
 		<div id='cssmenu'>
 		<ul>
 		<li><a href="settings?action=deleteDatabase">Gesamte Datenbank zurücksetzen</a></li>
-		<li><a href="settings?action=deletePictures">Alle Bilder löschen</a></li>	 
 		<li><a href="settings?action=showLog">Logfile anzeigen</a><br></li>	 
 	  	</ul>
 	  		<button class="btn" type="submit" name="action" value="Back">Zurück</button>
