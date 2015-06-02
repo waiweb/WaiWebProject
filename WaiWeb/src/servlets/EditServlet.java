@@ -49,7 +49,7 @@ public class EditServlet extends HttpServlet{
         	//Rechte überprüfen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
-        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.");	
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.(Edit)");	
         	
 				if(action == null){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
@@ -296,12 +296,14 @@ public class EditServlet extends HttpServlet{
 			checkUserId(request);
 			Date date= new Date();
 			Timestamp now = new Timestamp(date.getTime());
-			                                                                                     // wieviel minuten angezeigt werden sollen
-			Timestamp five= new Timestamp(now.getYear(), now.getMonth(), now.getDay(),now.getHours(), now.getMinutes()-1, 0, 0);
+			
+			//Wieviele Minuten angezeigt werden sollen:
+			Timestamp five= new Timestamp(now.getYear(), now.getMonth(), now.getDay(),now.getHours(), now.getMinutes()-15, 0, 0);
 			ArrayList<ImageItem> images= imgDaoImp.getImageItemsOfCam(id,five, now);
 			cam = camDaoImp.getCamFromDatabase(id);
 			
 		    List<ImageItem> path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
+		    
 			//Überabe an die Show_Images.jsp:
 			request.setAttribute("cam", cam);
 			request.setAttribute("path", path);
