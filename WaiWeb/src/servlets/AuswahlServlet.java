@@ -1,7 +1,9 @@
 package servlets;
 
 import java.io.IOException;
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -123,14 +125,27 @@ public class AuswahlServlet extends HttpServlet {
 					
 					//Vergleichen und ggf. gelöschte Cams entfernen:
 					List<Cam> collection = new ArrayList<Cam>();
+					Cam tempCam = new Cam();
 					long tempID = 0;
 					
 					for(int i=0;i<tempList.size();i++) {
 						tempID = tempList.get(i).getId_Cam();
-						collection.add(i, (camdaoImp.getCamFromDatabase(tempID)));
+							for(int j=0;j<newMapping.size();j++){
+								if(newMapping.get(j).getId_Cam() == tempID){
+									tempCam = newMapping.get(j);
+								}
+							}				
+						collection.add(i, tempCam);
 					}
 					
-					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgDaoImp.getAllImageItems());
+					System.out.println("Try to get all Thumbs:");
+					Date date= new Date();
+					
+					Timestamp now = new Timestamp(date.getTime());
+					Timestamp until = new Timestamp(date.getYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes()-10,date.getSeconds(), 0);
+					
+					List<ImageItem> imgTemp = imgDaoImp.getImageItems(until, now);
+					ArrayList<ImageItem> allThumbImages = (ArrayList<ImageItem>) Tool_PathEdit.editImageListToThumbnailImagePath(imgTemp);
 					
 					for(int j=0;j<collection.size();j++){
 						for(int i=0;i<allThumbImages.size();i++){
