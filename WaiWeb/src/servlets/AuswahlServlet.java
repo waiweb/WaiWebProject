@@ -104,25 +104,26 @@ public class AuswahlServlet extends HttpServlet {
 					//Temp List:
 					ArrayList<Cam> tempList = new ArrayList<Cam>();
 					
-					//Neues Mapping der User - Cams erstellen:
+					//Neues Mapping der User - Cams zuweisen wenn Cams gelöscht wurden:
 					if (newMapping.size() < camList.size()) {
 						for(int i=0;i<newMapping.size();i++) {
-							if(camList.get(i) != null && newMapping.get(i) != null) {
-								if(camList.get(i).getId_Cam() == newMapping.get(i).getId_Cam()) {	
+							for(int j=0;j<camList.size();j++){	
+								if(camList.get(j).getId_Cam() == newMapping.get(i).getId_Cam()) {	
 									tempList.add(camList.get(i));
 								}
 							}
 						}
+					//Neues Mapping der User - Cams zuweisen wenn keine Cams gelöscht wurden:
 					} else {
 						for(int i=0;i<camList.size();i++) {
-							if(camList.get(i) != null && newMapping.get(i) != null) {
-								if(camList.get(i).getId_Cam() == newMapping.get(i).getId_Cam()) {	
+							for(int j=0;j<newMapping.size();j++){
+								if(camList.get(i).getId_Cam() == newMapping.get(j).getId_Cam()) {	
 									tempList.add(camList.get(i));
 								}
 							}
 						}
 					}
-					
+	
 					//Vergleichen und ggf. gelöschte Cams entfernen:
 					List<Cam> collection = new ArrayList<Cam>();
 					Cam tempCam = new Cam();
