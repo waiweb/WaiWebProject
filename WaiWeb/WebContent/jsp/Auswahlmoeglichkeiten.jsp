@@ -34,8 +34,8 @@
 			}
 		%>
 		
-		<font size=5> Willkommen <%=userName %>! </font> <br>
-		<font size=3> Deine Session ID=<%=sessionID %></font>
+		<font face="sans-serif" size=5> Willkommen <%=userName %>! </font> <br>
+		<font face="sans-serif" size=3> Deine Session ID=<%=sessionID %></font><br><br>
 
 	<form name=checkLogin method=POST action=login>  
 	<div id='cssmenu'>

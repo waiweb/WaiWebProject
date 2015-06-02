@@ -1,27 +1,27 @@
 <html>
 <head>
-	<title> WAIWEB Login </title>
+	<title> WaiWeb Login </title>
 	<link href="css/LoginEdit.css" type="text/css" rel="stylesheet">
 </head>
 	<body bgcolor="white">
 	
 		<div style="text-align: center;">
-			<font size=7 color="red"> Please enter the following Information: </font>
+			<font face="sans-serif" size=6 color="red"> Willkommen zu WaiWeb! </font> <br><br>
+			<font face="sans-serif" size=3 color="red"> Bitte die folgenden Informationen eingeben: </font>
 		</div>
-	
-	<br>
+		
 		<!--  action=login & method=POST (Leitet direkt auf die doPost() Funktion des LoginServlet weiter) -->
 		<form name=checkLogin method=POST action=login>  
 			<div class="login">
    			<input type="text" name="username" placeholder="Username" id="username">  
-  			<input type="password" name="password" placeholder="password" id="password">  
-  			<a href="#" class="forgot">forgot password?</a>
+  			<input type="password" name="password" placeholder="Passwort" id="password">  
+  			<a href="#" class="forgot">Passwort vergessen?</a>
   			<input type="submit" name=action value="Submit">
 			</div>
 			<div class="shadow"></div>
 		</form>
 	<hr>
-	<font size=3 color="red"> Note: This application does not implement the complete 
+	<font face="sans-serif" size=3 color="red"> Note: This application does not implement the complete 
 	functionality of a typical calendar application. It demostartes a way JSP can be 
 	used with html tables and forms.</font>
 	</body>
