@@ -50,27 +50,36 @@ public class ImagCaptureJob implements Job {
     
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
-		log.info("Enter ImagCaptureJob - execute job");
-		System.out.println("Enter ImagCaptureJob - execute job");
 		
-		try {
-			//wenn man in den einstellungen context.xml auf false stellt ignoriert diese funktion den quarz.
-			if (JndiFactory.getInstance().getEnvironmentAsBoolean("enableQuarz").booleanValue() == true){
+		
+		Thread t = new Thread() {
+			public void run() {
+
 				
-					capture();	
-	
+				log.info("Enter ImagCaptureJob - execute job");
+				System.out.println("Enter ImagCaptureJob - execute job");
+				
+				try {
+					//wenn man in den einstellungen context.xml auf false stellt ignoriert diese funktion den quarz.
+					if (JndiFactory.getInstance().getEnvironmentAsBoolean("enableQuarz").booleanValue() == true){
+						
+							capture();	
+			
+					}
+
+				} catch (Exception e) {
+
+					e.printStackTrace();
+				}finally{
+					System.out.println("Capture completed");
+					log.info("capture completed");
+				}
+				
+				
 			}
+		};
+		t.start();
 
-		} catch (Exception e) {
-
-			e.printStackTrace();
-		}finally{
-			System.out.println("Cam capture locked already running !");
-			log.info("Cam capture finished un-locked");
-		}
-		
-
-		
 	}
 	
 
