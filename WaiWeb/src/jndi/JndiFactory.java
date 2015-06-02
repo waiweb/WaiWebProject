@@ -27,6 +27,7 @@ public class JndiFactory {
 	private static JndiFactory instance = new JndiFactory();
     private static Logger log = Logger.getLogger(JndiFactory.class);   
     
+    
     //Dynamic Paths
     private String camImagePath = "";
     private String configPath = "";
@@ -185,6 +186,19 @@ public class JndiFactory {
 		
 		this.camImagePath = camImagePath;
 	}
+	
+	public String getRelativeImagePath(){
+		
+		String temp= null;
+		
+		try {
+			temp = getEnvironmentAsString("relativeImagePath");
+		} catch (NamingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}  
+		return temp;  
+	}
 
 
 	private String getConfigPath() {
@@ -212,7 +226,7 @@ public class JndiFactory {
 		this.useDynamicBasePath = useDynamicBasePath;
 	}
 
-	
+
 	
 	
 }

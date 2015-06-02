@@ -132,16 +132,9 @@ public class Testservlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Enter doGet of TestServlet");
 		
-		if(imajob == null){
-		 imajob= new ImagCaptureJob();
-
-		 
-		}
+ 
 		
-	   
-
 		
-		imajob.capture();
 
 	
 	}

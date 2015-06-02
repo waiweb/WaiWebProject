@@ -50,19 +50,26 @@ public class ImagCaptureJob implements Job {
     
 	@Override
 	public void execute(JobExecutionContext arg0) throws JobExecutionException {
+		log.info("Enter ImagCaptureJob - execute job");
+		System.out.println("Enter ImagCaptureJob - execute job");
 		
 		try {
 			//wenn man in den einstellungen context.xml auf false stellt ignoriert diese funktion den quarz.
 			if (JndiFactory.getInstance().getEnvironmentAsBoolean("enableQuarz").booleanValue() == true){
-				capture();	
+				
+					capture();	
+	
 			}
 
 		} catch (Exception e) {
+
 			e.printStackTrace();
+		}finally{
+			System.out.println("Cam capture locked already running !");
+			log.info("Cam capture finished un-locked");
 		}
 		
-		log.info("Enter ImagCaptureJob - execute job");
-		System.out.println("Enter ImagCaptureJob - execute job");
+
 		
 	}
 	
@@ -157,13 +164,15 @@ public class ImagCaptureJob implements Job {
 		    		log.error("Erromessage: "+e.getMessage());
 
 		    	}
-		        
+		    	System.out.println("Dateisystempfad zum Bild: "+path);
+
 		        
 		        //Erzeugt und speichert die Thumbnail im Filesystem
 		        try {
 		    		ImageIO.write(Tool_ImageProcessing.getThumbnailOfImage(image), "jpg",new File(basePath+"/"+imageDirectoryPath+"/"+imageName+thumbnailImageType));
 
 		    	} catch (IOException e) {
+
 		    		log.error("Error while writing thumbnail-image to Disk of cam: "+cam.getId_Cam());
 		    		log.error("Erromessage: "+e.getMessage());
 		    	}
