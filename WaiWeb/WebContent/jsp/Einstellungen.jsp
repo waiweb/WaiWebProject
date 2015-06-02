@@ -11,7 +11,7 @@
 	<link href="css/Buttons.css"  type="text/css" rel="stylesheet">
 </head>
 	<body>
-		<font size=5> Einstellungen</font> <br><br>
+		<font face="sans-serif" size=5> Einstellungen</font> <br><br>
 		<form name=backButton method=GET action=settings>
 		<div id='cssmenu'>
 		<ul>

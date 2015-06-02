@@ -8,13 +8,13 @@
 	<!--  action=login & methdo=GET (Leitet direkt auf die doGet() Funktion des LoginServlet weiter) -->
 	<form name=wrongLogin method=GET action=login> 
 		<div style="text-align: center;">
-			<font size=5 color="red"> Login failed! Please check your username and password! </font>
-			<br>
-			<font size=3> Click to try again! </font>
-			<br>
-			<!-- Type=submit, Name=action (das Attribut), 
-				 Value=Return (über action.equals("Return") in doGet() des LoginServlet abfragen -->
-			<input type=submit name=action value="Return">
+				<font face="sans-serif" size=5 color="red"> Login fehlgeschlagen! Username und Passwort überprüfen! </font><br>
+				<br>
+				<font face="sans-serif" size=4> Zurück zum Login: </font>
+				<br><br>
+				<!-- Type=submit, Name=action (das Attribut), 
+					 Value=Return (über action.equals("Return") in doGet() des LoginServlet abfragen -->
+				<input style="height: 150px; width: 120px;"type=submit name=action value="Return">
 		</div>
 	</form>
 </body>
