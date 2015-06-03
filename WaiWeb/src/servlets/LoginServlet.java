@@ -53,6 +53,12 @@ public class LoginServlet extends HttpServlet {
 		else if (action.equals("Return")) {
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/login.html");
 			dispatcher.forward(request, response);
+		} 		
+		
+		//Falls auf den Button "Return" geklickt wird, rückleiten auf Login:
+		else if (action.equals("forgotpw")) {
+			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/html/Forgotpw.html");
+			dispatcher.forward(request, response);
 		}
 	}
 
