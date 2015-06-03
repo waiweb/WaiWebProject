@@ -44,12 +44,12 @@ public class EditServlet extends HttpServlet{
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		
-		//Aktive Session Ã¼berprÃ¼fen:
+		//Aktive Session ÃƒÂ¼berprÃƒÂ¼fen:
         if(session != null && session.getAttribute("rechte") != null){
-        	//Rechte Ã¼berprÃ¼fen: (ADMINISTRATOR)
+        	//Rechte ÃƒÂ¼berprÃƒÂ¼fen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
-        			+ " und Rechte=" + session.getAttribute("rechte") + " bestÃ¤tigt.(Edit)");	
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestÃƒÂ¤tigt.(Edit)");	
         	
 				if(action == null){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
@@ -67,7 +67,7 @@ public class EditServlet extends HttpServlet{
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
 		 		}
-			//FÃ¼r normale User kein Zugriff!
+			//FÃƒÂ¼r normale User kein Zugriff!
         	} else {
             	System.out.println("ERROR! Keine ausreichenden Rechte, Administrator-Rechte erforderlich!");
         		backToAuswahl(request, response);
@@ -93,7 +93,7 @@ public class EditServlet extends HttpServlet{
 			List<Cam> tempCheckedCams = new ArrayList<Cam>();
 			
 			try {
-				UserDaoImpl daoImp = new UserDaoImpl();
+				//UserDaoImpl daoImp = new UserDaoImpl();
 				user = daoImp.getUserFromDatabase(id);
 			    cams = camDaoImp.getAllCams();
 			    tempCheckedCams = ucDaoImp.getUserCamMapping(user);
@@ -125,11 +125,11 @@ public class EditServlet extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_User.jsp");
 			dispatcher.forward(request, response);	
 			
- 		//Loescht den ausgewÃ¤hlten Nutzer in der Datenbank und kehrt zur User Liste zurÃ¼ck:
+ 		//Loescht den ausgewÃƒÂ¤hlten Nutzer in der Datenbank und kehrt zur User Liste zurÃƒÂ¼ck:
  		} else if(action.equals("deleteUser")){
 			checkUserId(request);
 
-			UserDaoImpl daoImp = new UserDaoImpl();
+			//UserDaoImpl daoImp = new UserDaoImpl();
  			daoImp.deleteUserInDatabase(id);
  			
  			System.out.println("User mit der ID: " + id + " erfolgreich geloescht!");
@@ -149,7 +149,7 @@ public class EditServlet extends HttpServlet{
  	 	 
  	 	 	 		//Versucht den User in der Datenbank upzudaten:
  	 				try {
- 	 					UserDaoImpl daoImp = new UserDaoImpl();
+ 	 					//UserDaoImpl daoImp = new UserDaoImpl();
  	 					user = daoImp.getUserFromDatabase(id);
  	 					user.setUsername(username);
  	 					user.setRechte(rechte);
@@ -191,11 +191,11 @@ public class EditServlet extends HttpServlet{
  	 	 			
  	 	 			
  	 			} else {
- 	 	 			System.out.println("UngÃ¼ltige Rechte!");
+ 	 	 			System.out.println("UngÃƒÂ¼ltige Rechte!");
  	 	 			backToAuswahl(request, response);
  	 	 		}
  	 		} else {
- 	 			System.out.println("UngÃ¼ltige Eingabe der Nutzerdaten!");
+ 	 			System.out.println("UngÃƒÂ¼ltige Eingabe der Nutzerdaten!");
  	 			backToAuswahl(request, response);
  	 		}
  	 		
@@ -225,17 +225,17 @@ public class EditServlet extends HttpServlet{
  	 	 	 		}
  	 	 			
  	 			} else {
- 	 	 			System.out.println("UngÃ¼ltige Rechte!");
+ 	 	 			System.out.println("UngÃƒÂ¼ltige Rechte!");
  	 	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
  	 	 		}
  	 		} else {
- 	 			System.out.println("Falsche Eingabe der Daten! Felder dÃ¼rfen nicht NULL sein!");
+ 	 			System.out.println("Falsche Eingabe der Daten! Felder dÃƒÂ¼rfen nicht NULL sein!");
  	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
  	 		}
  		}
 		
 		/** Cam Editierung: **/
-		//Cam auswÃ¤hlen zum editieren, nur Administrator:
+		//Cam auswÃƒÂ¤hlen zum editieren, nur Administrator:
 		if(action.equals("editCam")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
@@ -252,7 +252,7 @@ public class EditServlet extends HttpServlet{
  			System.out.println("Cam mit der ID: " + id + " erfolgreich geloescht!");
  			backToAuswahl(request, response);
  		
- 		//Ã„nderungen der Cam in der Datenbank updaten:
+ 		//Ãƒâ€žnderungen der Cam in der Datenbank updaten:
  		} else if(action.equals("saveCam")){
 			checkUserId(request);
 			
@@ -304,7 +304,7 @@ public class EditServlet extends HttpServlet{
 			
 		    List<ImageItem> path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
 		    
-			//Ãœberabe an die Show_Images.jsp:
+			//ÃƒÅ“berabe an die Show_Images.jsp:
 			request.setAttribute("cam", cam);
 			request.setAttribute("path", path);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
