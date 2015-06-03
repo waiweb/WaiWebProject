@@ -13,7 +13,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import Dao.DaoFactory;
 import Dao.DatabaseControllerImpl;
+import Dao.Interface.DatabaseControlIDao;
 
 /**
  * Servlet implementation class SettingsServlet
@@ -22,6 +24,8 @@ import Dao.DatabaseControllerImpl;
 public class SettingsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	DatabaseControlIDao databaseDelete = DaoFactory.getInstance().getDatabaseControllDao();
+	
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -46,7 +50,7 @@ public class SettingsServlet extends HttpServlet {
 				//Komplette Datenbank zurücksetzen TODO: Funktion zum rücksetzen der Datenbanken ohne Admin zu löschen!
 				if(action.equals("deleteDatabase")){
 					
-					DatabaseControllerImpl databaseDelete = new DatabaseControllerImpl();
+					databaseDelete = new DatabaseControllerImpl();
 					databaseDelete.deleteDatabase();
 					
 					backToAuswahl(request, response);

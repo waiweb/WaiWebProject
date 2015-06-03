@@ -5,7 +5,7 @@ import java.util.List;
 import model.Cam;
 import model.User;
 
-public interface CamInterface {
+public interface CamDao {
 	
 	
 	public void createCamInDatabase(Cam cam);

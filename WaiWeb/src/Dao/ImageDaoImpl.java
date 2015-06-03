@@ -19,9 +19,9 @@ import jndi.JndiFactory;
 import exception.UserNotAddedExecption;
 import model.ImageItem;
 import model.User;
-import Dao.Interface.ImageItemInterface;
+import Dao.Interface.ImageDao;
 
-public class ImageDaoImpl implements ImageItemInterface{
+public class ImageDaoImpl implements ImageDao{
 	
 	public static final String homeDir = "./Images";
 	final JndiFactory jndi = JndiFactory.getInstance(); 

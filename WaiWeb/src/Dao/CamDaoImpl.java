@@ -12,12 +12,12 @@ import org.apache.log4j.Logger;
 import exception.CamNotAddedExecption;
 import exception.CamNotFoundExecption;
 import model.Cam;
-import Dao.Interface.CamInterface;
+import Dao.Interface.CamDao;
 
 
 import jndi.JndiFactory;
 
-public class CamDaoImpl implements CamInterface{
+public class CamDaoImpl implements CamDao{
 	
 final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
 private static Logger log = Logger.getLogger(JndiFactory.class);   

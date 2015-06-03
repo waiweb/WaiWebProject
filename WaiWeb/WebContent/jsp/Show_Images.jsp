@@ -78,21 +78,34 @@ $(function(){
 		</table>
 		</div>
 		
+		<%
+			 int x = 0;
+		%>
+		
 		<br style="clear: both"><br>
 		<table class="beispiel3" cellspacing="0" cellpadding="0">
+			<caption>Bildverlauf</caption>
+			
 			<tbody>
 			<c:forEach var="path" items="${path}">
-				<tr>
-					<!--  HIER werden die Image Pfade eingefügt! Über getContextPath(): Zugriff auf WebContent, dann restlichen Path angeben, also /camimages/ID/Year/... -->
+				
+					<!--  HIER werden die Image Pfade eingefÃ¼gt! Ãœber getContextPath(): Zugriff auf WebContent, dann restlichen Path angeben, also /camimages/ID/Year/... -->
 					<td><a href="<%=request.getContextPath()%><c:out value="${path.getPath()}.jpg"/>"><img src="<%=request.getContextPath()%><c:out value="${path.getPath()}_thumbnail.jpg"/>"></a><br><br><c:out value="${path.getTimestamp()}"/></td>	
-				</tr>
+				<%
+					x++;
+					if((x%4 == 0))
+					{
+						out.print("<tr>");		
+					//	System.out.println("Die zahl ist"+x);
+					}
+				
+				%>
+
+
+
 			</c:forEach>	
 			</tbody>				
 		</table><br>
-	  	<div class="links">
-		   		<button class="btn" type="submit" name="action" value="refresh"> Aktualisieren</button>	
-		  		<input type="hidden" name="id" value="${cam.id_Cam}">
-		</div>
 		</form>
 		<br style="clear: both">
 		<div class="rechts">

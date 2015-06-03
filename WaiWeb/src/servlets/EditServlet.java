@@ -18,10 +18,11 @@ import utils.Tool_PathEdit;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
 import exception.UserNotFoundExecption;
-import Dao.CamDaoImpl;
-import Dao.ImageDaoImpl;
-import Dao.UserCamMappingImpl;
-import Dao.UserDaoImpl;
+import Dao.DaoFactory;
+import Dao.Interface.CamDao;
+import Dao.Interface.ImageDao;
+import Dao.Interface.UserCamMappingDao;
+import Dao.Interface.UserDao;
 import model.Cam;
 import model.ImageItem;
 import model.User;
@@ -30,10 +31,10 @@ import model.User;
 public class EditServlet extends HttpServlet{
 	private static final long serialVersionUID = 1L;
 	
-	final UserDaoImpl daoImp = new UserDaoImpl();
-	final CamDaoImpl camDaoImp = new CamDaoImpl();
-	private ImageDaoImpl imgDaoImp = new ImageDaoImpl();
-	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
+    final UserDao daoImp = DaoFactory.getInstance().getUserDao();
+    final CamDao camDaoImp = DaoFactory.getInstance().getCamDao();
+	final UserCamMappingDao ucDaoImp = DaoFactory.getInstance().getUserCamMappingdao();
+	private ImageDao imgDaoImp = DaoFactory.getInstance().getIamgeDao();
 	private User user;
 	private Cam cam;
 	private int rechte, id;
@@ -344,18 +345,18 @@ public class EditServlet extends HttpServlet{
 				   images= imgDaoImp.getImageItemsOfCam(id,timestampStart, timestampEnd);
 				   cam = camDaoImp.getCamFromDatabase(id);
 				   path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
+				   
 				   System.out.println("Keine korrekte Kalender eingabe ! Es wurden die letzten 10 min ausgegeben");
 				   request.setAttribute("cam", cam);
 				   request.setAttribute("path", path);
 				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				   dispatcher.forward(request, response);
-				}else{
-					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht moeglich");
-					
+				   
+				} else{
+					System.out.println("Keine korrekte Kalender Eingabe! Bilder werden nur aktualisiert!");
 					request.setAttribute("id", id);
-					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
-					 dispatcher.forward(request, response);
-					 //response.sendRedirect(request.getContextPath() + "/edit?action=showImages");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
+					dispatcher.forward(request, response);
 				}
 		 }	
 	}

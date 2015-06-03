@@ -1,43 +1,12 @@
 package servlets;
 
-import java.awt.FlowLayout;
-import java.awt.Image;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayInputStream;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
-import java.nio.ByteBuffer;
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JFrame;
-
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamUtils;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDevice;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
-import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
-import com.github.sarxos.webcam.ds.ipcam.IpCamStorage;
-import com.github.sarxos.webcam.util.ImageUtils;
-
-import model.Cam;
-import model.ImageItem;
-import Dao.CamDaoImpl;
-import Dao.ImageDaoImpl;
-import jndi.JndiFactory;
 import jobs.ImagCaptureJob;
-import utils.Tool_ImageProcessing;
-import utils.Tool_PathEdit;
-import utils.Tool_Security;
-import utils.Tool_TimeStamp;
 
 /**
  * Servlet implementation class Testservlet
