@@ -294,7 +294,6 @@ public class EditServlet extends HttpServlet{
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
 			checkUserId(request);
-			System.out.println("id: "+id);
 			Date date= new Date();
 			Timestamp now = new Timestamp(date.getTime());
 			
@@ -354,7 +353,6 @@ public class EditServlet extends HttpServlet{
 					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht moeglich");
 					
 					request.setAttribute("id", id);
-					System.out.println("id: "+id);
 					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
 					 dispatcher.forward(request, response);
 					 //response.sendRedirect(request.getContextPath() + "/edit?action=showImages");
