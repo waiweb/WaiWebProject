@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Error!</title>
+<link href="css/Buttons.css" type="text/css" rel="stylesheet">
+</head>
+<body>
+	<!--  action=login & methdo=GET (Leitet direkt auf die doGet() Funktion des LoginServlet weiter) -->
+	<form name=wrongLogin method=GET action=login> 
+		<div style="text-align: center;">
+				<font face="sans-serif" size=5 color="red"> Bitte wenden Sie sich an Ihren Administrator!  </font><br>
+				<br>
+				<font face="sans-serif" size=4> Zurück zum Login: </font>
+				<br><br>
+				<!-- Type=submit, Name=action (das Attribut), 
+					 Value=Return (über action.equals("Return") in doGet() des LoginServlet abfragen -->
+				<input class = "btn"  type=submit name=action value="Return">
+		</div>
+	</form>
+</body>
+</html>
