@@ -10,7 +10,7 @@ import java.util.List;
 import model.Cam;
 import model.ImageItem;
 
-public interface ImageItemInterface {
+public interface ImageDao {
 	
 
 	

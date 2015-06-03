@@ -1,6 +1,6 @@
 package Dao.Interface;
 
-public interface DatabaseControlInterface {
+public interface DatabaseControlIDao {
 		
 	public void createDatabase();
 	public void deleteDatabase();

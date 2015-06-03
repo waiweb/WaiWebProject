@@ -19,30 +19,23 @@ import org.quartz.Job;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 
-import com.github.sarxos.webcam.Webcam;
-import com.github.sarxos.webcam.WebcamUtils;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDevice;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDeviceRegistry;
-import com.github.sarxos.webcam.ds.ipcam.IpCamDriver;
-import com.github.sarxos.webcam.ds.ipcam.IpCamMode;
-import com.github.sarxos.webcam.util.ImageUtils;
 
-import Dao.CamDaoImpl;
-import Dao.ImageDaoImpl;
+
+import Dao.DaoFactory;
+import Dao.Interface.CamDao;
+import Dao.Interface.ImageDao;
 import utils.PicCatch;
-import utils.SystemStartup;
 import utils.Tool_ImageProcessing;
 import utils.Tool_TimeStamp;
 import model.Cam;
 import model.ImageItem;
-import utils.PicCatch;
 
 public class ImagCaptureJob implements Job {
 	
     private static Logger log = Logger.getLogger(JndiFactory.class);   
 
-    final CamDaoImpl camdaoImp= new CamDaoImpl();
-    final ImageDaoImpl imageDaoImp = new ImageDaoImpl();
+    final CamDao camdaoImp= DaoFactory.getInstance().getCamDao();
+    final ImageDao imageDaoImp = DaoFactory.getInstance().getIamgeDao();
     public static final String originalImageType = ".jpg";
     public static final String thumbnailImageType = "_thumbnail.jpg";
     public String baseImagePath;
