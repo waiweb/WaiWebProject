@@ -9,13 +9,13 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import Dao.Interface.UserInterface;
+import Dao.Interface.UserDao;
 import exception.UserNotAddedExecption;
 import exception.UserNotFoundExecption;
 import model.User;
 import jndi.JndiFactory;
 
-public class UserDaoImpl implements UserInterface {
+public class UserDaoImpl implements UserDao {
 	
 	
 	final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.

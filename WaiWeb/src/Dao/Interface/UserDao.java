@@ -7,7 +7,7 @@ import model.Cam;
 import model.ImageItem;
 import model.User;
 
-public interface UserInterface {
+public interface UserDao {
 	
 	
 	public Boolean createUserInDatabase(User user);

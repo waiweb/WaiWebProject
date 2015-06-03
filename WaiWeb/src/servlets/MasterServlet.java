@@ -17,10 +17,11 @@ import model.User;
 //import utils.Tool_ImageProcessing;
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
-import Dao.CamDaoImpl;
-import Dao.DatabaseControllerImpl;
-import Dao.UserCamMappingImpl;
-import Dao.UserDaoImpl;
+import Dao.DaoFactory;
+import Dao.Interface.CamDao;
+import Dao.Interface.DatabaseControlIDao;
+import Dao.Interface.UserCamMappingDao;
+import Dao.Interface.UserDao;
 
 /**
  * Servlet implementation class MasterServlet
@@ -38,25 +39,28 @@ public class MasterServlet extends HttpServlet {
        
         /**	
         //WICHTIG!!!
-         * Auskommentieren für Beispielnutzer usw. bei Start!
-         * Momentan genutzt für Tests: USERNAME: admin PW: admin
+         * Funktion "beispiele()" auskommentieren falls DB nicht zurückgesetzt werden soll!
+         * Momentan genutzt für Tests, DB rücksetzen und User und Cams anlegen!
+         * ADMIN USER:	Username =  admin, Passwort = admin	
+         * NORMAL USER: Username =  user, Passwort = user	
          */
         
-        try {
+      try {
 			beispiele();
 		} catch (UserNotFoundExecption e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}	
     }
     
 	public void beispiele() throws UserNotFoundExecption{
     	
-		DatabaseControllerImpl db = new DatabaseControllerImpl();
+		DatabaseControlIDao db = DaoFactory.getInstance().getDatabaseControllDao();
 		db.createDatabase();
 		
-		UserDaoImpl udb = new UserDaoImpl();
-		UserCamMappingImpl usercammapping = new UserCamMappingImpl();
+		UserDao udb = DaoFactory.getInstance().getUserDao();
+
+		final UserCamMappingDao usercammapping = DaoFactory.getInstance().getUserCamMappingdao();
 		
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
 		udb.createUserInDatabase(new User("user",new String(Tool_Security.hashFromString("user")),0,Tool_TimeStamp.getTimeStampString(),"User"));
@@ -75,7 +79,7 @@ public class MasterServlet extends HttpServlet {
 		}
 		
 		//Create cams
-		CamDaoImpl camdao = new CamDaoImpl();
+		CamDao camdao = DaoFactory.getInstance().getCamDao();
 		
 		camdao.createCamInDatabase(new Cam("Wasserturm", "https://www.mvv-energie.de/webcam_maritim/MA-Wasserturm.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("East", "http://my.dal.biz/cgi-bin/webcam/getpics.cgi?Cam=east", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));

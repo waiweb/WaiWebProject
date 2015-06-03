@@ -10,11 +10,11 @@ import org.apache.log4j.Logger;
 
 import utils.Tool_Security;
 import utils.Tool_TimeStamp;
-import Dao.Interface.DatabaseControlInterface;
+import Dao.Interface.DatabaseControlIDao;
 import exception.UserNotAddedExecption;
 import jndi.JndiFactory;
 
-public class DatabaseControllerImpl implements DatabaseControlInterface {
+public class DatabaseControllerImpl implements DatabaseControlIDao {
 	
 	final JndiFactory jndi = JndiFactory.getInstance(); //ich hole mir die instanz hier heraus.
 	private static Logger log = Logger.getLogger(JndiFactory.class);   

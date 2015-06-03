@@ -18,10 +18,11 @@ import jndi.JndiFactory;
 import com.sun.istack.internal.logging.Logger;
 
 import utils.Tool_PathEdit;
-import Dao.CamDaoImpl;
-import Dao.ImageDaoImpl;
-import Dao.UserCamMappingImpl;
-import Dao.UserDaoImpl;
+import Dao.DaoFactory;
+import Dao.Interface.CamDao;
+import Dao.Interface.ImageDao;
+import Dao.Interface.UserCamMappingDao;
+import Dao.Interface.UserDao;
 import model.Cam;
 import model.ImageItem;
 import model.User;
@@ -29,11 +30,11 @@ import model.User;
 public class AuswahlServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 	
-    final UserDaoImpl daoImp = new UserDaoImpl();
-    final CamDaoImpl camdaoImp= new CamDaoImpl();
-	final UserCamMappingImpl ucDaoImp= new UserCamMappingImpl();
+    final UserDao daoImp = DaoFactory.getInstance().getUserDao();
+    final CamDao camdaoImp = DaoFactory.getInstance().getCamDao();
+	final UserCamMappingDao ucDaoImp = DaoFactory.getInstance().getUserCamMappingdao();
+	private ImageDao imgDaoImp = DaoFactory.getInstance().getIamgeDao();
 	private static Logger log = Logger.getLogger(JndiFactory.class);
-	private ImageDaoImpl imgDaoImp = new ImageDaoImpl();
     private String username;
     private Long id;
 	

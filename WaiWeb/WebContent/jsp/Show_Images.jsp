@@ -89,10 +89,6 @@ $(function(){
 			</c:forEach>	
 			</tbody>				
 		</table><br>
-	  	<div class="links">
-		   		<button class="btn" type="submit" name="action" value="refresh"> Aktualisieren</button>	
-		  		<input type="hidden" name="id" value="${cam.id_Cam}">
-		</div>
 		</form>
 		<br style="clear: both">
 		<div class="rechts">

@@ -14,8 +14,9 @@ import javax.servlet.http.HttpSession;
 import exception.UserNotFoundExecption;
 import model.User;
 import utils.Tool_Security;
-import Dao.CamDaoImpl;
-import Dao.UserDaoImpl;
+import Dao.DaoFactory;
+import Dao.Interface.CamDao;
+import Dao.Interface.UserDao;
 
 /**
  * Servlet implementation class LoginServlet
@@ -33,8 +34,8 @@ public class LoginServlet extends HttpServlet {
         // TODO Auto-generated constructor stub
     }
     
-    final UserDaoImpl daoImp = new UserDaoImpl();
-    final CamDaoImpl camdaoImp= new CamDaoImpl();
+    final UserDao daoImp = DaoFactory.getInstance().getUserDao();
+    final CamDao camdaoImp = DaoFactory.getInstance().getCamDao();
     private User user;
     private Long tempID;
 

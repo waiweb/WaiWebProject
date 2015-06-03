@@ -13,9 +13,9 @@ import org.apache.log4j.Logger;
 import jndi.JndiFactory;
 import model.Cam;
 import model.User;
-import Dao.Interface.UserCamMappingInterface;
+import Dao.Interface.UserCamMappingDao;
 
-public class UserCamMappingImpl implements UserCamMappingInterface{
+public class UserCamMappingImpl implements UserCamMappingDao{
 
 	final JndiFactory jndi = JndiFactory.getInstance();
 	private static Logger log = Logger.getLogger(JndiFactory.class);   
