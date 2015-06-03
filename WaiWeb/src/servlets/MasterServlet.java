@@ -38,8 +38,10 @@ public class MasterServlet extends HttpServlet {
        
         /**	
         //WICHTIG!!!
-         * Auskommentieren für Beispielnutzer usw. bei Start!
-         * Momentan genutzt für Tests: USERNAME: admin PW: admin
+         * Funktion "beispiele()" auskommentieren falls DB nicht zurückgesetzt werden soll!
+         * Momentan genutzt für Tests, DB rücksetzen und User und Cams anlegen!
+         * ADMIN USER:	Username =  admin, Passwort = admin	
+         * NORMAL USER: Username =  user, Passwort = user	
          */
         
         try {

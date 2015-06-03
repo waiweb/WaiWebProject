@@ -344,18 +344,18 @@ public class EditServlet extends HttpServlet{
 				   images= imgDaoImp.getImageItemsOfCam(id,timestampStart, timestampEnd);
 				   cam = camDaoImp.getCamFromDatabase(id);
 				   path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
+				   
 				   System.out.println("Keine korrekte Kalender eingabe ! Es wurden die letzten 10 min ausgegeben");
 				   request.setAttribute("cam", cam);
 				   request.setAttribute("path", path);
 				   RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
 				   dispatcher.forward(request, response);
-				}else{
-					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht moeglich");
-					
+				   
+				} else{
+					System.out.println("Keine korrekte Kalender Eingabe! Bilder werden nur aktualisiert!");
 					request.setAttribute("id", id);
-					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
-					 dispatcher.forward(request, response);
-					 //response.sendRedirect(request.getContextPath() + "/edit?action=showImages");
+					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
+					dispatcher.forward(request, response);
 				}
 		 }	
 	}
