@@ -93,7 +93,7 @@ public class EditServlet extends HttpServlet{
 			List<Cam> tempCheckedCams = new ArrayList<Cam>();
 			
 			try {
-				UserDaoImpl daoImp = new UserDaoImpl();
+				//UserDaoImpl daoImp = new UserDaoImpl();
 				user = daoImp.getUserFromDatabase(id);
 			    cams = camDaoImp.getAllCams();
 			    tempCheckedCams = ucDaoImp.getUserCamMapping(user);
@@ -129,7 +129,7 @@ public class EditServlet extends HttpServlet{
  		} else if(action.equals("deleteUser")){
 			checkUserId(request);
 
-			UserDaoImpl daoImp = new UserDaoImpl();
+			//UserDaoImpl daoImp = new UserDaoImpl();
  			daoImp.deleteUserInDatabase(id);
  			
  			System.out.println("User mit der ID: " + id + " erfolgreich geloescht!");
@@ -149,7 +149,7 @@ public class EditServlet extends HttpServlet{
  	 	 
  	 	 	 		//Versucht den User in der Datenbank upzudaten:
  	 				try {
- 	 					UserDaoImpl daoImp = new UserDaoImpl();
+ 	 					//UserDaoImpl daoImp = new UserDaoImpl();
  	 					user = daoImp.getUserFromDatabase(id);
  	 					user.setUsername(username);
  	 					user.setRechte(rechte);
@@ -294,7 +294,6 @@ public class EditServlet extends HttpServlet{
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
 			checkUserId(request);
-			System.out.println("id: "+id);
 			Date date= new Date();
 			Timestamp now = new Timestamp(date.getTime());
 			
@@ -354,7 +353,6 @@ public class EditServlet extends HttpServlet{
 					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht moeglich");
 					
 					request.setAttribute("id", id);
-					System.out.println("id: "+id);
 					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
 					 dispatcher.forward(request, response);
 					 //response.sendRedirect(request.getContextPath() + "/edit?action=showImages");
