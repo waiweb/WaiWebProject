@@ -44,12 +44,12 @@ public class MasterServlet extends HttpServlet {
          * NORMAL USER: Username =  user, Passwort = user	
          */
         
-        try {
+      try {
 			beispiele();
 		} catch (UserNotFoundExecption e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}		
+		}	
     }
     
 	public void beispiele() throws UserNotFoundExecption{
@@ -63,6 +63,7 @@ public class MasterServlet extends HttpServlet {
 		//User anlegen einmal mit und einmal ohne gehashtem password (mit ist besser !):
 		udb.createUserInDatabase(new User("user",new String(Tool_Security.hashFromString("user")),0,Tool_TimeStamp.getTimeStampString(),"User"));
 		udb.createUserInDatabase(new User("a",new String(Tool_Security.hashFromString("a")),1,Tool_TimeStamp.getTimeStampString(),"User a"));
+		udb.createUserInDatabase(new User("b",new String(Tool_Security.hashFromString("b")),0,Tool_TimeStamp.getTimeStampString(),"User b"));
 		udb.createUserInDatabase(new User("b",new String(Tool_Security.hashFromString("b")),0,Tool_TimeStamp.getTimeStampString(),"User b"));
 
 		
