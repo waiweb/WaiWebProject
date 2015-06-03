@@ -44,12 +44,12 @@ public class EditServlet extends HttpServlet{
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		
-		//Aktive Session überprüfen:
+		//Aktive Session Ã¼berprÃ¼fen:
         if(session != null && session.getAttribute("rechte") != null){
-        	//Rechte überprüfen: (ADMINISTRATOR)
+        	//Rechte Ã¼berprÃ¼fen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
-        			+ " und Rechte=" + session.getAttribute("rechte") + " bestätigt.(Edit)");	
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestÃ¤tigt.(Edit)");	
         	
 				if(action == null){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
@@ -67,7 +67,7 @@ public class EditServlet extends HttpServlet{
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Auswahlmoeglichkeiten.jsp");
 					dispatcher.forward(request, response);	
 		 		}
-			//Für normale User kein Zugriff!
+			//FÃ¼r normale User kein Zugriff!
         	} else {
             	System.out.println("ERROR! Keine ausreichenden Rechte, Administrator-Rechte erforderlich!");
         		backToAuswahl(request, response);
@@ -125,7 +125,7 @@ public class EditServlet extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_User.jsp");
 			dispatcher.forward(request, response);	
 			
- 		//Loescht den ausgewählten Nutzer in der Datenbank und kehrt zur User Liste zurück:
+ 		//Loescht den ausgewÃ¤hlten Nutzer in der Datenbank und kehrt zur User Liste zurÃ¼ck:
  		} else if(action.equals("deleteUser")){
 			checkUserId(request);
 
@@ -191,11 +191,11 @@ public class EditServlet extends HttpServlet{
  	 	 			
  	 	 			
  	 			} else {
- 	 	 			System.out.println("Ungültige Rechte!");
+ 	 	 			System.out.println("UngÃ¼ltige Rechte!");
  	 	 			backToAuswahl(request, response);
  	 	 		}
  	 		} else {
- 	 			System.out.println("Ungültige Eingabe der Nutzerdaten!");
+ 	 			System.out.println("UngÃ¼ltige Eingabe der Nutzerdaten!");
  	 			backToAuswahl(request, response);
  	 		}
  	 		
@@ -225,17 +225,17 @@ public class EditServlet extends HttpServlet{
  	 	 	 		}
  	 	 			
  	 			} else {
- 	 	 			System.out.println("Ungültige Rechte!");
+ 	 	 			System.out.println("UngÃ¼ltige Rechte!");
  	 	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
  	 	 		}
  	 		} else {
- 	 			System.out.println("Falsche Eingabe der Daten! Felder dürfen nicht NULL sein!");
+ 	 			System.out.println("Falsche Eingabe der Daten! Felder dÃ¼rfen nicht NULL sein!");
  	 			response.sendRedirect(request.getContextPath() + "/auswahl?action=user");
  	 		}
  		}
 		
 		/** Cam Editierung: **/
-		//Cam auswählen zum editieren, nur Administrator:
+		//Cam auswÃ¤hlen zum editieren, nur Administrator:
 		if(action.equals("editCam")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
@@ -252,7 +252,7 @@ public class EditServlet extends HttpServlet{
  			System.out.println("Cam mit der ID: " + id + " erfolgreich geloescht!");
  			backToAuswahl(request, response);
  		
- 		//Änderungen der Cam in der Datenbank updaten:
+ 		//Ã„nderungen der Cam in der Datenbank updaten:
  		} else if(action.equals("saveCam")){
 			checkUserId(request);
 			
@@ -294,6 +294,7 @@ public class EditServlet extends HttpServlet{
  		//Cam Images der jeweiligen Cam anzeigen: TODO: Bilder jeweiligen Cams in Liste speichern und an JSP senden!
  		} else if (action.equals("showImages")){
 			checkUserId(request);
+			System.out.println("id: "+id);
 			Date date= new Date();
 			Timestamp now = new Timestamp(date.getTime());
 			
@@ -304,7 +305,7 @@ public class EditServlet extends HttpServlet{
 			
 		    List<ImageItem> path= Tool_PathEdit.editImageListToOriginalImagePathJSP(images);
 		    
-			//Überabe an die Show_Images.jsp:
+			//Ãœberabe an die Show_Images.jsp:
 			request.setAttribute("cam", cam);
 			request.setAttribute("path", path);
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Show_Images.jsp");
@@ -351,6 +352,12 @@ public class EditServlet extends HttpServlet{
 				   dispatcher.forward(request, response);
 				}else{
 					System.out.println("Keine korrekte Kalender eingabe! Ausgabe nicht moeglich");
+					
+					request.setAttribute("id", id);
+					System.out.println("id: "+id);
+					 RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("/edit?action=showImages");
+					 dispatcher.forward(request, response);
+					 //response.sendRedirect(request.getContextPath() + "/edit?action=showImages");
 				}
 		 }	
 	}
