@@ -50,7 +50,7 @@ public class EditServlet extends HttpServlet{
         	//Rechte Ueberpruefen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
-        			+ " und Rechte=" + session.getAttribute("rechte") + " bestÃƒÂ¤tigt.(Edit)");	
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestaetigt.(Edit)");	
         	
 				if(action == null){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");

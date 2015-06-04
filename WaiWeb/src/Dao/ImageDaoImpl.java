@@ -1,9 +1,6 @@
 package Dao;
 
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,11 +11,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 
-import utils.Tool_TimeStamp;
 import jndi.JndiFactory;
 import exception.UserNotAddedExecption;
 import model.ImageItem;
-import model.User;
 import Dao.Interface.ImageDao;
 
 public class ImageDaoImpl implements ImageDao{
@@ -97,9 +92,8 @@ public class ImageDaoImpl implements ImageDao{
 		} finally {
 			closeConnection(connection);
 		}
+
 		
-		
-		System.out.println("siez imagearray : "+imageItemList.size());
 		log.info("size of selected images: "+imageItemList.size());
 
 		return imageItemList;
@@ -146,7 +140,6 @@ public class ImageDaoImpl implements ImageDao{
 		}
 		
 		
-		System.out.println("siez imagearray : "+imageItemList.size());
 		log.info("size of selected images: "+imageItemList.size());
 
 
@@ -203,7 +196,6 @@ public class ImageDaoImpl implements ImageDao{
 		}
 		
 		
-		System.out.println("siez imagearray : "+imageItemList.size());
 		log.info("size of selected images: "+imageItemList.size());
 
 

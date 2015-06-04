@@ -82,7 +82,7 @@ public class MasterServlet extends HttpServlet {
 		CamDao camdao = DaoFactory.getInstance().getCamDao();
 		
 		camdao.createCamInDatabase(new Cam("Wasserturm", "https://www.mvv-energie.de/webcam_maritim/MA-Wasserturm.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
-		camdao.createCamInDatabase(new Cam("East", "http://my.dal.biz/cgi-bin/webcam/getpics.cgi?Cam=east", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		//camdao.createCamInDatabase(new Cam("East", "http://my.dal.biz/cgi-bin/webcam/getpics.cgi?Cam=east", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("Big", "http://www.mpc-it.de/webcam/big.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("See", "http://www.die-ersten-am-see.de/webcam/camluzo.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("Fuessen", "http://webcamfuessen.de/webcam/webcamfuessen.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
@@ -90,7 +90,7 @@ public class MasterServlet extends HttpServlet {
 		camdao.createCamInDatabase(new Cam("usa1", "http://96.10.1.168/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("usa2", "http://50.73.56.89/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("usa3", "http://trackfield.webcam.oregonstate.edu/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
-		camdao.createCamInDatabase(new Cam("usa4", "http://plazacam.studentaffairs.duke.edu/axis-cgi/mjpg/video.cgi", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
+		//camdao.createCamInDatabase(new Cam("usa4", "http://plazacam.studentaffairs.duke.edu/axis-cgi/mjpg/video.cgi", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 
 			
 			
