@@ -1,4 +1,5 @@
 <Context>
+<Environment name="enableBeispiel" value="true" type="java.lang.Boolean" override="false"/>
 
 <Environment name="enableQuarz" value="true" type="java.lang.Boolean" override="false"/>
 <Environment name="projectPath" value="D:/xWAI/Semesterprojekt/WaiWebProject/WaiWeb/WebContent/WEB-INF" type="java.lang.String" override="false"/>

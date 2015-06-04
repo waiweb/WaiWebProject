@@ -51,7 +51,7 @@ public class SettingsServlet extends HttpServlet {
 				if(action.equals("deleteDatabase")){
 					
 					databaseDelete = new DatabaseControllerImpl();
-					databaseDelete.deleteDatabase();
+					databaseDelete.createDatabase();
 					
 					backToAuswahl(request, response);
 				
