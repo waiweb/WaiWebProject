@@ -45,12 +45,12 @@ public class EditServlet extends HttpServlet{
 		String action = request.getParameter("action");
 		HttpSession session = request.getSession();
 		
-		//Aktive Session ÃƒÂ¼berprÃƒÂ¼fen:
+		//Aktive Session Ueberpruefen:
         if(session != null && session.getAttribute("rechte") != null){
-        	//Rechte ÃƒÂ¼berprÃƒÂ¼fen: (ADMINISTRATOR)
+        	//Rechte Ueberpruefen: (ADMINISTRATOR)
         		if((int) session.getAttribute("rechte") == 1){
         		System.out.println("Session mit User=" + session.getAttribute("username") 
-        			+ " und Rechte=" + session.getAttribute("rechte") + " bestÃƒÂ¤tigt.(Edit)");	
+        			+ " und Rechte=" + session.getAttribute("rechte") + " bestaetigt.(Edit)");	
         	
 				if(action == null){
 					RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/User.jsp");
@@ -126,7 +126,7 @@ public class EditServlet extends HttpServlet{
 			RequestDispatcher dispatcher = getServletContext().getRequestDispatcher("//jsp/Edit_User.jsp");
 			dispatcher.forward(request, response);	
 			
- 		//Loescht den ausgewÃƒÂ¤hlten Nutzer in der Datenbank und kehrt zur User Liste zurÃƒÂ¼ck:
+ 		//Loescht den ausgewaehlten Nutzer in der Datenbank und kehrt zur User Liste zurueck:
  		} else if(action.equals("deleteUser")){
 			checkUserId(request);
 
@@ -236,7 +236,7 @@ public class EditServlet extends HttpServlet{
  		}
 		
 		/** Cam Editierung: **/
-		//Cam auswÃƒÂ¤hlen zum editieren, nur Administrator:
+		//Cam auswaehlen zum editieren, nur Administrator:
 		if(action.equals("editCam")){
 			checkUserId(request);
 			cam = camDaoImp.getCamFromDatabase(id);
@@ -253,7 +253,7 @@ public class EditServlet extends HttpServlet{
  			System.out.println("Cam mit der ID: " + id + " erfolgreich geloescht!");
  			backToAuswahl(request, response);
  		
- 		//Ãƒâ€žnderungen der Cam in der Datenbank updaten:
+ 		//Aenderungen der Cam in der Datenbank updaten:
  		} else if(action.equals("saveCam")){
 			checkUserId(request);
 			
