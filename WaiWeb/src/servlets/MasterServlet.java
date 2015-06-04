@@ -4,6 +4,7 @@ package servlets;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.naming.NamingException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,11 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+import org.quartz.JobExecutionException;
+
+import jndi.JndiFactory;
+import jobs.ImagCaptureJob;
 import exception.UserNotFoundExecption;
 import model.Cam;
 import model.User;
@@ -29,6 +35,8 @@ import Dao.Interface.UserDao;
 @WebServlet("/MasterServlet")
 public class MasterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+    private static Logger log = Logger.getLogger(JndiFactory.class);   
+
        
     /**
      * @see HttpServlet#HttpServlet()
@@ -39,19 +47,50 @@ public class MasterServlet extends HttpServlet {
        
         /**	
         //WICHTIG!!!
-         * Funktion "beispiele()" auskommentieren falls DB nicht zurÃ¼ckgesetzt werden soll!
-         * Momentan genutzt fÃ¼r Tests, DB rÃ¼cksetzen und User und Cams anlegen!
+         * Funktion "beispiele()" auskommentieren falls DB nicht zurückgesetzt werden soll!
+         * Momentan genutzt für Tests, DB rücksetzen und User und Cams anlegen!
          * ADMIN USER:	Username =  admin, Passwort = admin	
          * NORMAL USER: Username =  user, Passwort = user	
          */
         
-      try {
-			beispiele();
-		} catch (UserNotFoundExecption e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}	
+        beispielInit();
+        
+   
     }
+    
+    public void beispielInit(){
+    	
+    	
+     try {
+		if (JndiFactory.getInstance().getEnvironmentAsBoolean("enableBeispiel").booleanValue() == true){
+				
+	      	  CamDao camDao = DaoFactory.getInstance().getCamDao();
+	      	  
+	      	  
+	      	  if(camDao.getAllCams().size() == 0){
+	      		System.out.println("enter beispiele()");
+
+	    			beispiele();
+
+	      	  }
+	      	  else{
+		      		System.out.println("not entered beispiele()");
+
+	      	  }
+	      	
+	      	  
+
+		 }
+	} catch (NamingException e1) {
+		System.out.println("Enviroment enableBeispiel not found");
+		log.info("Enviroment enableBeispiel not found");
+	} catch (UserNotFoundExecption e) {
+		System.out.println("Capture completed");
+		log.info("capture completed");
+	}
+
+    }
+    
     
 	public void beispiele() throws UserNotFoundExecption{
     	
@@ -82,7 +121,6 @@ public class MasterServlet extends HttpServlet {
 		CamDao camdao = DaoFactory.getInstance().getCamDao();
 		
 		camdao.createCamInDatabase(new Cam("Wasserturm", "https://www.mvv-energie.de/webcam_maritim/MA-Wasserturm.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
-		//camdao.createCamInDatabase(new Cam("East", "http://my.dal.biz/cgi-bin/webcam/getpics.cgi?Cam=east", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("Big", "http://www.mpc-it.de/webcam/big.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("See", "http://www.die-ersten-am-see.de/webcam/camluzo.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("Fuessen", "http://webcamfuessen.de/webcam/webcamfuessen.jpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
@@ -90,7 +128,6 @@ public class MasterServlet extends HttpServlet {
 		camdao.createCamInDatabase(new Cam("usa1", "http://96.10.1.168/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("usa2", "http://50.73.56.89/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 		camdao.createCamInDatabase(new Cam("usa3", "http://trackfield.webcam.oregonstate.edu/mjpg/video.mjpg", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
-		//camdao.createCamInDatabase(new Cam("usa4", "http://plazacam.studentaffairs.duke.edu/axis-cgi/mjpg/video.cgi", Tool_TimeStamp.getTimeStampString(), "/camimages", ""));
 
 			
 			
@@ -112,28 +149,15 @@ public class MasterServlet extends HttpServlet {
 		
 		System.out.println(usercammapping.getUserCamMapping(udb.getUserIdFromDatabaseByName("a")));	
 		
-		//Aenderung username und passwort, einsetzen neuen zeitstempel
-		//udb.updateUser(new User(1,"UseraaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
-		//udb.updateUser(new User(2,"UseraaaaaaA","meinyoooolo",1,Tool_TimeStamp.getTimeStampString(),""));
-
-		//Ausgabe aller user
-		//list = (ArrayList<User>) udb.getAllUsers();
-		//for(int i=0; i< list.size();i++){
-		//	System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
-		//}
+		//initial capture
+		ImagCaptureJob imaJob = new ImagCaptureJob();
+		try {
+			imaJob.execute(null);
+		} catch (JobExecutionException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		
-		//User id holen, dann damit user loeschen		
-		//long userid = udb.getUserIdFromDatabaseByName("UseraaaaaaA");
-		//System.out.println("Gesuchte userid: "+userid);
-		//udb.deleteUserInDatabase(userid);
-		
-		
-		//ausgabe aller user
-		//list = (ArrayList<User>) udb.getAllUsers();
-		//for(int i=0; i< list.size();i++){
-		//	System.out.println("Id: "+list.get(i).getId_User()+ " name: "+list.get(i).getUsername()+ " password: "+list.get(i).getPassword()+" Lastupdate: "+list.get(i).getTimeOfCreation());
-		//}	
     }
     
 	/**
